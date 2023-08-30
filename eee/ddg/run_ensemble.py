@@ -1,6 +1,6 @@
 
 
-from eee.ddg import acdc_pkg
+from eee.ddg import acdc_pkg as acdc
 from eee.structure import sync_structures
 import pandas as pd
 
@@ -68,6 +68,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
     
     ##make first column of dataframe with mutations from one of the files--they should all be the same
     ##maybe write code that checks that these are all the same? Is this necessary after sync_structures?
+    mut_source=df_list[0]
     combined_df=mut_source[['Mutation']].copy()
 
     i=0

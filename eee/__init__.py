@@ -3,6 +3,7 @@ from . import structure
 from . import simulation
 from . import epistasis
 from . import io
+from . import ddg
 
 from .ensemble import Ensemble
 

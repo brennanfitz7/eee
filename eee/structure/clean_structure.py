@@ -34,7 +34,7 @@ def clean_structure(df,
     Returns
     -------
     df : pandas.DataFrame
-        dataframe with residues cleaned up by fodx.
+        dataframe with residues cleaned up by foldx.
     """
 
     tmp_dir = create_new_dir()    

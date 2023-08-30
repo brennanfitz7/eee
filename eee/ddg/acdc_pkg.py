@@ -1,0 +1,377 @@
+"""
+Functions to run acdc-nn package and get DDG's for each mutation.
+"""
+
+import sys
+import argparse
+import pandas as pd
+from eee.io import read_structure
+
+
+AA = [("A","ALA"),
+      ("C","CYS"),
+      ("D","ASP"),
+      ("E","GLU"),
+      ("F","PHE"),
+      ("G","GLY"),
+      ("H","HIS"),
+      ("I","ILE"),
+      ("K","LYS"),
+      ("L","LEU"),
+      ("M","MET"),
+      ("N","ASN"),
+      ("P","PRO"),
+      ("Q","GLN"),
+      ("R","ARG"),
+      ("S","SER"),
+      ("T","THR"),
+      ("V","VAL"),
+      ("W","TRP"),
+      ("Y","TYR")]
+
+AA_3TO1 = dict([(a[1],a[0]) for a in AA])
+AA_1TO3 = dict([(a[0],a[1]) for a in AA])
+
+
+def _make_psi_file(fasta_file:str,psi_file:str):
+    """
+    Creates a psi file.
+
+    Parameters
+    ----------
+    
+    fasta_file : str
+        fasta file name/path to fasta file 
+    
+    psi_file : str
+        desired name for the created psi file
+
+    Returns
+    -------
+    None
+    """
+    verbose= True
+    import subprocess
+
+    cmd=['/home/brennanfitz7/miniconda3/bin/hhblits','-d','/home/brennanfitz7/ACDC_NN/UniRef30_2023_02/UniRef30_2023_02','-i',fasta_file,'-cpu','6','-n','2','-opsi',psi_file]
+
+
+    popen = subprocess.Popen(cmd,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.STDOUT,
+                         universal_newlines=True)
+
+    for line in popen.stdout:
+        if verbose:
+            print(line,end="",flush=True)
+        
+    # Check for success
+    return_code = popen.wait()
+    if return_code != 0:
+        err = "Program failed.\n"
+        raise RuntimeError(err)
+        
+        
+
+def _make_prof_file_from_psi(psi_file:str, prof_file:str):
+    """
+    Creates a prof file from a psi file.
+
+    Parameters
+    ----------
+    
+    psi_file : str
+        psi file for the protein
+    
+    prof_file : str
+        prof file for the protein
+
+    Returns
+    -------
+    None
+    """
+    verbose= True
+    import subprocess
+
+    cmd=['ddgun','mkprof', psi_file]
+
+
+    popen = subprocess.Popen(cmd,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.STDOUT,
+                         universal_newlines=True)
+    
+    f = open(prof_file, 'w')
+    
+    for line in popen.stdout:
+        f.write(line)
+    f.close()
+
+        
+    # Check for success
+    return_code = popen.wait()
+    if return_code != 0:
+        err = "Program failed.\n"
+        raise RuntimeError(err)
+
+def _make_prof_file(fasta_file:str,psi_file:str,prof_file:str):
+    """
+    Creates a prof file from fasta file.
+
+    Parameters
+    ----------
+
+    fasta_file : str
+        fasta file name/path to fasta file
+    
+    psi_file : str
+        desired name for the created psi file
+    
+    prof_file : str
+        prof file for the protein
+
+    Returns
+    -------
+    None
+    """
+    _make_psi_file(fasta_file, psi_file)
+    _make_prof_file_from_psi(psi_file, prof_file)
+
+
+def _make_mutation_file(pdb_file:str):
+    """
+    Makes a dataframe with all possible mutations from a pdb file. 
+
+    Parameters
+    ----------
+        
+    pdb_file : str
+        pdb file of protein of interest
+
+    Returns
+    -------
+    Dataframe with all possible mutations from a pdb file. 
+    """
+    
+    raw_prot=read_structure(pdb_file)
+    prot_seq=raw_prot[raw_prot['class'] == "ATOM"].loc[:,["chain",'resid','resid_num']].drop_duplicates(subset=["resid_num","chain"], keep='first')
+    
+    mutation_dict={'chain':[],'wt_res':[],'res_pos':[],'mut_res':[]}
+    
+    aa_list=["ALA","CYS","ASP","GLU","PHE","GLY","HIS","ILE","LYS","LEU","MET","ASN","PRO","GLN","ARG","SER","THR","VAL","TRP","TYR"]
+    
+    for index, row in prot_seq.iterrows():
+        for aa in aa_list:
+            if row[1]!=aa:
+                mutation_dict["chain"].append(row[0])
+                mutation_dict["wt_res"].append(row[1])
+                mutation_dict["res_pos"].append(row[2])
+                mutation_dict["mut_res"].append(aa)
+            else:
+                continue
+    
+    mutation_df=pd.DataFrame.from_dict(mutation_dict)
+    
+    return mutation_df
+
+
+def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str):
+    """
+    Makes a tab separated file in the format for ACDC_NN batch input.
+
+    Parameters
+    ----------
+        
+    pdb_file : str
+        pdb file of protein of interest
+        
+    prof_file : str
+        prof file to be created
+    
+    tsv_file : str
+        tsv file to be created
+
+    Returns
+    -------
+    None
+    """
+
+    ##mut_file=_make_mutation_file(pdb_file) change this when you're not running tests anymore
+    mut_file=_make_mutation_file(pdb_file).iloc[0:10]
+    mutation_col=[]
+    for index, row in mut_file.iterrows():
+        mutation_col.append(AA_3TO1.get(row[1])+row[2]+AA_3TO1.get(row[3]))
+    mut_file.drop(columns=['wt_res','res_pos','mut_res'], inplace=True)
+    mut_file.insert(loc=0, column= 'SUB', value= mutation_col)
+    mut_file.insert(loc=1, column= 'PROFILE', value=prof_file)
+    mut_file.insert(loc=2, column= 'PDB', value=pdb_file)
+    mut_file.rename(columns={"chain":"CHAIN"},inplace=True)
+    
+    mut_file.to_csv(tsv_file, sep="\t",header=False, index=False)
+    
+def generate_input(pdb_file:str,fasta_file:str):
+    """
+    Creates a prof file and an tab separated file in the format for ACDC_NN batch input. 
+
+    Parameters
+    ----------
+        
+    pdb_file : str
+        pdb file of protein of interest
+
+    fasta_file : str
+        fasta file name/path to fasta file
+
+    Returns
+    -------
+    None
+    """ 
+    
+    pdb_id=pdb_file.split('.')[0]
+    #fasta_file='rcsb_pdb_'+pdb_id.upper()+'.fasta'
+    psi_file=pdb_id+'.psi'
+    prof_file=pdb_id+'.prof'
+    tsv_file=pdb_id+'_ddg_input.tsv'
+    
+    _make_prof_file(fasta_file=fasta_file,psi_file=psi_file,prof_file=prof_file) 
+    _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file)
+    
+    
+
+def ddg_calc(pdb_file:str):
+    """
+    Runs the calculation for ddg using ACDC-NN.
+
+    Parameters
+    ----------
+        
+    pdb_file : str
+        pdb file of protein of interest
+        
+    Returns
+    -------
+    None
+    """
+    pdb_id=pdb_file.split('.')[0]
+    tsv_file=pdb_id+'_ddg_input.tsv'
+    output_file=pdb_id+'_ddg_output.txt'
+    
+    
+    verbose= True
+    import subprocess
+
+    cmd=['acdc-nn','batch',tsv_file]
+
+    
+    popen = subprocess.Popen(cmd,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.STDOUT,
+                         universal_newlines=True)
+    
+    f = open(output_file, 'w')
+    
+    for line in popen.stdout:
+        f.write(line)
+    f.close()
+
+    for line in popen.stdout:
+        if verbose:
+            print(line,end="",flush=True)
+        
+    # Check for success
+    return_code = popen.wait()
+    if return_code != 0:
+        err = "Program failed.\n"
+        raise RuntimeError(err)
+        
+
+        
+def convert_to_df(pdb_file:str):
+    """
+    Creates a dataframe with each mutation and the resulting DDG.
+
+    Parameters
+    ----------
+    
+    pdb_file : str
+        pdb file of protein of interest
+
+    Returns
+    -------
+    Pandas dataframe with each mutation and the resulting DDG's.
+    """
+    
+    pdb_id=pdb_file.split('.')[0]
+    output_file=pdb_id+'_ddg_output.txt'
+    tsv_file=pdb_id+'_ddg_input.tsv'
+    output_df=pdb_id+'_ddg_df.csv'
+    
+    with open(output_file,'r') as ddgs:
+        output_list = ddgs.read().splitlines()
+    
+    ddg_list=[]
+    for item in output_list:
+        if "==" in item or len(item)<=3:
+            continue
+        else:
+            ddg_list.append(item)
+    
+    input_df=pd.read_table(tsv_file, delimiter='\t',names=['Mutation', 'Prof', 'PDB','Chain'])
+    
+    ddg_df = pd.DataFrame(
+    {'Mutation': input_df['Mutation'],'DDG': ddg_list})
+
+    ddg_df.to_csv(output_df, index=False)
+    
+    return ddg_df
+
+
+
+def main(argv=None):
+    
+    if argv is None:
+        argv = sys.argv[1:]
+    
+    input_parser = argparse.ArgumentParser(description='Generate input for ACDC-NN')
+    input_parser.add_argument('-p','--pdb',metavar='', required=True, help='Path to pdb file')
+    input_parser.add_argument('-f','--fasta',metavar='', required=True, help='Path to fasta file')
+
+    
+    ddg_parser = argparse.ArgumentParser(description='Run DDG calculation with ACDC-NN')
+    ddg_parser.add_argument('-p','--pdb',metavar='', required=True, help='Path to pdb file')
+    
+        
+    dataframe_parser = argparse.ArgumentParser(description='Convert the DDG results to a dataframe')
+    dataframe_parser.add_argument('-p','--pdb',metavar='', required=True, help='Path to pdb file')
+    
+    parsers = {"generate_input":input_parser,
+               "ddg_calc":ddg_parser,
+                "convert_to_df":dataframe_parser}
+
+    
+    if argv[0] not in parsers:
+        err = "first argument must be 'generate_input','ddg_calc', or 'convert_to_df'"
+        raise ValueError(err)
+        
+    calc_type = argv[0]
+        
+    args = parsers[calc_type].parse_args(argv[1:])
+    
+    if calc_type == "generate_input":
+        generate_input(fasta_file=args.fasta,
+                       pdb_file=args.pdb)
+        
+    elif calc_type == "ddg_calc":
+        ddg_calc(pdb_file=args.pdb)
+        
+    elif calc_type == "convert_to_df":
+        convert_to_df(pdb_file=args.pdb)
+
+    else:
+        err = "Something is very, very wrong."
+        
+
+
+if __name__ == "__main__":
+    main()
+    

@@ -153,13 +153,16 @@ def _make_mutation_file(pdb_file:str):
     Dataframe with all possible mutations from a pdb file. 
     """
     
+    #get dataframe from pdb, select for atoms, and drop duplicates
     raw_prot=read_structure(pdb_file)
     prot_seq=raw_prot[raw_prot['class'] == "ATOM"].loc[:,["chain",'resid','resid_num']].drop_duplicates(subset=["resid_num","chain"], keep='first')
     
+    #create new mutation dictionary
     mutation_dict={'chain':[],'wt_res':[],'res_pos':[],'mut_res':[]}
     
     aa_list=["ALA","CYS","ASP","GLU","PHE","GLY","HIS","ILE","LYS","LEU","MET","ASN","PRO","GLN","ARG","SER","THR","VAL","TRP","TYR"]
     
+    #populate mutation dictionary with info from original df
     for index, row in prot_seq.iterrows():
         for aa in aa_list:
             if row[1]!=aa:
@@ -170,6 +173,7 @@ def _make_mutation_file(pdb_file:str):
             else:
                 continue
     
+    #create a dataframe from the mutation dictionary
     mutation_df=pd.DataFrame.from_dict(mutation_dict)
     
     return mutation_df

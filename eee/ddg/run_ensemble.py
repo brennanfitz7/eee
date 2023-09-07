@@ -1,12 +1,15 @@
 
 
-from eee.ddg import acdc_pkg as acdc
+from eee.ddg import acdc
 from eee.structure import sync_structures
+
 import pandas as pd
 
 import glob
 import sys
 import argparse
+import shutil
+
 
 
 def run_ensemble(pdb_csv:str,prot_name:str,module:str):
@@ -52,19 +55,39 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
             
     
     elif calculator==acdc:
-        for pdb in synced_pdbs:
-            fasta_file='rcsb_pdb_'+pdb.split('.')[0].upper()+'.fasta'
-            ###^^think about above!!
+        output=glob.glob('calculation_*/tmp-align_output.fasta')[0]
+        with open(output,'r') as seqs:
+            seq_list = seqs.read().split('>')
+        c=0
+        for seq in seq_list:
+            simple_seq=seq.replace('\n','')[4:]
+            #no placeholder hyphens
+            ready_seq=seq.replace('-','')
+            #making fasta_seq
+            fasta_seq='>protein_sequence\n'+ready_seq
+            #write fasta_seq into fasta file
+    
+            file = open(pdb_list[c].split('.')[0]+".fasta", "w")
+            file.write(fasta_seq)
+            file.close()
+            c=c+1
+
+        d=0 
+        for pdb in synced_pdbs:  
+            fasta_file=pdb_list[d].split('.')[0]+".fasta"
             pdb_file=str(prot_name+'/'+pdb)
             calculator.generate_input(pdb_file, fasta_file)
             calculator.ddg_calc(pdb_file)
             pdb=calculator.convert_to_df(pdb_file)
             df_list.append(pdb)
+            d=d+1
             
     
     else:
         return "This should not happen."
-        
+
+    #this removes the calculation file containing the fasta alignments    
+    shutil.rmtree(glob.glob('calculation_*')[0])
     
     ##make first column of dataframe with mutations from one of the files--they should all be the same
     ##maybe write code that checks that these are all the same? Is this necessary after sync_structures?

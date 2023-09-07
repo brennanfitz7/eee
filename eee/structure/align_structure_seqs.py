@@ -209,7 +209,6 @@ def align_structure_seqs(dfs,
 
                     
     # Remove "_resid_key" convenience column
-    for i in range(len(dfs)):
         dfs[i] = dfs[i].drop(columns="_resid_key")
-        
+
     return dfs

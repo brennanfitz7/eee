@@ -62,12 +62,13 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
         for seq in seq_list:
             simple_seq=seq.replace('\n','')[4:]
             #no placeholder hyphens
-            ready_seq=seq.replace('-','')
+            ready_seq=simple_seq.replace('-','')
+            pdb_tag=pdb_list[c].split('.')[0]
             #making fasta_seq
-            fasta_seq='>protein_sequence\n'+ready_seq
+            fasta_seq='>'+pdb_tag+'\n'+ready_seq
             #write fasta_seq into fasta file
     
-            file = open(pdb_list[c].split('.')[0]+".fasta", "w")
+            file = open(pdb_tag+".fasta", "w")
             file.write(fasta_seq)
             file.close()
             c=c+1

@@ -57,7 +57,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
     elif calculator==acdc:
         output=glob.glob('calculation_*/tmp-align_output.fasta')[0]
         with open(output,'r') as seqs:
-            seq_list = seqs.read().split('>')
+            seq_list = seqs.read().split('>')[1:]
         c=0
         for seq in seq_list:
             simple_seq=seq.replace('\n','')[4:]

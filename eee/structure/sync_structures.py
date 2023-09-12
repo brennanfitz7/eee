@@ -117,7 +117,7 @@ def sync_structures(structure_files,
 
     # Figure out which residues are shared between what structures
     logger.log("Aligning sequences using muscle.")
-    dfs = align_structure_seqs(dfs,verbose=verbose,keep_temporary=True)
+    dfs = align_structure_seqs(dfs,verbose=verbose,keep_temporary=keep_temporary)
 
     # Align structures in 3D
     logger.log("Aligning structures using lovoalign.")

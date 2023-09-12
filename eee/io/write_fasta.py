@@ -39,5 +39,5 @@ def write_fasta(df,fasta_file:str,overwrite=False):
     seq = [AA_3TO1[aa] for aa in this_df["resid"]]
 
     # Write fasta
-    with open(seq_name+'.fasta','w') as f:
+    with open(fasta_file,'w') as f:
         f.write(f">{seq_name}\n{''.join(seq)}\n")

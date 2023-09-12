@@ -196,7 +196,7 @@ def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str):
     
     mut_file.to_csv(tsv_file, sep="\t",header=False, index=False)
     
-def generate_input(pdb_file:str,fasta_file:str):
+def generate_input(pdb_file:str):
     """
     Creates a prof file and an tab separated file in the format for ACDC_NN batch input. 
 

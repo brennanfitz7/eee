@@ -4,6 +4,7 @@ Functions to generate input for acdc_nn
 
 
 from eee.io import read_structure
+from eee.io import write_fasta
 from eee.data import AA_3TO1
 
 import pandas as pd
@@ -12,15 +13,15 @@ import subprocess
 
 
 
-def _make_psi_file(fasta_file:str,psi_file:str):
+def _make_psi_file(pdb_file:str, psi_file:str):
     """
     Creates a psi file.
 
     Parameters
     ----------
     
-    fasta_file : str
-        fasta file name/path to fasta file 
+    pdb_file : str
+        pdb_file/path to pdb_file that will be used to create the fasta file
     
     psi_file : str
         desired name for the created psi file
@@ -29,10 +30,14 @@ def _make_psi_file(fasta_file:str,psi_file:str):
     -------
     None
     """
+    fasta_file=pdb_file.split('.')[0] ##consider if later you want files to be 1abc.pdb_clean.fasta so you know they're from the clean version--something to consider
+    pdb_df=read_structure(pdb_file)
+    write_fasta(pdb_df,fasta_file)
+    
     verbose= True
 
 
-    #both of these paths have to be changed to make it work for anyone outside of my specfic spock
+    #both of these paths have to be changed to make it work for anyone outside of my specfic spock account
     cmd=['/home/brennanfitz7/miniconda3/bin/hhblits','-d','/home/brennanfitz7/ACDC_NN/UniRef30_2023_02/UniRef30_2023_02','-i',fasta_file,'-cpu','6','-n','2','-opsi',psi_file]
 
 
@@ -93,18 +98,17 @@ def _make_prof_file_from_psi(psi_file:str, prof_file:str):
         err = "Program failed.\n"
         raise RuntimeError(err)
 
-def _make_prof_file(fasta_file:str,psi_file:str,prof_file:str):
+def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str):
     """
-    Creates a prof file from fasta file.
+    Creates a prof file from a pdb file.
 
     Parameters
     ----------
+    pdb_file : str
+        pdb file name/path to pdb file
 
-    fasta_file : str
-        fasta file name/path to fasta file
-    
     psi_file : str
-        desired name for the created psi file
+        psi file to be created
     
     prof_file : str
         prof file for the protein
@@ -113,8 +117,8 @@ def _make_prof_file(fasta_file:str,psi_file:str,prof_file:str):
     -------
     None
     """
-    _make_psi_file(fasta_file, psi_file)
-    _make_prof_file_from_psi(psi_file, prof_file)
+    _make_psi_file(pdb_file=pdb_file, psi_file=psi_file )
+    _make_prof_file_from_psi(psi_file=psi_file, prof_file=prof_file)
 
 
 def _make_mutation_file(pdb_file:str):
@@ -211,10 +215,10 @@ def generate_input(pdb_file:str,fasta_file:str):
     """ 
     
     pdb_id=pdb_file.split('.')[0]
-    #fasta_file='rcsb_pdb_'+pdb_id.upper()+'.fasta'
     psi_file=pdb_id+'.psi'
     prof_file=pdb_id+'.prof'
     tsv_file=pdb_id+'_ddg_input.tsv'
     
-    _make_prof_file(fasta_file=fasta_file,psi_file=psi_file,prof_file=prof_file) 
+
+    _make_prof_file(pdb_file=pdb_file, psi_file=psi_file,prof_file=prof_file) 
     _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file)

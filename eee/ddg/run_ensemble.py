@@ -43,55 +43,18 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
     #this returns a list of pdb files without the file path
     
     df_list=[]
-    
-    if calculator!=acdc:
-        for pdb in synced_pdbs:
-            pdb_file=str(prot_name+'/'+pdb)
-            calculator.generate_input(pdb_file)
-            calculator.ddg_calc(pdb_file)
-            pdb=calculator.convert_to_df(pdb_file)
-            df_list.append(pdb)
-           
-            
-    
-    elif calculator==acdc:
-        output=glob.glob('calculation_*/tmp-align_output.fasta')[0]
-        with open(output,'r') as seqs:
-            seq_list = seqs.read().split('>')[1:]
-        c=0
-        for seq in seq_list:
-            simple_seq=seq.replace('\n','')[4:]
-            #no placeholder hyphens
-            ready_seq=simple_seq.replace('-','')
-            pdb_tag=pdb_list[c].split('.')[0]
-            #making fasta_seq
-            fasta_seq='>'+pdb_tag+'\n'+ready_seq
-            #write fasta_seq into fasta file
-    
-            file = open(pdb_tag+".fasta", "w")
-            file.write(fasta_seq)
-            file.close()
-            c=c+1
+        
+    for pdb in synced_pdbs:
+        pdb_file=str(prot_name+'/'+pdb)
+        calculator.generate_input(pdb_file)
+        calculator.ddg_calc(pdb_file)
+        pdb=calculator.convert_to_df(pdb_file)
+        df_list.append(pdb)
 
-        d=0 
-        for pdb in synced_pdbs:  
-            fasta_file=pdb_list[d].split('.')[0]+".fasta"
-            pdb_file=str(prot_name+'/'+pdb)
-            calculator.generate_input(pdb_file, fasta_file)
-            calculator.ddg_calc(pdb_file)
-            pdb=calculator.convert_to_df(pdb_file)
-            df_list.append(pdb)
-            d=d+1
-            
-    
-    else:
-        return "This should not happen."
-
-    #this removes the calculation file containing the fasta alignments    
-    shutil.rmtree(glob.glob('calculation_*')[0])
     
     ##make first column of dataframe with mutations from one of the files--they should all be the same
     ##maybe write code that checks that these are all the same? Is this necessary after sync_structures?
+    #this function should not require running sync structures itself
     mut_source=df_list[0]
     combined_df=mut_source[['Mutation']].copy()
 

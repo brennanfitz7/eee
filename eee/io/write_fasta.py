@@ -31,7 +31,7 @@ def write_fasta(df,fasta_file:str,overwrite=False):
                 err += "Cannot overwrite.\n"
                 raise FileExistsError(err)
 
-    seq_name=fasta_file.split('.')[0].split('/')[-1]
+    seq_name=fasta_file.split('.')[0].split('/')[-1] ##remove splits later? may be redundant?
 
     mask = np.logical_and(df.atom == "CA",
                           df["class"] == "ATOM")

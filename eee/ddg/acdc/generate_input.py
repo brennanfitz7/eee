@@ -30,7 +30,7 @@ def _make_psi_file(pdb_file:str, psi_file:str):
     -------
     None
     """
-    fasta_file=pdb_file.split('.')[0] ##consider if later you want files to be 1abc.pdb_clean.fasta so you know they're from the clean version--something to consider
+    fasta_file=pdb_file.split('.')[0].split('/')[-1] ##consider if later you want files to be 1abc.pdb_clean.fasta so you know they're from the clean version--something to consider
     pdb_df=read_structure(pdb_file)
     write_fasta(pdb_df,fasta_file)
     

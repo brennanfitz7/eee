@@ -34,6 +34,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
     pdb_df=pd.read_csv(pdb_csv)
     pdb_list=pdb_df['PDB']
     name_list=pdb_df['NAME']
+    name_dict = dict(zip(pdb_list, name_list)) #sets pdbs as keys and names as values
     module_dict={'acdc':acdc}
     calculator=module_dict.get(module)
     
@@ -41,6 +42,8 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
 
     synced_pdbs=glob.glob('*.pdb',root_dir=prot_name)
     #this returns a list of pdb files without the file path
+    #FIX THIS SO PDB's GO IN IN ORDER THEY ARE MADE NOT IN ALPHABETICAL ORDER
+    #or maybe make a dictionary with the csv file--seems possible to create a dictionary from two lists
     
     df_list=[]
         
@@ -49,6 +52,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
         calculator.generate_input(pdb_file)
         calculator.ddg_calc(pdb_file)
         pdb=calculator.convert_to_df(pdb_file)
+        df.name=pdb.split('_')[0]
         df_list.append(pdb)
 
     
@@ -58,12 +62,11 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
     mut_source=df_list[0]
     combined_df=mut_source[['Mutation']].copy()
 
-    i=0
     for df in df_list:
         DDG_col = df['DDG']
-        df.name=name_list[i]
-        combined_df[df.name] = DDG_col
-        i=i+1
+        ##use name_dict to get the correct name for the pdb file
+        name_of_df=name_dict.get(df.name)
+        combined_df[name_of_df] = DDG_col
     
     combined_df.to_csv(prot_name+'/'+prot_name+'_combined_df.csv', index=False)
     

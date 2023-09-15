@@ -1,4 +1,3 @@
-from eee.io import read_structure
 from eee.data import AA_3TO1
 
 import numpy as np

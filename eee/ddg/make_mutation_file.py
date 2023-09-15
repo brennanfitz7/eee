@@ -2,7 +2,7 @@ from eee.io import read_structure
 
 import pandas as pd
 
-def _make_mutation_file(pdb_file:str):
+def make_mutation_file(pdb_file:str):
     """
     Makes a dataframe with all possible mutations from a pdb file. 
 

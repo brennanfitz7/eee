@@ -2,7 +2,7 @@
 Functions to generate input for acdc_nn
 """
 
-from eee.ddg import _make_mutation_file
+from eee.ddg import make_mutation_file
 from eee.io import read_structure
 from eee.io import write_fasta
 from eee.data import AA_3TO1
@@ -143,7 +143,7 @@ def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str):
     """
 
     ##mut_file=_make_mutation_file(pdb_file) change this when you're not running tests anymore
-    mut_file=_make_mutation_file(pdb_file).iloc[0:10]
+    mut_file=make_mutation_file(pdb_file).iloc[0:10]
     mutation_col=[]
     for index, row in mut_file.iterrows():
         mutation_col.append(AA_3TO1.get(row[1])+row[2]+AA_3TO1.get(row[3]))

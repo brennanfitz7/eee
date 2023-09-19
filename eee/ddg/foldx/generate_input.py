@@ -20,7 +20,7 @@ def generate_input(pdb_file:str,just_a_test=True):
     mut_string=','.join(mut for mut in mutation_col)
 
     #writing this string out to a txt file
-    txt_file=pdb_file.split('_')[0]
+    txt_file=pdb_file.split('.')[0]+'.txt'
     mut_txt = open(txt_file, "w")
     n = mut_txt.write(mut_string)
     mut_txt.close()

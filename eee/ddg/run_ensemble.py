@@ -12,7 +12,7 @@ import shutil
 
 
 
-def run_ensemble(pdb_csv:str,prot_name:str,module:str):
+def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
     """
     Runs three pdb file (cif files eventually) and create ddg csv.
 
@@ -26,6 +26,9 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
     
     module : str
         the name of the module being used to calculate DDG. For now, must be 'acdc'.
+    
+    just_a_test : bool
+        bool that determines whether the full mutation file is run or only a test file of 10 mutations
         
     Returns
     -------
@@ -49,7 +52,12 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
         
     for pdb in synced_pdbs:
         pdb_file=str(prot_name+'/'+pdb)
-        calculator.generate_input(pdb_file)
+        if just_a_test==True:
+            calculator.generate_input(pdb_file)
+        elif just_a_test==False:
+            calculator.generate_input(pdb_file,just_a_test=False)
+        else:
+            print('just_a_test argument entered incorrectly in run_ensemble')
         calculator.ddg_calc(pdb_file)
         ddg_df=calculator.convert_to_df(pdb_file)
         ddg_df.name=pdb.split('_')[0]

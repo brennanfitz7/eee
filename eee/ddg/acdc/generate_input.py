@@ -121,7 +121,7 @@ def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str):
     _make_prof_file_from_psi(psi_file=psi_file, prof_file=prof_file)
 
 
-def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str):
+def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str,just_a_test=True):
     """
     Makes a tab separated file in the format for ACDC_NN batch input.
 
@@ -137,13 +137,21 @@ def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str):
     tsv_file : str
         tsv file to be created
 
+    just_a_test : bool
+        bool that determines whether the full mutation file is produced or only a test file of 10 mutations
+
     Returns
     -------
     None
     """
 
     ##mut_file=_make_mutation_file(pdb_file) change this when you're not running tests anymore
-    mut_file=make_mutation_file(pdb_file).iloc[0:10]
+    if just_a_test==True:
+        mut_file=make_mutation_file(pdb_file).iloc[0:10]
+    elif just_a_test==False:
+        mut_file=make_mutation_file(pdb_file)
+    else:
+        print("just_a_test argument entered incorrectly in acdc_nn_format")
     mutation_col=[]
     for index, row in mut_file.iterrows():
         mutation_col.append(AA_3TO1.get(row[1])+row[2]+AA_3TO1.get(row[3]))
@@ -155,7 +163,7 @@ def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str):
     
     mut_file.to_csv(tsv_file, sep="\t",header=False, index=False)
     
-def generate_input(pdb_file:str):
+def generate_input(pdb_file:str,just_a_test=True):
     """
     Creates a prof file and an tab separated file in the format for ACDC_NN batch input. 
 
@@ -167,6 +175,9 @@ def generate_input(pdb_file:str):
 
     fasta_file : str
         fasta file name/path to fasta file
+
+    just_a_test : bool
+        bool that determines whether the full mutation file is produced or only a test file of 10 mutations
 
     Returns
     -------
@@ -180,4 +191,9 @@ def generate_input(pdb_file:str):
     
 
     _make_prof_file(pdb_file=pdb_file, psi_file=psi_file,prof_file=prof_file) 
-    _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file)
+    if just_a_test==True:
+        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file)
+    elif just_a_test==False:
+        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file,just_a_test=False)
+    else: 
+        print('just_a_test argument entered incorrectly in generate input')

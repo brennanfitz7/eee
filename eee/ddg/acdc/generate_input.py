@@ -2,7 +2,7 @@
 Functions to generate input for acdc_nn
 """
 
-from eee.ddg import make_mutation_file
+from eee.ddg.make_mutation_file import make_mutation_file
 from eee.io import read_structure
 from eee.io import write_fasta
 from eee.data import AA_3TO1

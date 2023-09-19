@@ -51,9 +51,9 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str):
         pdb_file=str(prot_name+'/'+pdb)
         calculator.generate_input(pdb_file)
         calculator.ddg_calc(pdb_file)
-        pdb=calculator.convert_to_df(pdb_file)
+        pdb_df=calculator.convert_to_df(pdb_file)
         df.name=pdb.split('_')[0]
-        df_list.append(pdb)
+        df_list.append(pdb_df)
 
     
     ##make first column of dataframe with mutations from one of the files--they should all be the same

@@ -1,1 +1,1 @@
-from generate_input import generate_input
+from .generate_input import generate_input

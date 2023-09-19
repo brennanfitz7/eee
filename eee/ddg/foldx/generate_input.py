@@ -24,6 +24,5 @@ def generate_input(pdb_file:str,just_a_test=True):
     mut_txt = open(txt_file, "w")
     n = mut_txt.write(mut_string)
     mut_txt.close()
-    #hi
 
 

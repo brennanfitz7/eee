@@ -109,6 +109,7 @@ def align_structure_seqs(dfs,
                          verbose=verbose,
                          keep_temporary=keep_temporary)
     
+
     # Convert output into column indexes and column contents. For example: 
     # MAST-
     # -ASTP
@@ -119,17 +120,13 @@ def align_structure_seqs(dfs,
     column_contents = [[] for _ in range(len(output[0]))]
     for i in range(len(output)):
         
-        counter = 0
-        alignment = output[i]
-    
-        for s in seq_list[i]:
-            while s != alignment[counter]:
-                counter += 1
-            column_indexes[i].append(counter)
-            
-        for j, c in enumerate(alignment):
+        counter = 0            
+        for j, c in enumerate(output[i]):
             if c != "-":
                 column_contents[j].append(i)
+                column_indexes[i].append(counter)
+                counter += 1
+
 
     # Check sequence identity. identical_aa is True if the amino acids are the 
     # same at that site (or a mix of Ser and Cys), False if they differ. Gaps
@@ -209,6 +206,7 @@ def align_structure_seqs(dfs,
 
                     
     # Remove "_resid_key" convenience column
+    for i in range(len(dfs)):
         dfs[i] = dfs[i].drop(columns="_resid_key")
-
+        
     return dfs

@@ -1,5 +1,5 @@
 ##Generate input could make a list of all mutations that can be put on the command line later in the ddgcalc point
-from eee.ddg import make_mutation_file
+from eee.ddg.make_mutation_file import make_mutation_file
 from eee.data import AA_3TO1
 
 def generate_input(pdb_file:str,just_a_test=True):

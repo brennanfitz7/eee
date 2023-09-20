@@ -5,7 +5,7 @@ import pandas as pd
 def convert_to_df(pdb_file:str):
 #figure out how to add header without deleting first row--it's okay for now bc the first line is mutating the residue to itself
     #foldx is able to identify the protein tag alone--no path
-    pdb_id=pdb_file.split('/')[-1].split('.')[0]
+    pdb_id=pdb_file.split('/')[-1][0:-4]
     #establishing the name of the output file to find--should be where I ran it regardless of where pdb files are
     ddg_txt='PS_'+pdb_id+'_scanning_output.txt'
     column_names=['Mutation','DDG']
@@ -24,7 +24,7 @@ def convert_to_df(pdb_file:str):
         else:
             ddg_df1.drop(index,inplace=True)
 
-    output_df=pdb_id+'_ddg_df.csv'
+    output_df=pdb_id.split('.')[0]+'_ddg_df.csv'
     ddg_df1.to_csv(output_df, index=False)
     
     return ddg_df1

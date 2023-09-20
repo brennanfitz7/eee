@@ -1,6 +1,7 @@
 
 
 from eee.ddg import acdc
+from eee.ddg import foldx
 from eee.structure import sync_structures
 
 import pandas as pd
@@ -38,7 +39,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
     pdb_list=pdb_df['PDB']
     name_list=pdb_df['NAME']
     name_dict = dict(zip(pdb_list, name_list)) #sets pdbs as keys and names as values
-    module_dict={'acdc':acdc}
+    module_dict={'acdc':acdc,'foldx':foldx}
     calculator=module_dict.get(module)
     
     sync_structures(structure_files=pdb_list, out_dir=prot_name)
@@ -62,7 +63,6 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
         ddg_df=calculator.convert_to_df(pdb_file)
         ddg_df.name=pdb.split('_')[0]
         df_list.append(ddg_df)
-        #hi
 
     
     ##make first column of dataframe with mutations from one of the files--they should all be the same

@@ -25,3 +25,5 @@ AA = [("A","ALA"),
 
 AA_3TO1 = dict([(a[1],a[0]) for a in AA])
 AA_1TO3 = dict([(a[0],a[1]) for a in AA])
+
+AA_3TO1.update({'H1S':'H','H2S':'H','H3S':'H'})

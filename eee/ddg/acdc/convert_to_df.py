@@ -27,10 +27,11 @@ def convert_to_df(pdb_file:str):
     
     ddg_list=[]
     for item in output_list:
-        if "==" in item or len(item)<=3:
-            continue
-        else:
+        if item[3:len(item)].isdigit()==True:
             ddg_list.append(item)
+        else:
+            continue
+        
     
     input_df=pd.read_table(tsv_file, delimiter='\t',names=['Mutation', 'Prof', 'PDB','Chain'])
     

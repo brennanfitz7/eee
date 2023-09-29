@@ -21,12 +21,13 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
     ----------
     pdb_csv : str
         file name or path to file of csv file. File should contain columns NAME (column contains name designations, such as 'apo') and PDB (pdb file or filepath)
+        if calculator is acdc, should also contain column ACDC with hhblits path and uniref path, in that order
 
     prot_name : str
         the name of the protein. This will determine the name of the output file created by sync structures.
     
     module : str
-        the name of the module being used to calculate DDG. For now, must be 'acdc'.
+        the name of the module being used to calculate DDG. For now, must be 'acdc' or 'foldx'.
     
     just_a_test : bool
         bool that determines whether the full mutation file is run or only a test file of 10 mutations
@@ -41,6 +42,10 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
     name_dict = dict(zip(pdb_list, name_list)) #sets pdbs as keys and names as values
     module_dict={'acdc':acdc,'foldx':foldx}
     calculator=module_dict.get(module)
+    if calculator==acdc:
+        acdc_info=pdb_df['ACDC'].tolist()
+        hhblits_path=acdc_info[0]
+        uniref_path=acdc_info[1]
     
     sync_structures(structure_files=pdb_list, out_dir=prot_name)
 
@@ -50,32 +55,59 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
     #or maybe make a dictionary with the csv file--seems possible to create a dictionary from two lists
     
     df_list=[]
-        
+    
+    #for foldx, need to move files into whatever file I'm running things in
+    if calculator==foldx:
+        for pdb in synced_pdbs: 
+            shutil.move(prot_name/pdb,pdb)
+
+
     for pdb in synced_pdbs:
-        pdb_file=str(prot_name+'/'+pdb)
-        if just_a_test==True:
-            calculator.generate_input(pdb_file)
-        elif just_a_test==False:
-            calculator.generate_input(pdb_file,just_a_test=False)
-        else:
-            print('just_a_test argument entered incorrectly in run_ensemble')
+        if calculator==foldx:
+            pdb_file=pdb
+            if just_a_test==True:
+                calculator.generate_input(pdb_file)
+            elif just_a_test==False:
+                calculator.generate_input(pdb_file, just_a_test=False)
+            else:
+                print('just_a_test argument entered incorrectly in run_ensemble')
+        if calculator==acdc:
+            pdb_file=str(prot_name+'/'+pdb)
+            if just_a_test==True:
+                calculator.generate_input(pdb_file,hhblits_path=hhblits_path,uniref_path=uniref_path)
+            elif just_a_test==False:
+                calculator.generate_input(pdb_file,hhblits_path=hhblits_path, uniref_path=uniref_path, just_a_test=False)
+            else:
+                print('just_a_test argument entered incorrectly in run_ensemble')
         calculator.ddg_calc(pdb_file)
         ddg_df=calculator.convert_to_df(pdb_file)
         ddg_df.name=pdb.split('_')[0]
         df_list.append(ddg_df)
 
     
-    ##make first column of dataframe with mutations from one of the files--they should all be the same
-    ##maybe write code that checks that these are all the same? Is this necessary after sync_structures?
-    #this function should not require running sync structures itself
-    mut_source=df_list[0]
+    mut_sets=[]
+    for df in df_list:
+        mut_sets.append(set(df.Mutation))
+
+    shared_muts=mut_sets[0].intersection(*mut_sets[1:])
+
+    clean_df_list=[]
+    for df in df_list:
+        mask=df.Mutation.isin(shared_muts)
+        clean_df=df.loc[mask,:]
+        clean_df.name=df.name
+        clean_df_list.append(clean_df)
+
+    mut_source=clean_df_list[0]
     combined_df=mut_source[['Mutation']].copy()
 
-    for df in df_list:
+    for df in clean_df_list:
         DDG_col = df['DDG']
         ##use name_dict to get the correct name for the pdb file
         name_of_df=name_dict.get(df.name)
         combined_df[name_of_df] = DDG_col
+
+    return(combined_df)
     
     combined_df.to_csv(prot_name+'/'+prot_name+'_combined_df.csv', index=False)
     

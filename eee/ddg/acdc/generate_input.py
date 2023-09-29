@@ -13,7 +13,7 @@ import subprocess
 
 
 
-def _make_psi_file(pdb_file:str, psi_file:str):
+def _make_psi_file(pdb_file:str, psi_file:str,hhblits_path:str,uniref_path:str):
     """
     Creates a psi file.
 
@@ -25,6 +25,12 @@ def _make_psi_file(pdb_file:str, psi_file:str):
     
     psi_file : str
         desired name for the created psi file
+
+    hhblits_path : str
+        path to hhblits
+    
+    uniref_path : str
+        path to uniref database
 
     Returns
     -------
@@ -38,7 +44,7 @@ def _make_psi_file(pdb_file:str, psi_file:str):
 
 
     #both of these paths have to be changed to make it work for anyone outside of my specfic spock account
-    cmd=['/home/brennanfitz7/miniconda3/bin/hhblits','-d','/home/brennanfitz7/ACDC_NN/UniRef30_2023_02/UniRef30_2023_02','-i',fasta_file,'-cpu','6','-n','2','-opsi',psi_file]
+    cmd=[hhblits_path,'-d',uniref_path,'-i',fasta_file,'-cpu','6','-n','2','-opsi',psi_file]
 
 
     popen = subprocess.Popen(cmd,
@@ -98,7 +104,7 @@ def _make_prof_file_from_psi(psi_file:str, prof_file:str):
         err = "Program failed.\n"
         raise RuntimeError(err)
 
-def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str):
+def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str,hhblits_path:str,uniref_path:str):
     """
     Creates a prof file from a pdb file.
 
@@ -113,11 +119,17 @@ def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str):
     prof_file : str
         prof file for the protein
 
+    hhblits_path : str
+        path to hhblits
+    
+    uniref_path : str
+        path to uniref database
+
     Returns
     -------
     None
     """
-    _make_psi_file(pdb_file=pdb_file, psi_file=psi_file )
+    _make_psi_file(pdb_file=pdb_file, psi_file=psi_file, hhblits_path=hhblits_path, uniref_path=uniref_path)
     _make_prof_file_from_psi(psi_file=psi_file, prof_file=prof_file)
 
 
@@ -163,7 +175,7 @@ def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str,just_a_test=True):
     
     mut_file.to_csv(tsv_file, sep="\t",header=False, index=False)
     
-def generate_input(pdb_file:str,just_a_test=True):
+def generate_input(pdb_file:str, hhblits_path:str, uniref_path:str, just_a_test=True,):
     """
     Creates a prof file and an tab separated file in the format for ACDC_NN batch input. 
 
@@ -175,6 +187,12 @@ def generate_input(pdb_file:str,just_a_test=True):
 
     fasta_file : str
         fasta file name/path to fasta file
+    
+    hhblits_path : str
+        path to hhblits
+    
+    uniref_path : str
+        path to uniref database 
 
     just_a_test : bool
         bool that determines whether the full mutation file is produced or only a test file of 10 mutations
@@ -190,7 +208,7 @@ def generate_input(pdb_file:str,just_a_test=True):
     tsv_file=pdb_id+'_ddg_input.tsv'
     
 
-    _make_prof_file(pdb_file=pdb_file, psi_file=psi_file,prof_file=prof_file) 
+    _make_prof_file(pdb_file=pdb_file, psi_file=psi_file,prof_file=prof_file, hhblits_path=hhblits_path, uniref_path=uniref_path) 
     if just_a_test==True:
         _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file)
     elif just_a_test==False:

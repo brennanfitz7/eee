@@ -59,7 +59,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
     #for foldx, need to move files into whatever file I'm running things in
     if calculator==foldx:
         for pdb in synced_pdbs: 
-            shutil.move(prot_name/pdb,pdb)
+            shutil.move(prot_name+'/'+pdb,pdb)
 
 
     for pdb in synced_pdbs:

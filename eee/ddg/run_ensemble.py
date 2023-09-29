@@ -106,10 +106,10 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
         ##use name_dict to get the correct name for the pdb file
         name_of_df=name_dict.get(df.name)
         combined_df[name_of_df] = DDG_col
-
-    return(combined_df)
     
     combined_df.to_csv(prot_name+'/'+prot_name+'_combined_df.csv', index=False)
+    
+    return combined_df
     
     
     

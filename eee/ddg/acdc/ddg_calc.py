@@ -16,7 +16,7 @@ def ddg_calc(muts_file:str):
     -------
     None
     """
-    pdb_id=muts_file.split('.')[0]
+    pdb_id=muts_file.split('_')[0]
     output_file=pdb_id+'_acdc_raw_ddgs.txt'
     
     

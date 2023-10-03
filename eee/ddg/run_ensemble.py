@@ -71,7 +71,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
                 calculator.generate_input(pdb_file, just_a_test=False)
             else:
                 print('just_a_test argument entered incorrectly in run_ensemble')
-            calculator.ddg_calc(muts_file=pdb_id+'_'+module+'_muts.tsv', pdb_file=pdb_file)
+            calculator.ddg_calc(muts_file=pdb_id+'_'+module+'_muts.txt', pdb_file=pdb_file)
             calculator.convert_to_df('PS'+pdb_file[0:-4]+'_scanning_output.txt')
             
 

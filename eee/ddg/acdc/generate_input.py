@@ -43,7 +43,6 @@ def _make_psi_file(pdb_file:str, psi_file:str,hhblits_path:str,uniref_path:str):
     verbose= True
 
 
-    #both of these paths have to be changed to make it work for anyone outside of my specfic spock account
     cmd=[hhblits_path,'-d',uniref_path,'-i',fasta_file,'-cpu','6','-n','2','-opsi',psi_file]
 
 
@@ -205,7 +204,7 @@ def generate_input(pdb_file:str, hhblits_path:str, uniref_path:str, just_a_test=
     pdb_id=pdb_file.split('.')[0]
     psi_file=pdb_id+'.psi'
     prof_file=pdb_id+'.prof'
-    tsv_file=pdb_id+'_ddg_input.tsv'
+    tsv_file=pdb_id+'_acdc_muts.tsv'
     
 
     _make_prof_file(pdb_file=pdb_file, psi_file=psi_file,prof_file=prof_file, hhblits_path=hhblits_path, uniref_path=uniref_path) 

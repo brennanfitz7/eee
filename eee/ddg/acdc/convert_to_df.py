@@ -2,27 +2,28 @@ import pandas as pd
 
 
 
-def convert_to_df(pdb_file:str):
+def convert_to_df(ddg_output:str):
+
+    #1abc_CALCULATOR_raw_ddgs.txt
     """
     Creates a dataframe with each mutation and the resulting DDG.
 
     Parameters
     ----------
     
-    pdb_file : str
-        pdb file of protein of interest
+    ddg_output : str
+        output of raw ddg calculations
 
     Returns
     -------
     Pandas dataframe with each mutation and the resulting DDG's.
     """
     
-    pdb_id=pdb_file.split('.')[0]
-    output_file=pdb_id+'_ddg_output.txt'
-    tsv_file=pdb_id+'_ddg_input.tsv'
-    output_df=pdb_id+'_ddg_df.csv'
+    pdb_id=ddg_output.split('_')[0]
+    muts_file=pdb_id+'_acdc_muts.tsv'
+    output_df=pdb_id+'_acdc_ddg_df.csv'
     
-    with open(output_file,'r') as ddgs:
+    with open(ddg_output,'r') as ddgs:
         output_list = ddgs.read().splitlines()
     
     ddg_list=[]
@@ -33,7 +34,7 @@ def convert_to_df(pdb_file:str):
             continue
         
     
-    input_df=pd.read_table(tsv_file, delimiter='\t',names=['Mutation', 'Prof', 'PDB','Chain'])
+    input_df=pd.read_table(muts_file, delimiter='\t',names=['Mutation', 'Prof', 'PDB','Chain'])
     
     ddg_df = pd.DataFrame(
     {'Mutation': input_df['Mutation'],'DDG': ddg_list})

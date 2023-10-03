@@ -1,10 +1,9 @@
 import subprocess
 
-def ddg_calc(pdb_file:str):
+def ddg_calc(muts_file:str,pdb_file:str):
 
-    txt_file=pdb_file.split('.')[0]+'_muts.txt'
     #open text file into a string
-    text_file = open(txt_file, "r")
+    text_file = open(muts_file, "r")
     mut_string = text_file.read()
     text_file.close()
     

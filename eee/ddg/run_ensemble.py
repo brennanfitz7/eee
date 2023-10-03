@@ -51,10 +51,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
 
     synced_pdbs=glob.glob('*.pdb',root_dir=prot_name)
     #this returns a list of pdb files without the file path
-    #FIX THIS SO PDB's GO IN IN ORDER THEY ARE MADE NOT IN ALPHABETICAL ORDER
-    #or maybe make a dictionary with the csv file--seems possible to create a dictionary from two lists
-    
-    df_list=[]
+
     
     #for foldx, need to move files into whatever file I'm running things in
     if calculator==foldx:
@@ -62,39 +59,55 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
             shutil.move(prot_name+'/'+pdb,pdb)
 
 
+    df_list=[]
+
     for pdb in synced_pdbs:
         if calculator==foldx:
             pdb_file=pdb
+            pdb_id=pdb_file.split('.')[0]
             if just_a_test==True:
                 calculator.generate_input(pdb_file)
             elif just_a_test==False:
                 calculator.generate_input(pdb_file, just_a_test=False)
             else:
                 print('just_a_test argument entered incorrectly in run_ensemble')
+            calculator.ddg_calc(muts_file=pdb_id+'_'+calculator+'_muts.tsv', pdb_file=pdb_file)
+            calculator.convert_to_df('PS'+pdb_file[0:-4]+'_scanning_output.txt')
+            
+
+            
         if calculator==acdc:
             pdb_file=str(prot_name+'/'+pdb)
+            pdb_id=pdb_file.split('.')[0]
             if just_a_test==True:
                 calculator.generate_input(pdb_file,hhblits_path=hhblits_path,uniref_path=uniref_path)
             elif just_a_test==False:
                 calculator.generate_input(pdb_file,hhblits_path=hhblits_path, uniref_path=uniref_path, just_a_test=False)
             else:
                 print('just_a_test argument entered incorrectly in run_ensemble')
-        calculator.ddg_calc(pdb_file)
-        ddg_df=calculator.convert_to_df(pdb_file)
+            #run ddg_calc and convert_to_df
+            calculator.ddg_calc(pdb_id+'_'+calculator+'_muts.tsv')
+            ddg_df=calculator.convert_to_df(pdb_id+'_'+calculator+'_raw_ddgs.txt')
+
+
         ddg_df.name=pdb.split('_')[0]
         df_list.append(ddg_df)
 
-    
+    #create list of sets of each df's mutation column 
     mut_sets=[]
     for df in df_list:
         mut_sets.append(set(df.Mutation))
 
+    #create a set of all shared mutations
     shared_muts=mut_sets[0].intersection(*mut_sets[1:])
 
     clean_df_list=[]
     for df in df_list:
+        #make a mask to select for mutations shared between all files
         mask=df.Mutation.isin(shared_muts)
+        #apply mask to df
         clean_df=df.loc[mask,:]
+        #make sure the name of the df is maintained
         clean_df.name=df.name
         clean_df_list.append(clean_df)
 
@@ -107,7 +120,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
         name_of_df=name_dict.get(df.name)
         combined_df[name_of_df] = DDG_col
     
-    combined_df.to_csv(prot_name+'/'+prot_name+'_combined_df.csv', index=False)
+    combined_df.to_csv(prot_name+'_'+module+'_ddgs.csv', index=False)
     
     return combined_df
     

@@ -2,14 +2,13 @@ from eee.data import AA_3TO1
 
 import pandas as pd
 
-def convert_to_df(pdb_file:str):
+def convert_to_df(ddg_output:str):
 #figure out how to add header without deleting first row--it's okay for now bc the first line is mutating the residue to itself
     #foldx is able to identify the protein tag alone--no path
-    pdb_id=pdb_file.split('/')[-1][0:-4]
+    pdb_id=ddg_output.split('_')[1]
     #establishing the name of the output file to find--should be where I ran it regardless of where pdb files are
-    ddg_txt='PS_'+pdb_id+'_scanning_output.txt'
     
-    ddg_df_raw=pd.read_csv(ddg_txt, sep='\t')
+    ddg_df_raw=pd.read_csv(ddg_output, sep='\t')
     
     column_names=['Mutation','DDG']
     ddg_df=ddg_df_raw.set_axis(column_names, axis=1)
@@ -41,7 +40,7 @@ def convert_to_df(pdb_file:str):
         
     ddg_df=pd.DataFrame(df_data)
     
-    output_df=pdb_id.split('.')[0]+'_ddg_df.csv'
+    output_df=pdb_id.split('.')[0]+'_foldx_ddg_df.csv'
     #this creates the output_df wherever the program is run
     ddg_df.to_csv(output_df, index=False)
     

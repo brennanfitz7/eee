@@ -1,4 +1,4 @@
-from eee.io import read_structure
+from eee.io.read_structure import read_structure
 
 import pandas as pd
 

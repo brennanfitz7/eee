@@ -2,7 +2,7 @@
 import subprocess
 
 
-def ddg_calc(pdb_file:str):
+def ddg_calc(muts_file:str):
     """
     Runs the calculation for ddg using ACDC-NN.
 
@@ -16,14 +16,13 @@ def ddg_calc(pdb_file:str):
     -------
     None
     """
-    pdb_id=pdb_file.split('.')[0]
-    tsv_file=pdb_id+'_ddg_input.tsv'
-    output_file=pdb_id+'_ddg_output.txt'
+    pdb_id=muts_file.split('.')[0]
+    output_file=pdb_id+'_acdc_raw_ddgs.txt'
     
     
     verbose= True
 
-    cmd=['acdc-nn','batch',tsv_file]
+    cmd=['acdc-nn','batch',muts_file]
 
     
     popen = subprocess.Popen(cmd,

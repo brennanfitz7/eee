@@ -73,6 +73,9 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
                 print('just_a_test argument entered incorrectly in run_ensemble')
             calculator.ddg_calc(muts_file=pdb_id+'_'+module+'_muts.txt', pdb_file=pdb_file)
             ddg_df=calculator.convert_to_df('PS_'+pdb_file[0:-4]+'_scanning_output.txt')
+            ddg_df.name=pdb.split('_')[0]
+            df_list.append(ddg_df)
+
             
 
             
@@ -88,10 +91,8 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
             #run ddg_calc and convert_to_df
             calculator.ddg_calc(pdb_id+'_'+module+'_muts.tsv')
             ddg_df=calculator.convert_to_df(pdb_id+'_'+module+'_raw_ddgs.txt')
-
-
-        ddg_df.name=pdb.split('_')[0]
-        df_list.append(ddg_df)
+            ddg_df.name=pdb.split('_')[0]
+            df_list.append(ddg_df)
 
     #create list of sets of each df's mutation column 
     mut_sets=[]

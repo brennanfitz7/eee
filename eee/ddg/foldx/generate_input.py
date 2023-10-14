@@ -1,4 +1,3 @@
-##Generate input could make a list of all mutations that can be put on the command line later in the ddgcalc point
 from eee.ddg.make_mutation_file import make_mutation_file
 from eee.data import AA_3TO1
 
@@ -23,7 +22,7 @@ def generate_input(pdb_file:str,just_a_test=True):
     #writing this string out to a txt file
     txt_file=pdb_file.split('.')[0]+'_foldx_muts.txt'
     mut_txt = open(txt_file, "w")
-    n = mut_txt.write(mut_string)
+    mut_txt.write(mut_string)
     mut_txt.close()
 
 

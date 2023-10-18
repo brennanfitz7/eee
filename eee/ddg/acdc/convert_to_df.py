@@ -29,7 +29,8 @@ def convert_to_df(ddg_output:str):
     ddg_list=[]
     for item in output_list:
         if item[3:len(item)].isdigit()==True:
-            ddg_list.append(item)
+            #adds tod ddg_list and also multiplies by -1 to switch signs (stabilizing mutaitons are now negative)
+            ddg_list.append(item*-1)
         else:
             continue
         

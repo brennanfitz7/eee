@@ -59,7 +59,7 @@ def read_tree(tree,fmt=None):
         except ete3.parser.newick.NewickError:
 
             # Try all possible formats now, in succession
-            w = "\n\nCould not parse tree without format string. Going to try different\n"
+            w = "\n\nNo tree format specified. Going to try different\n"
             w += "formats. Please check output carefully.\n\n"
             print(w)
 

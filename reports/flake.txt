@@ -2356,79 +2356,73 @@
 ./tests/analysis/test_cluster_ddg.py:182:1: W293 blank line contains whitespace
 ./tests/analysis/test_cluster_ddg.py:184:5: E303 too many blank lines (2)
 ./tests/analysis/test_cluster_ddg.py:184:26: W292 no newline at end of file
-./tests/analysis/test_epistasis_and_accessibility.py:15:1: E302 expected 2 blank lines, found 1
-./tests/analysis/test_epistasis_and_accessibility.py:15:36: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:16:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:40:5: E303 too many blank lines (2)
-./tests/analysis/test_epistasis_and_accessibility.py:42:1: E302 expected 2 blank lines, found 1
-./tests/analysis/test_epistasis_and_accessibility.py:42:53: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:43:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:49:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:50:31: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:59:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:63:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:67:43: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:68:43: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:75:33: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:75:41: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:77:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:80:33: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:80:41: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:80:60: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:81:28: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:82:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:86:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:92:43: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:93:43: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:100:33: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:100:41: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:103:57: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:105:33: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:105:41: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:105:60: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:106:28: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:107:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:113:5: E303 too many blank lines (2)
-./tests/analysis/test_epistasis_and_accessibility.py:118:43: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:119:43: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:124:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:125:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:126:5: E303 too many blank lines (2)
-./tests/analysis/test_epistasis_and_accessibility.py:126:33: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:126:41: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:128:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:131:33: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:131:41: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:131:60: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:132:28: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:133:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:136:63: W291 trailing whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:139:5: E303 too many blank lines (2)
-./tests/analysis/test_epistasis_and_accessibility.py:144:43: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:145:43: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:150:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:151:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:152:5: E303 too many blank lines (2)
-./tests/analysis/test_epistasis_and_accessibility.py:152:33: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:152:41: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:154:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:157:33: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:157:41: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:157:60: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:158:28: E231 missing whitespace after ','
-./tests/analysis/test_epistasis_and_accessibility.py:159:1: W293 blank line contains whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:162:63: W291 trailing whitespace
-./tests/analysis/test_epistasis_and_accessibility.py:168:5: E303 too many blank lines (5)
-./tests/analysis/test_epistasis_and_accessibility.py:168:26: W292 no newline at end of file
-./tests/analysis/test_epistasis.py:1:1: F401 'eee.analysis.epistasis.get_epistasis' imported but unused
 ./tests/analysis/test_epistasis.py:2:1: F401 'eee.analysis.epistasis.get_ensemble_epistasis' imported but unused
 ./tests/analysis/test_epistasis.py:3:1: F401 'eee.analysis.epistasis.get_all_pairs_epistasis' imported but unused
 ./tests/analysis/test_epistasis.py:4:1: F401 'eee.analysis.epistasis.summarize_epistasis' imported but unused
-./tests/analysis/test_epistasis.py:6:1: E302 expected 2 blank lines, found 1
-./tests/analysis/test_epistasis.py:9:1: E302 expected 2 blank lines, found 1
-./tests/analysis/test_epistasis.py:12:1: E302 expected 2 blank lines, found 1
-./tests/analysis/test_epistasis.py:15:1: E302 expected 2 blank lines, found 1
-./tests/analysis/test_epistasis.py:16:9: W292 no newline at end of file
+./tests/analysis/test_epistasis.py:8:1: E302 expected 2 blank lines, found 1
+./tests/analysis/test_epistasis.py:9:1: W293 blank line contains whitespace
+./tests/analysis/test_epistasis.py:16:18: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+./tests/analysis/test_epistasis.py:17:18: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+./tests/analysis/test_epistasis.py:26:18: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+./tests/analysis/test_epistasis.py:27:18: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+./tests/analysis/test_epistasis.py:35:18: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+./tests/analysis/test_epistasis.py:36:18: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+./tests/analysis/test_epistasis.py:38:1: W293 blank line contains whitespace
+./tests/analysis/test_epistasis.py:45:18: E712 comparison to True should be 'if cond is True:' or 'if cond:'
+./tests/analysis/test_epistasis.py:46:18: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+./tests/analysis/test_epistasis.py:55:18: E712 comparison to False should be 'if cond is False:' or 'if not cond:'
+./tests/analysis/test_epistasis.py:56:18: E712 comparison to True should be 'if cond is True:' or 'if cond:'
+./tests/analysis/test_epistasis.py:65:18: E712 comparison to True should be 'if cond is True:' or 'if cond:'
+./tests/analysis/test_epistasis.py:66:18: E712 comparison to True should be 'if cond is True:' or 'if cond:'
+./tests/analysis/test_epistasis.py:70:5: E303 too many blank lines (2)
+./tests/analysis/test_epistasis.py:71:22: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:71:24: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:71:26: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:71:28: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:71:30: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:72:22: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:72:24: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:72:26: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:72:29: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:72:31: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:73:22: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:73:24: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:73:26: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:73:28: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:73:31: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:74:22: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:74:24: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:74:26: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:74:28: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:74:30: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:81:30: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:81:33: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:81:35: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:81:38: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:81:40: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:81:42: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:82:32: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:82:35: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:82:37: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:82:39: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:82:41: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:82:43: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:83:32: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:83:35: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:83:37: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:83:39: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:83:41: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:83:43: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:84:35: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:84:41: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:84:47: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:84:53: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:84:60: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:84:67: E231 missing whitespace after ','
+./tests/analysis/test_epistasis.py:88:1: E303 too many blank lines (3)
+./tests/analysis/test_epistasis.py:91:1: E302 expected 2 blank lines, found 1
+./tests/analysis/test_epistasis.py:94:1: E302 expected 2 blank lines, found 1
+./tests/analysis/test_epistasis.py:95:9: W292 no newline at end of file
 ./tests/analysis/test_num_genotypes.py:7:1: E302 expected 2 blank lines, found 1
 ./tests/analysis/test_num_genotypes.py:9:18: E231 missing whitespace after ':'
 ./tests/analysis/test_num_genotypes.py:9:23: E231 missing whitespace after ','
@@ -2489,6 +2483,16 @@
 ./tests/analysis/test_num_genotypes.py:90:1: W293 blank line contains whitespace
 ./tests/analysis/test_num_genotypes.py:91:1: W293 blank line contains whitespace
 ./tests/analysis/test_num_genotypes.py:92:1: W293 blank line contains whitespace
+./tests/analysis/test_dms_epistasis.py:2:1: F401 'pytest' imported but unused
+./tests/analysis/test_dms_epistasis.py:4:1: F401 'eee.analysis.dms_epistasis.dms_epistasis' imported but unused
+./tests/analysis/test_dms_epistasis.py:5:1: F401 'eee.core.data.AA_1TO3' imported but unused
+./tests/analysis/test_dms_epistasis.py:7:1: F401 'numpy as np' imported but unused
+./tests/analysis/test_dms_epistasis.py:8:1: F401 'pandas as pd' imported but unused
+./tests/analysis/test_dms_epistasis.py:10:1: F401 'os' imported but unused
+./tests/analysis/test_dms_epistasis.py:11:1: F401 'shutil' imported but unused
+./tests/analysis/test_dms_epistasis.py:12:1: F401 'json' imported but unused
+./tests/analysis/test_dms_epistasis.py:16:1: W293 blank line contains whitespace
+./tests/analysis/test_dms_epistasis.py:17:9: W292 no newline at end of file
 ./tests/analysis/test_ensemble_fitness.py:5:1: F401 'eee.core.fitness.ff.ff_on' imported but unused
 ./tests/analysis/test_ensemble_fitness.py:6:1: F401 'eee.core.fitness.ff.ff_off' imported but unused
 ./tests/analysis/test_ensemble_fitness.py:11:1: F401 'pytest' imported but unused
@@ -2629,69 +2633,49 @@
 ./tests/io/test_read_structure.py:77:46: E231 missing whitespace after ','
 ./tests/io/test_read_structure.py:78:40: E231 missing whitespace after ','
 ./tests/io/test_read_structure.py:78:48: W292 no newline at end of file
-./tests/io/test_io_read_tree.py:9:1: E302 expected 2 blank lines, found 1
-./tests/io/test_io_read_tree.py:9:32: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:9:47: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:15:30: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:21:30: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:25:16: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:25:24: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:32:16: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:32:24: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:35:29: W291 trailing whitespace
-./tests/io/test_io_read_tree.py:36:1: W293 blank line contains whitespace
-./tests/io/test_io_read_tree.py:37:17: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:37:20: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:37:23: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:38:16: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:38:24: E231 missing whitespace after ','
-./tests/io/test_io_read_tree.py:41:29: W291 trailing whitespace
-./tests/io/test_io_read_tree.py:44:5: E303 too many blank lines (2)
-./tests/io/test_io_read_tree.py:45:1: W293 blank line contains whitespace
-./tests/io/test_io_read_tree.py:45:5: W292 no newline at end of file
-./tests/io/test_io_write_tree.py:8:1: E302 expected 2 blank lines, found 1
-./tests/io/test_io_write_tree.py:8:33: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:8:48: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:19:9: F841 local variable 'T2' is assigned to but never used
-./tests/io/test_io_write_tree.py:20:26: E127 continuation line over-indented for visual indent
-./tests/io/test_io_write_tree.py:21:26: E127 continuation line over-indented for visual indent
-./tests/io/test_io_write_tree.py:26:25: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:26:31: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:27:34: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:30:31: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:30:39: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:31:40: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:33:76: W291 trailing whitespace
-./tests/io/test_io_write_tree.py:38:28: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:42:9: F841 local variable 'newick' is assigned to but never used
-./tests/io/test_io_write_tree.py:42:30: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:43:1: W293 blank line contains whitespace
-./tests/io/test_io_write_tree.py:45:21: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:45:44: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:51:25: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:51:48: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:52:1: W293 blank line contains whitespace
-./tests/io/test_io_write_tree.py:54:16: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:54:24: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:59:30: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:63:16: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:63:24: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:65:27: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:68:16: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:68:24: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:70:27: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:70:33: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:70:48: W291 trailing whitespace
-./tests/io/test_io_write_tree.py:71:1: W293 blank line contains whitespace
-./tests/io/test_io_write_tree.py:72:17: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:72:20: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:72:23: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:73:16: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:73:24: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:75:27: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:75:33: E231 missing whitespace after ','
-./tests/io/test_io_write_tree.py:75:48: W291 trailing whitespace
-./tests/io/test_io_write_tree.py:77:18: W292 no newline at end of file
+./tests/io/test_write_tree.py:8:1: E302 expected 2 blank lines, found 1
+./tests/io/test_write_tree.py:8:33: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:8:48: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:19:9: F841 local variable 'T2' is assigned to but never used
+./tests/io/test_write_tree.py:20:26: E127 continuation line over-indented for visual indent
+./tests/io/test_write_tree.py:21:26: E127 continuation line over-indented for visual indent
+./tests/io/test_write_tree.py:26:25: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:26:31: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:27:34: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:30:31: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:30:39: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:31:40: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:33:76: W291 trailing whitespace
+./tests/io/test_write_tree.py:38:28: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:42:9: F841 local variable 'newick' is assigned to but never used
+./tests/io/test_write_tree.py:42:30: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:43:1: W293 blank line contains whitespace
+./tests/io/test_write_tree.py:45:21: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:45:44: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:51:25: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:51:48: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:52:1: W293 blank line contains whitespace
+./tests/io/test_write_tree.py:54:16: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:54:24: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:59:30: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:63:16: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:63:24: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:65:27: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:68:16: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:68:24: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:70:27: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:70:33: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:70:48: W291 trailing whitespace
+./tests/io/test_write_tree.py:71:1: W293 blank line contains whitespace
+./tests/io/test_write_tree.py:72:17: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:72:20: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:72:23: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:73:16: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:73:24: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:75:27: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:75:33: E231 missing whitespace after ','
+./tests/io/test_write_tree.py:75:48: W291 trailing whitespace
+./tests/io/test_write_tree.py:77:18: W292 no newline at end of file
 ./tests/io/test_read_ddg.py:8:1: E302 expected 2 blank lines, found 1
 ./tests/io/test_read_ddg.py:10:26: E231 missing whitespace after ','
 ./tests/io/test_read_ddg.py:10:32: E231 missing whitespace after ','
@@ -2863,6 +2847,26 @@
 ./tests/io/test_write_pdb.py:36:5: E303 too many blank lines (3)
 ./tests/io/test_write_pdb.py:37:1: W293 blank line contains whitespace
 ./tests/io/test_write_pdb.py:37:5: W292 no newline at end of file
+./tests/io/test_read_tree.py:9:1: E302 expected 2 blank lines, found 1
+./tests/io/test_read_tree.py:9:32: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:9:47: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:15:30: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:21:30: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:25:16: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:25:24: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:32:16: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:32:24: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:35:29: W291 trailing whitespace
+./tests/io/test_read_tree.py:36:1: W293 blank line contains whitespace
+./tests/io/test_read_tree.py:37:17: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:37:20: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:37:23: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:38:16: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:38:24: E231 missing whitespace after ','
+./tests/io/test_read_tree.py:41:29: W291 trailing whitespace
+./tests/io/test_read_tree.py:44:5: E303 too many blank lines (2)
+./tests/io/test_read_tree.py:45:1: W293 blank line contains whitespace
+./tests/io/test_read_tree.py:45:5: W292 no newline at end of file
 ./tests/_private/test_utility.py:8:1: E302 expected 2 blank lines, found 1
 ./tests/_private/test_utility.py:12:30: E231 missing whitespace after ','
 ./tests/_private/test_utility.py:14:16: E231 missing whitespace after ','
@@ -4120,120 +4124,120 @@
 ./tests/calcs/test_simulation_calcs___init__.py:13:34: E231 missing whitespace after ','
 ./tests/calcs/test_simulation_calcs___init__.py:14:44: E231 missing whitespace after ','
 ./tests/calcs/test_simulation_calcs___init__.py:14:56: W292 no newline at end of file
-./tests/calcs/test_simulation_base.py:15:1: E302 expected 2 blank lines, found 1
-./tests/calcs/test_simulation_base.py:17:67: W291 trailing whitespace
-./tests/calcs/test_simulation_base.py:23:1: E302 expected 2 blank lines, found 1
-./tests/calcs/test_simulation_base.py:25:73: W291 trailing whitespace
-./tests/calcs/test_simulation_base.py:29:17: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:29:23: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:32:1: E302 expected 2 blank lines, found 1
-./tests/calcs/test_simulation_base.py:34:65: W291 trailing whitespace
-./tests/calcs/test_simulation_base.py:47:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:48:41: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:49:39: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:50:41: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:51:38: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:52:41: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:56:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:57:35: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:63:1: C901 'test_Simulation' is too complex (11)
-./tests/calcs/test_simulation_base.py:63:1: E302 expected 2 blank lines, found 1
-./tests/calcs/test_simulation_base.py:63:34: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:69:52: W291 trailing whitespace
-./tests/calcs/test_simulation_base.py:77:5: E303 too many blank lines (2)
-./tests/calcs/test_simulation_base.py:82:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:93:16: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:93:24: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:99:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:105:30: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:108:16: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:108:24: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:119:30: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:122:16: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:122:24: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:124:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:132:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:138:9: E722 do not use bare 'except'
-./tests/calcs/test_simulation_base.py:144:16: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:144:24: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:155:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:160:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:161:37: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:163:38: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:170:37: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:172:38: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:173:41: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:175:35: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:16:1: E302 expected 2 blank lines, found 1
+./tests/calcs/test_simulation_base.py:18:67: W291 trailing whitespace
+./tests/calcs/test_simulation_base.py:24:1: E302 expected 2 blank lines, found 1
+./tests/calcs/test_simulation_base.py:26:73: W291 trailing whitespace
+./tests/calcs/test_simulation_base.py:30:17: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:30:23: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:33:1: E302 expected 2 blank lines, found 1
+./tests/calcs/test_simulation_base.py:35:65: W291 trailing whitespace
+./tests/calcs/test_simulation_base.py:48:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:49:41: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:50:39: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:51:41: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:52:38: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:53:41: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:57:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:58:35: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:64:1: C901 'test_Simulation' is too complex (11)
+./tests/calcs/test_simulation_base.py:64:1: E302 expected 2 blank lines, found 1
+./tests/calcs/test_simulation_base.py:64:34: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:70:52: W291 trailing whitespace
+./tests/calcs/test_simulation_base.py:78:5: E303 too many blank lines (2)
+./tests/calcs/test_simulation_base.py:83:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:94:16: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:94:24: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:100:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:106:30: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:109:16: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:109:24: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:120:30: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:123:16: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:123:24: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:125:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:133:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:139:9: E722 do not use bare 'except'
+./tests/calcs/test_simulation_base.py:145:16: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:145:24: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:156:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:161:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:162:37: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:164:38: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:171:37: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:173:38: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:174:41: E231 missing whitespace after ','
 ./tests/calcs/test_simulation_base.py:176:35: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:178:1: E302 expected 2 blank lines, found 1
-./tests/calcs/test_simulation_base.py:178:48: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:195:41: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:197:35: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:208:45: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:211:5: E303 too many blank lines (2)
-./tests/calcs/test_simulation_base.py:213:1: E302 expected 2 blank lines, found 1
-./tests/calcs/test_simulation_base.py:228:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:229:5: E303 too many blank lines (2)
-./tests/calcs/test_simulation_base.py:229:37: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:230:35: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:231:37: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:232:34: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:233:37: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:234:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:237:47: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:177:35: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:179:1: E302 expected 2 blank lines, found 1
+./tests/calcs/test_simulation_base.py:179:48: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:196:41: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:198:35: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:209:45: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:212:5: E303 too many blank lines (2)
+./tests/calcs/test_simulation_base.py:214:1: E302 expected 2 blank lines, found 1
+./tests/calcs/test_simulation_base.py:229:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:230:5: E303 too many blank lines (2)
+./tests/calcs/test_simulation_base.py:230:37: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:231:35: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:232:37: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:233:34: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:234:37: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:235:1: W293 blank line contains whitespace
 ./tests/calcs/test_simulation_base.py:238:47: E231 missing whitespace after ','
 ./tests/calcs/test_simulation_base.py:239:47: E231 missing whitespace after ','
 ./tests/calcs/test_simulation_base.py:240:47: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:242:35: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:245:46: W291 trailing whitespace
-./tests/calcs/test_simulation_base.py:248:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:250:53: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:264:63: E128 continuation line under-indented for visual indent
-./tests/calcs/test_simulation_base.py:265:39: E128 continuation line under-indented for visual indent
-./tests/calcs/test_simulation_base.py:266:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:267:20: E222 multiple spaces after operator
-./tests/calcs/test_simulation_base.py:275:48: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:279:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:283:5: F841 local variable 'df' is assigned to but never used
-./tests/calcs/test_simulation_base.py:283:42: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:287:1: E302 expected 2 blank lines, found 1
-./tests/calcs/test_simulation_base.py:288:75: W291 trailing whitespace
-./tests/calcs/test_simulation_base.py:290:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:241:47: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:243:35: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:246:46: W291 trailing whitespace
+./tests/calcs/test_simulation_base.py:249:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:251:53: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:265:63: E128 continuation line under-indented for visual indent
+./tests/calcs/test_simulation_base.py:266:39: E128 continuation line under-indented for visual indent
+./tests/calcs/test_simulation_base.py:267:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:268:20: E222 multiple spaces after operator
+./tests/calcs/test_simulation_base.py:276:48: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:280:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:284:5: F841 local variable 'df' is assigned to but never used
+./tests/calcs/test_simulation_base.py:284:42: E231 missing whitespace after ','
 ./tests/calcs/test_simulation_base.py:291:1: E302 expected 2 blank lines, found 1
-./tests/calcs/test_simulation_base.py:292:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:301:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:303:5: E303 too many blank lines (2)
-./tests/calcs/test_simulation_base.py:311:25: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:312:40: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:323:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:325:25: W291 trailing whitespace
-./tests/calcs/test_simulation_base.py:335:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:336:26: W291 trailing whitespace
-./tests/calcs/test_simulation_base.py:338:35: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:341:66: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:292:75: W291 trailing whitespace
+./tests/calcs/test_simulation_base.py:294:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:295:1: E302 expected 2 blank lines, found 1
+./tests/calcs/test_simulation_base.py:296:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:305:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:307:5: E303 too many blank lines (2)
+./tests/calcs/test_simulation_base.py:315:25: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:316:40: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:327:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:329:25: W291 trailing whitespace
+./tests/calcs/test_simulation_base.py:339:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:340:26: W291 trailing whitespace
 ./tests/calcs/test_simulation_base.py:342:35: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:349:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:351:5: E303 too many blank lines (2)
-./tests/calcs/test_simulation_base.py:358:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:359:37: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:359:39: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:359:44: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:365:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:366:5: E303 too many blank lines (2)
-./tests/calcs/test_simulation_base.py:366:29: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:367:37: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:367:39: E231 missing whitespace after ','
-./tests/calcs/test_simulation_base.py:367:44: E231 missing whitespace after ':'
-./tests/calcs/test_simulation_base.py:373:1: E302 expected 2 blank lines, found 1
-./tests/calcs/test_simulation_base.py:374:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:382:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:386:1: E302 expected 2 blank lines, found 1
-./tests/calcs/test_simulation_base.py:387:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:395:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:398:1: E302 expected 2 blank lines, found 1
+./tests/calcs/test_simulation_base.py:345:66: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:346:35: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:353:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:355:5: E303 too many blank lines (2)
+./tests/calcs/test_simulation_base.py:362:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:363:37: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:363:39: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:363:44: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:369:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:370:5: E303 too many blank lines (2)
+./tests/calcs/test_simulation_base.py:370:29: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:371:37: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:371:39: E231 missing whitespace after ','
+./tests/calcs/test_simulation_base.py:371:44: E231 missing whitespace after ':'
+./tests/calcs/test_simulation_base.py:377:1: E302 expected 2 blank lines, found 1
+./tests/calcs/test_simulation_base.py:378:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:386:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:390:1: E302 expected 2 blank lines, found 1
+./tests/calcs/test_simulation_base.py:391:1: W293 blank line contains whitespace
 ./tests/calcs/test_simulation_base.py:399:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:407:1: W293 blank line contains whitespace
-./tests/calcs/test_simulation_base.py:408:27: W292 no newline at end of file
+./tests/calcs/test_simulation_base.py:402:1: E302 expected 2 blank lines, found 1
+./tests/calcs/test_simulation_base.py:403:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:411:1: W293 blank line contains whitespace
+./tests/calcs/test_simulation_base.py:412:27: W292 no newline at end of file
 ./tests/calcs/test_dms.py:1:1: F401 'pytest' imported but unused
 ./tests/calcs/test_dms.py:8:1: E302 expected 2 blank lines, found 1
 ./tests/calcs/test_dms.py:9:1: W293 blank line contains whitespace
@@ -4380,8 +4384,12 @@
 ./eee/__init__.py:5:1: F401 '.core' imported but unused
 ./eee/__init__.py:6:1: F401 '.structure' imported but unused
 ./eee/__init__.py:7:1: F401 '.io' imported but unused
-./eee/__init__.py:9:1: E302 expected 2 blank lines, found 1
-./eee/__init__.py:32:1: E305 expected 2 blank lines after class or function definition, found 1
+./eee/__init__.py:8:1: F401 '.calcs' imported but unused
+./eee/__init__.py:10:1: E302 expected 2 blank lines, found 1
+./eee/__init__.py:33:1: E305 expected 2 blank lines after class or function definition, found 1
+./eee/__init__.py:35:1: F401 '.__version__.__version__' imported but unused
+./eee/__init__.py:35:1: E402 module level import not at top of file
+./eee/__init__.py:37:1: W391 blank line at end of file
 ./eee/tools/build_ensemble_gui/species.py:7:1: E302 expected 2 blank lines, found 1
 ./eee/tools/build_ensemble_gui/species.py:16:1: W293 blank line contains whitespace
 ./eee/tools/build_ensemble_gui/species.py:24:1: W293 blank line contains whitespace
@@ -5098,8 +5106,7 @@
 ./eee/core/engine/follow_tree.py:210:17: E303 too many blank lines (2)
 ./eee/core/engine/follow_tree.py:217:1: W293 blank line contains whitespace
 ./eee/core/engine/follow_tree.py:233:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:237:24: E231 missing whitespace after ','
-./eee/core/engine/follow_tree.py:242:20: W292 no newline at end of file
+./eee/core/engine/follow_tree.py:243:20: W292 no newline at end of file
 ./eee/core/engine/wright_fisher.py:23:1: E302 expected 2 blank lines, found 1
 ./eee/core/engine/wright_fisher.py:29:1: W293 blank line contains whitespace
 ./eee/core/engine/wright_fisher.py:42:58: E231 missing whitespace after ','
@@ -5287,61 +5294,6 @@
 ./eee/core/genotype/single_genotype.py:179:77: W291 trailing whitespace
 ./eee/core/genotype/single_genotype.py:180:36: W291 trailing whitespace
 ./eee/core/genotype/single_genotype.py:183:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:15:1: E302 expected 2 blank lines, found 1
-./eee/analysis/epistasis_and_accessibility.py:17:73: W291 trailing whitespace
-./eee/analysis/epistasis_and_accessibility.py:18:29: W291 trailing whitespace
-./eee/analysis/epistasis_and_accessibility.py:20:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:21:32: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:24:33: E225 missing whitespace around operator
-./eee/analysis/epistasis_and_accessibility.py:24:36: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:31:26: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:36:13: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:38:53: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:39:58: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:41:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:43:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:44:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:48:77: W291 trailing whitespace
-./eee/analysis/epistasis_and_accessibility.py:51:46: W291 trailing whitespace
-./eee/analysis/epistasis_and_accessibility.py:52:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:58:69: W291 trailing whitespace
-./eee/analysis/epistasis_and_accessibility.py:59:25: W291 trailing whitespace
-./eee/analysis/epistasis_and_accessibility.py:60:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:64:78: W291 trailing whitespace
-./eee/analysis/epistasis_and_accessibility.py:67:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:69:58: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:69:66: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:75:65: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:75:73: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:91:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:100:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:102:36: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:106:43: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:108:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:110:56: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:112:29: E128 continuation line under-indented for visual indent
-./eee/analysis/epistasis_and_accessibility.py:123:56: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:128:48: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:129:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:131:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:135:20: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:135:26: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:136:20: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:136:26: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:136:32: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:137:20: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:137:29: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:137:38: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:139:22: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:142:57: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:146:29: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:147:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:150:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:155:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:161:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:174:1: W293 blank line contains whitespace
-./eee/analysis/epistasis_and_accessibility.py:199:13: E231 missing whitespace after ','
-./eee/analysis/epistasis_and_accessibility.py:201:17: W292 no newline at end of file
 ./eee/analysis/ensemble_fitness.py:8:1: E302 expected 2 blank lines, found 1
 ./eee/analysis/ensemble_fitness.py:12:73: W291 trailing whitespace
 ./eee/analysis/ensemble_fitness.py:13:64: W291 trailing whitespace
@@ -5365,7 +5317,8 @@
 ./eee/analysis/__init__.py:6:1: F401 '.wf.analysis.get_genotype_frequencies' imported but unused
 ./eee/analysis/__init__.py:8:1: F401 '.ensemble_fitness.ensemble_fitness' imported but unused
 ./eee/analysis/__init__.py:10:1: F401 '.num_genotypes.get_num_genotypes' imported but unused
-./eee/analysis/__init__.py:10:45: W292 no newline at end of file
+./eee/analysis/__init__.py:12:1: F401 '.epistasis' imported but unused
+./eee/analysis/__init__.py:12:24: W292 no newline at end of file
 ./eee/analysis/cluster_ddg.py:2:20: W291 trailing whitespace
 ./eee/analysis/cluster_ddg.py:21:1: E302 expected 2 blank lines, found 1
 ./eee/analysis/cluster_ddg.py:27:32: W291 trailing whitespace
@@ -5485,102 +5438,159 @@
 ./eee/analysis/epistasis.py:61:1: W293 blank line contains whitespace
 ./eee/analysis/epistasis.py:63:36: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:64:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:65:37: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:68:35: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:69:37: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:70:39: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:71:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:74:19: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:99:70: W291 trailing whitespace
-./eee/analysis/epistasis.py:101:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:104:28: W291 trailing whitespace
-./eee/analysis/epistasis.py:108:71: W291 trailing whitespace
-./eee/analysis/epistasis.py:110:71: W291 trailing whitespace
-./eee/analysis/epistasis.py:113:27: W291 trailing whitespace
-./eee/analysis/epistasis.py:122:70: W291 trailing whitespace
-./eee/analysis/epistasis.py:123:62: W291 trailing whitespace
-./eee/analysis/epistasis.py:125:73: W291 trailing whitespace
-./eee/analysis/epistasis.py:126:47: W291 trailing whitespace
-./eee/analysis/epistasis.py:148:21: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:69:35: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:70:37: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:71:39: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:72:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:75:19: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:100:70: W291 trailing whitespace
+./eee/analysis/epistasis.py:102:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:105:28: W291 trailing whitespace
+./eee/analysis/epistasis.py:109:71: W291 trailing whitespace
+./eee/analysis/epistasis.py:111:71: W291 trailing whitespace
+./eee/analysis/epistasis.py:114:27: W291 trailing whitespace
+./eee/analysis/epistasis.py:123:70: W291 trailing whitespace
+./eee/analysis/epistasis.py:124:62: W291 trailing whitespace
+./eee/analysis/epistasis.py:126:73: W291 trailing whitespace
+./eee/analysis/epistasis.py:127:47: W291 trailing whitespace
 ./eee/analysis/epistasis.py:149:21: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:152:34: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:150:21: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:153:34: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:154:34: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:155:34: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:157:69: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:156:34: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:158:69: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:159:69: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:160:69: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:161:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:168:34: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:161:69: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:162:1: W293 blank line contains whitespace
 ./eee/analysis/epistasis.py:169:34: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:170:34: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:171:34: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:173:69: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:172:34: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:174:69: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:175:69: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:176:69: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:177:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:186:32: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:186:39: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:186:51: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:188:75: W291 trailing whitespace
-./eee/analysis/epistasis.py:190:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:198:25: W291 trailing whitespace
-./eee/analysis/epistasis.py:204:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:209:76: W291 trailing whitespace
-./eee/analysis/epistasis.py:210:53: W291 trailing whitespace
-./eee/analysis/epistasis.py:214:5: E303 too many blank lines (2)
-./eee/analysis/epistasis.py:216:48: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:216:62: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:217:36: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:218:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:220:26: W291 trailing whitespace
-./eee/analysis/epistasis.py:223:20: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:223:25: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:223:30: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:223:35: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:223:44: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:224:19: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:225:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:233:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:235:49: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:242:58: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:245:31: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:248:46: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:248:84: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:251:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:253:53: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:260:62: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:272:60: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:177:69: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:178:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:187:32: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:187:39: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:187:51: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:189:75: W291 trailing whitespace
+./eee/analysis/epistasis.py:191:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:199:25: W291 trailing whitespace
+./eee/analysis/epistasis.py:205:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:210:76: W291 trailing whitespace
+./eee/analysis/epistasis.py:211:53: W291 trailing whitespace
+./eee/analysis/epistasis.py:215:5: E303 too many blank lines (2)
+./eee/analysis/epistasis.py:217:48: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:217:62: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:218:36: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:219:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:221:26: W291 trailing whitespace
+./eee/analysis/epistasis.py:224:20: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:224:25: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:224:30: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:224:35: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:224:44: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:225:19: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:226:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:234:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:236:49: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:243:58: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:246:31: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:249:46: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:249:84: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:252:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:254:53: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:261:62: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:273:60: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:274:60: E231 missing whitespace after ','
 ./eee/analysis/epistasis.py:275:60: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:278:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:285:1: E302 expected 2 blank lines, found 1
-./eee/analysis/epistasis.py:285:27: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:288:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:295:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:299:78: W291 trailing whitespace
-./eee/analysis/epistasis.py:301:76: W291 trailing whitespace
-./eee/analysis/epistasis.py:304:61: W291 trailing whitespace
-./eee/analysis/epistasis.py:308:25: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:308:35: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:276:60: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:279:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:286:1: E302 expected 2 blank lines, found 1
+./eee/analysis/epistasis.py:286:27: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:289:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:296:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:300:78: W291 trailing whitespace
+./eee/analysis/epistasis.py:302:76: W291 trailing whitespace
+./eee/analysis/epistasis.py:305:61: W291 trailing whitespace
 ./eee/analysis/epistasis.py:309:25: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:309:34: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:309:45: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:310:19: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:321:45: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:322:35: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:323:1: W293 blank line contains whitespace
-./eee/analysis/epistasis.py:327:47: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:334:64: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:335:58: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:337:41: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:338:24: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:338:32: E231 missing whitespace after ','
-./eee/analysis/epistasis.py:352:5: E303 too many blank lines (2)
-./eee/analysis/epistasis.py:356:1: W391 blank line at end of file
+./eee/analysis/epistasis.py:309:35: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:310:25: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:310:34: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:310:45: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:311:19: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:322:45: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:323:35: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:324:1: W293 blank line contains whitespace
+./eee/analysis/epistasis.py:328:47: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:335:64: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:336:58: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:338:41: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:339:24: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:339:32: E231 missing whitespace after ','
+./eee/analysis/epistasis.py:353:5: E303 too many blank lines (2)
+./eee/analysis/epistasis.py:357:1: W391 blank line at end of file
+./eee/analysis/dms_epistasis.py:15:1: E302 expected 2 blank lines, found 1
+./eee/analysis/dms_epistasis.py:19:1: W293 blank line contains whitespace
+./eee/analysis/dms_epistasis.py:26:1: W293 blank line contains whitespace
+./eee/analysis/dms_epistasis.py:30:78: W291 trailing whitespace
+./eee/analysis/dms_epistasis.py:33:1: W293 blank line contains whitespace
+./eee/analysis/dms_epistasis.py:35:58: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:35:66: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:39:1: W293 blank line contains whitespace
+./eee/analysis/dms_epistasis.py:44:1: W293 blank line contains whitespace
+./eee/analysis/dms_epistasis.py:45:36: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:49:33: E127 continuation line over-indented for visual indent
+./eee/analysis/dms_epistasis.py:57:45: E225 missing whitespace around operator
+./eee/analysis/dms_epistasis.py:57:48: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:58:1: W293 blank line contains whitespace
+./eee/analysis/dms_epistasis.py:60:56: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:65:56: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:68:48: E225 missing whitespace around operator
+./eee/analysis/dms_epistasis.py:68:51: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:70:1: W293 blank line contains whitespace
+./eee/analysis/dms_epistasis.py:74:22: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:74:28: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:74:34: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:74:45: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:78:24: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:78:30: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:78:36: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:78:42: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:79:42: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:83:26: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:83:35: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:83:48: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:84:41: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:88:30: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:89:40: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:99:33: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:101:1: W293 blank line contains whitespace
+./eee/analysis/dms_epistasis.py:104:33: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:111:37: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:112:37: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:113:37: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:114:37: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:124:64: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:125:64: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:127:80: W291 trailing whitespace
+./eee/analysis/dms_epistasis.py:129:37: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:154:1: W293 blank line contains whitespace
+./eee/analysis/dms_epistasis.py:160:26: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:160:32: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:161:26: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:161:32: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:161:38: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:162:26: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:162:35: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:162:44: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:163:32: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:164:34: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:164:49: E231 missing whitespace after ','
+./eee/analysis/dms_epistasis.py:166:26: E231 missing whitespace after ','
 ./eee/analysis/plots/__init__.py:16:1: F401 '._energy_diagram.energy_diagram' imported but unused
 ./eee/analysis/plots/__init__.py:16:1: E402 module level import not at top of file
 ./eee/analysis/plots/__init__.py:17:1: F401 '._titration.titration' imported but unused
@@ -5657,18 +5667,6 @@
 ./eee/analysis/wf/analysis.py:65:1: W293 blank line contains whitespace
 ./eee/analysis/wf/analysis.py:68:30: E231 missing whitespace after ','
 ./eee/analysis/wf/analysis.py:70:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:73:1: E302 expected 2 blank lines, found 1
-./eee/analysis/wf/analysis.py:73:25: E231 missing whitespace after ','
-./eee/analysis/wf/analysis.py:73:30: E231 missing whitespace after ','
-./eee/analysis/wf/analysis.py:76:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:85:73: W291 trailing whitespace
-./eee/analysis/wf/analysis.py:86:72: W291 trailing whitespace
-./eee/analysis/wf/analysis.py:87:26: W291 trailing whitespace
-./eee/analysis/wf/analysis.py:88:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:94:78: W291 trailing whitespace
-./eee/analysis/wf/analysis.py:95:40: W291 trailing whitespace
-./eee/analysis/wf/analysis.py:103:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:130:21: W292 no newline at end of file
 ./eee/analysis/wf/summary.py:2:68: W291 trailing whitespace
 ./eee/analysis/wf/summary.py:5:75: W291 trailing whitespace
 ./eee/analysis/wf/summary.py:6:78: W291 trailing whitespace
@@ -5923,18 +5921,44 @@
 ./eee/analysis/wf/traj_epistasis.py:199:13: E231 missing whitespace after ','
 ./eee/analysis/wf/traj_epistasis.py:200:1: W293 blank line contains whitespace
 ./eee/analysis/wf/traj_epistasis.py:217:23: W292 no newline at end of file
-./eee/analysis/wf/on_tree.py:2:1: F401 'eee.analysis.wf.analysis.get_most_common' imported but unused
-./eee/analysis/wf/on_tree.py:4:1: E302 expected 2 blank lines, found 1
-./eee/analysis/wf/on_tree.py:8:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:15:73: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:16:72: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:17:26: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:18:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:24:78: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:25:40: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:33:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:45:5: E303 too many blank lines (3)
-./eee/analysis/wf/on_tree.py:57:23: W292 no newline at end of file
+./eee/analysis/wf/on_tree.py:11:1: E302 expected 2 blank lines, found 1
+./eee/analysis/wf/on_tree.py:15:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:21:75: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:22:78: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:23:30: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:24:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:31:75: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:34:72: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:35:22: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:37:60: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:45:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:50:5: E303 too many blank lines (2)
+./eee/analysis/wf/on_tree.py:55:37: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:58:77: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:61:37: E128 continuation line under-indented for visual indent
+./eee/analysis/wf/on_tree.py:66:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:70:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:73:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:77:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:81:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:83:44: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:84:30: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:87:77: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:92:36: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:95:60: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:104:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:111:73: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:112:72: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:113:26: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:114:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:120:78: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:121:40: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:124:24: E203 whitespace before ','
+./eee/analysis/wf/on_tree.py:125:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:131:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:151:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:154:37: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:174:26: W292 no newline at end of file
 ./eee/io/read_dataframe.py:9:1: E302 expected 2 blank lines, found 1
 ./eee/io/read_dataframe.py:9:22: E231 missing whitespace after ','
 ./eee/io/read_dataframe.py:30:27: E231 missing whitespace after ','
@@ -6556,110 +6580,111 @@
 ./eee/calcs/read_json.py:97:1: W293 blank line contains whitespace
 ./eee/calcs/read_json.py:100:1: C901 'read_json' is too complex (12)
 ./eee/calcs/read_json.py:100:1: E302 expected 2 blank lines, found 1
-./eee/calcs/read_json.py:103:70: W291 trailing whitespace
-./eee/calcs/read_json.py:106:76: W291 trailing whitespace
-./eee/calcs/read_json.py:111:73: W291 trailing whitespace
-./eee/calcs/read_json.py:113:74: W291 trailing whitespace
-./eee/calcs/read_json.py:114:49: W291 trailing whitespace
-./eee/calcs/read_json.py:115:79: W291 trailing whitespace
-./eee/calcs/read_json.py:117:72: W291 trailing whitespace
-./eee/calcs/read_json.py:118:77: W291 trailing whitespace
-./eee/calcs/read_json.py:127:73: W291 trailing whitespace
-./eee/calcs/read_json.py:128:71: W291 trailing whitespace
-./eee/calcs/read_json.py:129:18: W291 trailing whitespace
-./eee/calcs/read_json.py:137:75: W291 trailing whitespace
-./eee/calcs/read_json.py:138:21: W291 trailing whitespace
-./eee/calcs/read_json.py:148:1: W293 blank line contains whitespace
-./eee/calcs/read_json.py:156:38: E231 missing whitespace after ','
-./eee/calcs/read_json.py:157:1: W293 blank line contains whitespace
-./eee/calcs/read_json.py:166:1: W293 blank line contains whitespace
-./eee/calcs/read_json.py:176:45: E231 missing whitespace after ','
-./eee/calcs/read_json.py:185:1: W293 blank line contains whitespace
-./eee/calcs/read_json.py:189:1: W293 blank line contains whitespace
-./eee/calcs/read_json.py:195:1: W293 blank line contains whitespace
-./eee/calcs/read_json.py:197:39: E231 missing whitespace after ','
-./eee/calcs/read_json.py:198:53: E231 missing whitespace after ','
-./eee/calcs/read_json.py:205:1: W293 blank line contains whitespace
-./eee/calcs/read_json.py:210:42: E231 missing whitespace after ','
-./eee/calcs/read_json.py:213:1: W293 blank line contains whitespace
-./eee/calcs/read_json.py:216:60: W291 trailing whitespace
-./eee/calcs/read_json.py:226:36: W291 trailing whitespace
-./eee/calcs/read_json.py:236:1: W293 blank line contains whitespace
-./eee/calcs/read_json.py:237:1: W391 blank line at end of file
+./eee/calcs/read_json.py:104:70: W291 trailing whitespace
+./eee/calcs/read_json.py:107:76: W291 trailing whitespace
+./eee/calcs/read_json.py:112:73: W291 trailing whitespace
+./eee/calcs/read_json.py:114:74: W291 trailing whitespace
+./eee/calcs/read_json.py:115:49: W291 trailing whitespace
+./eee/calcs/read_json.py:116:79: W291 trailing whitespace
+./eee/calcs/read_json.py:118:72: W291 trailing whitespace
+./eee/calcs/read_json.py:119:77: W291 trailing whitespace
+./eee/calcs/read_json.py:130:73: W291 trailing whitespace
+./eee/calcs/read_json.py:131:71: W291 trailing whitespace
+./eee/calcs/read_json.py:132:18: W291 trailing whitespace
+./eee/calcs/read_json.py:134:77: W291 trailing whitespace
+./eee/calcs/read_json.py:143:75: W291 trailing whitespace
+./eee/calcs/read_json.py:144:21: W291 trailing whitespace
+./eee/calcs/read_json.py:154:1: W293 blank line contains whitespace
+./eee/calcs/read_json.py:162:38: E231 missing whitespace after ','
+./eee/calcs/read_json.py:163:1: W293 blank line contains whitespace
+./eee/calcs/read_json.py:172:1: W293 blank line contains whitespace
+./eee/calcs/read_json.py:182:45: E231 missing whitespace after ','
+./eee/calcs/read_json.py:192:1: W293 blank line contains whitespace
+./eee/calcs/read_json.py:196:1: W293 blank line contains whitespace
+./eee/calcs/read_json.py:202:1: W293 blank line contains whitespace
+./eee/calcs/read_json.py:204:39: E231 missing whitespace after ','
+./eee/calcs/read_json.py:205:53: E231 missing whitespace after ','
+./eee/calcs/read_json.py:212:1: W293 blank line contains whitespace
+./eee/calcs/read_json.py:217:42: E231 missing whitespace after ','
+./eee/calcs/read_json.py:220:1: W293 blank line contains whitespace
+./eee/calcs/read_json.py:223:60: W291 trailing whitespace
+./eee/calcs/read_json.py:233:36: W291 trailing whitespace
+./eee/calcs/read_json.py:243:1: W293 blank line contains whitespace
+./eee/calcs/read_json.py:244:1: W391 blank line at end of file
 ./eee/calcs/simulation_base.py:2:68: W291 trailing whitespace
 ./eee/calcs/simulation_base.py:3:64: W291 trailing whitespace
-./eee/calcs/simulation_base.py:19:1: E302 expected 2 blank lines, found 1
-./eee/calcs/simulation_base.py:21:72: W291 trailing whitespace
-./eee/calcs/simulation_base.py:22:68: W291 trailing whitespace
-./eee/calcs/simulation_base.py:24:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:35:39: W291 trailing whitespace
-./eee/calcs/simulation_base.py:39:32: W291 trailing whitespace
-./eee/calcs/simulation_base.py:42:81: W291 trailing whitespace
-./eee/calcs/simulation_base.py:46:85: W291 trailing whitespace
-./eee/calcs/simulation_base.py:48:64: W291 trailing whitespace
-./eee/calcs/simulation_base.py:50:75: W291 trailing whitespace
-./eee/calcs/simulation_base.py:51:79: W291 trailing whitespace
-./eee/calcs/simulation_base.py:53:76: W291 trailing whitespace
-./eee/calcs/simulation_base.py:54:77: W291 trailing whitespace
-./eee/calcs/simulation_base.py:55:31: W291 trailing whitespace
-./eee/calcs/simulation_base.py:56:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:58:67: W291 trailing whitespace
-./eee/calcs/simulation_base.py:59:78: W291 trailing whitespace
-./eee/calcs/simulation_base.py:60:22: W291 trailing whitespace
-./eee/calcs/simulation_base.py:64:76: W291 trailing whitespace
-./eee/calcs/simulation_base.py:65:62: W291 trailing whitespace
-./eee/calcs/simulation_base.py:69:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:71:71: W291 trailing whitespace
-./eee/calcs/simulation_base.py:74:39: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:85:57: W291 trailing whitespace
-./eee/calcs/simulation_base.py:90:51: W291 trailing whitespace
-./eee/calcs/simulation_base.py:97:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:98:71: W291 trailing whitespace
-./eee/calcs/simulation_base.py:121:13: E122 continuation line missing indentation or outdented
-./eee/calcs/simulation_base.py:126:68: W291 trailing whitespace
-./eee/calcs/simulation_base.py:128:65: W291 trailing whitespace
-./eee/calcs/simulation_base.py:132:75: W291 trailing whitespace
-./eee/calcs/simulation_base.py:136:76: W291 trailing whitespace
-./eee/calcs/simulation_base.py:139:61: W291 trailing whitespace
-./eee/calcs/simulation_base.py:142:81: W291 trailing whitespace
-./eee/calcs/simulation_base.py:143:37: W291 trailing whitespace
-./eee/calcs/simulation_base.py:145:75: W291 trailing whitespace
-./eee/calcs/simulation_base.py:146:23: W291 trailing whitespace
-./eee/calcs/simulation_base.py:155:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:161:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:167:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:170:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:172:37: W291 trailing whitespace
-./eee/calcs/simulation_base.py:175:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:184:76: W291 trailing whitespace
-./eee/calcs/simulation_base.py:185:28: W291 trailing whitespace
-./eee/calcs/simulation_base.py:202:5: E303 too many blank lines (2)
-./eee/calcs/simulation_base.py:202:32: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:205:20: W291 trailing whitespace
-./eee/calcs/simulation_base.py:212:27: E231 missing whitespace after ':'
-./eee/calcs/simulation_base.py:213:29: E231 missing whitespace after ':'
-./eee/calcs/simulation_base.py:222:37: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:226:42: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:230:54: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:235:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:236:22: W291 trailing whitespace
-./eee/calcs/simulation_base.py:237:36: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:238:12: E111 indentation is not a multiple of 4
-./eee/calcs/simulation_base.py:238:25: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:238:27: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:239:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:248:24: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:255:72: W291 trailing whitespace
-./eee/calcs/simulation_base.py:267:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:268:23: W291 trailing whitespace
-./eee/calcs/simulation_base.py:276:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:277:34: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:295:1: W293 blank line contains whitespace
-./eee/calcs/simulation_base.py:303:20: F541 f-string is missing placeholders
-./eee/calcs/simulation_base.py:314:33: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:316:55: W291 trailing whitespace
-./eee/calcs/simulation_base.py:331:44: E231 missing whitespace after ','
-./eee/calcs/simulation_base.py:346:24: W292 no newline at end of file
+./eee/calcs/simulation_base.py:20:1: E302 expected 2 blank lines, found 1
+./eee/calcs/simulation_base.py:22:72: W291 trailing whitespace
+./eee/calcs/simulation_base.py:23:68: W291 trailing whitespace
+./eee/calcs/simulation_base.py:25:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:36:39: W291 trailing whitespace
+./eee/calcs/simulation_base.py:40:32: W291 trailing whitespace
+./eee/calcs/simulation_base.py:43:81: W291 trailing whitespace
+./eee/calcs/simulation_base.py:47:85: W291 trailing whitespace
+./eee/calcs/simulation_base.py:49:64: W291 trailing whitespace
+./eee/calcs/simulation_base.py:51:75: W291 trailing whitespace
+./eee/calcs/simulation_base.py:52:79: W291 trailing whitespace
+./eee/calcs/simulation_base.py:54:76: W291 trailing whitespace
+./eee/calcs/simulation_base.py:55:77: W291 trailing whitespace
+./eee/calcs/simulation_base.py:56:31: W291 trailing whitespace
+./eee/calcs/simulation_base.py:57:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:59:67: W291 trailing whitespace
+./eee/calcs/simulation_base.py:60:78: W291 trailing whitespace
+./eee/calcs/simulation_base.py:61:22: W291 trailing whitespace
+./eee/calcs/simulation_base.py:65:76: W291 trailing whitespace
+./eee/calcs/simulation_base.py:66:62: W291 trailing whitespace
+./eee/calcs/simulation_base.py:70:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:72:71: W291 trailing whitespace
+./eee/calcs/simulation_base.py:75:39: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:86:57: W291 trailing whitespace
+./eee/calcs/simulation_base.py:91:51: W291 trailing whitespace
+./eee/calcs/simulation_base.py:98:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:99:71: W291 trailing whitespace
+./eee/calcs/simulation_base.py:122:13: E122 continuation line missing indentation or outdented
+./eee/calcs/simulation_base.py:127:68: W291 trailing whitespace
+./eee/calcs/simulation_base.py:129:65: W291 trailing whitespace
+./eee/calcs/simulation_base.py:133:75: W291 trailing whitespace
+./eee/calcs/simulation_base.py:137:76: W291 trailing whitespace
+./eee/calcs/simulation_base.py:140:61: W291 trailing whitespace
+./eee/calcs/simulation_base.py:143:81: W291 trailing whitespace
+./eee/calcs/simulation_base.py:144:37: W291 trailing whitespace
+./eee/calcs/simulation_base.py:146:75: W291 trailing whitespace
+./eee/calcs/simulation_base.py:147:23: W291 trailing whitespace
+./eee/calcs/simulation_base.py:156:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:162:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:168:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:171:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:173:37: W291 trailing whitespace
+./eee/calcs/simulation_base.py:176:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:185:76: W291 trailing whitespace
+./eee/calcs/simulation_base.py:186:28: W291 trailing whitespace
+./eee/calcs/simulation_base.py:203:5: E303 too many blank lines (2)
+./eee/calcs/simulation_base.py:203:32: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:206:20: W291 trailing whitespace
+./eee/calcs/simulation_base.py:213:27: E231 missing whitespace after ':'
+./eee/calcs/simulation_base.py:214:29: E231 missing whitespace after ':'
+./eee/calcs/simulation_base.py:223:37: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:227:42: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:231:54: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:237:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:238:22: W291 trailing whitespace
+./eee/calcs/simulation_base.py:239:36: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:240:12: E111 indentation is not a multiple of 4
+./eee/calcs/simulation_base.py:240:25: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:240:27: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:241:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:250:24: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:257:72: W291 trailing whitespace
+./eee/calcs/simulation_base.py:269:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:270:23: W291 trailing whitespace
+./eee/calcs/simulation_base.py:278:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:279:34: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:297:1: W293 blank line contains whitespace
+./eee/calcs/simulation_base.py:305:20: F541 f-string is missing placeholders
+./eee/calcs/simulation_base.py:316:33: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:318:55: W291 trailing whitespace
+./eee/calcs/simulation_base.py:333:44: E231 missing whitespace after ','
+./eee/calcs/simulation_base.py:348:24: W292 no newline at end of file
 ./eee/structure/clean_structure.py:15:1: E302 expected 2 blank lines, found 1
 ./eee/structure/clean_structure.py:20:77: W291 trailing whitespace
 ./eee/structure/clean_structure.py:40:31: W291 trailing whitespace
@@ -6820,33 +6845,34 @@
 1     E117 over-indented (comment)
 1     E122 continuation line missing indentation or outdented
 1     E124 closing bracket does not match visual indentation
-55    E127 continuation line over-indented for visual indent
+56    E127 continuation line over-indented for visual indent
 143   E128 continuation line under-indented for visual indent
 3     E201 whitespace after '{'
+1     E203 whitespace before ','
 1     E221 multiple spaces before operator
 3     E222 multiple spaces after operator
-5     E225 missing whitespace around operator
-4105  E231 missing whitespace after ','
+6     E225 missing whitespace around operator
+4130  E231 missing whitespace after ','
 3     E261 at least two spaces before inline comment
 10    E265 block comment should start with '# '
 1     E266 too many leading '#' for block comment
 2     E301 expected 1 blank line, found 0
-211   E302 expected 2 blank lines, found 1
-111   E303 too many blank lines (2)
+207   E302 expected 2 blank lines, found 1
+107   E303 too many blank lines (2)
 5     E305 expected 2 blank lines after class or function definition, found 1
 4     E401 multiple imports on one line
-14    E402 module level import not at top of file
+15    E402 module level import not at top of file
 1     E501 line too long (128 > 127 characters)
 2     E701 multiple statements on one line (colon)
-97    E712 comparison to True should be 'if cond is True:' or 'if cond:'
+109   E712 comparison to True should be 'if cond is True:' or 'if cond:'
 2     E714 test for object identity should be 'is not'
 2     E722 do not use bare 'except'
-76    F401 'glob' imported but unused
+85    F401 'glob' imported but unused
 9     F541 f-string is missing placeholders
 8     F841 local variable 'value' is assigned to but never used
-796   W291 trailing whitespace
-84    W292 no newline at end of file
-999   W293 blank line contains whitespace
-16    W391 blank line at end of file
+795   W291 trailing whitespace
+82    W292 no newline at end of file
+984   W293 blank line contains whitespace
+17    W391 blank line at end of file
 4     W605 invalid escape sequence '\('
-6815
+6840

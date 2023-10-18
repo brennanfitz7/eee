@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Command line interface to run a generation eee simulation from a json file. 
+Command line interface to run an eee calculation.  
 """
 
-from eee.io import read_json
+from eee.calcs import read_json
 
 import os
 import shutil
@@ -28,7 +28,6 @@ def main(argv=None):
                         help="overwrite the output directory if it exists.")
     cmd = parser.parse_args(argv)
     
-
     es, kwargs = read_json(json_file=cmd.json_file,
                            use_stored_seed=cmd.use_stored_seed)
 

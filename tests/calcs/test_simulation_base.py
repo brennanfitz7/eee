@@ -1,5 +1,6 @@
 import pytest
 
+import eee
 from eee.calcs.simulation_base import Simulation
 from eee.core import Fitness
 from eee.core import Genotype
@@ -281,6 +282,9 @@ def test_Simulation__write_calc_params(ens_test_data,
 
     # Make sure we can read in dataframe
     df = pd.read_csv(os.path.join("input","ddg.csv"))
+
+    # Make sure it wrote versions correctly
+    assert as_written["eee_version"] == eee.__version__
 
     os.chdir(current_dir)
 

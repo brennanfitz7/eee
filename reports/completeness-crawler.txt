@@ -29,8 +29,7 @@ FOUND tests._private.test_wrap.test_wrap_function
 FOUND tests.analysis.test_cluster_ddg.test__clean_up_axes
 FOUND tests.analysis.test_cluster_ddg.test_cluster_ddg
 FOUND tests.analysis.test_ensemble_fitness.test_ensemble_fitness
-FOUND tests.analysis.test_epistasis_and_accessibility.test__get_rings
-FOUND tests.analysis.test_epistasis_and_accessibility.test_epistasis_and_accessibility
+FOUND tests.analysis.test_epistasis.test_get_epistasis
 FOUND tests.analysis.test_num_genotypes.test_get_num_genotypes
 FOUND tests.calcs.test_accessible_paths.test_AccessiblePaths
 FOUND tests.calcs.test_accessible_paths.test_AccessiblePaths_run
@@ -123,16 +122,18 @@ FOUND tests.io.test_read_ensemble.test_read_ensemble
 FOUND tests.io.test_read_structure.test__read_structure_cif
 FOUND tests.io.test_read_structure.test__read_structure_pdb
 FOUND tests.io.test_read_structure.test_read_structure
+FOUND tests.io.test_read_tree.test_read_tree
 FOUND tests.io.test_write_pdb.test_write_pdb
+FOUND tests.io.test_write_tree.test_write_tree
 FOUND tests.structure.test_align_structure_seqs.test_align_structure_seqs
 FOUND tests.structure.test_sync_structures.test__create_unique_filenames
 FOUND tests.structure.test_sync_structures.test_sync_structures
 FAKE tests._private.test_logger.test_log
 FAKE tests._private.test_wrap.test_IterFromFile
 FAKE tests._private.test_wrap.test_IterFromFile___call__
+FAKE tests.analysis.test_dms_epistasis.test_dms_epistasis
 FAKE tests.analysis.test_epistasis.test_get_all_pairs_epistasis
 FAKE tests.analysis.test_epistasis.test_get_ensemble_epistasis
-FAKE tests.analysis.test_epistasis.test_get_epistasis
 FAKE tests.analysis.test_epistasis.test_summarize_epistasis
 FAKE tests.analysis.wf.test_analysis.test_extract_alignment
 FAKE tests.analysis.wf.test_analysis.test_get_genotype_frequencies
@@ -145,6 +146,7 @@ MISSING tests._private.check.test_plot.test_check_plot
 MISSING tests.analysis.plots.test__energy_diagram.test_energy_diagram
 MISSING tests.analysis.plots.test__titration.test_titration
 MISSING tests.analysis.wf.test_on_tree.test_extract_alignment
+MISSING tests.analysis.wf.test_on_tree.test_load_wf_tree_sim
 MISSING tests.analysis.wf.test_summary.test_extract_key_trajectories
 MISSING tests.analysis.wf.test_summary.test_fitness_and_variance
 MISSING tests.analysis.wf.test_summary.test_load_simulation_results
@@ -154,12 +156,10 @@ MISSING tests.analysis.wf.test_summary.test_summarize_simulation
 MISSING tests.analysis.wf.test_traj_epistasis.test_get_min_max
 MISSING tests.analysis.wf.test_traj_epistasis.test_traj_epistasis
 MISSING tests.bin.test_eee-get-available-functions.test_main
-MISSING tests.bin.test_eee-simulate-from-json.test_main
+MISSING tests.bin.test_eee-run-calculation.test_main
 MISSING tests.bin.test_eee-sync-structures.test_main
 MISSING tests.calcs.test___init__.test__get_available
 MISSING tests.core.engine.test_wright_fisher.test_get_num_accumulated_mutations
-MISSING tests.io.test_read_tree.test_read_tree
-MISSING tests.io.test_write_tree.test_write_tree
 MISSING tests.test___init__.test__check_for_notebook
 MISSING tests.tools.build_ensemble_gui.test_base.test_MetaWidget
 MISSING tests.tools.build_ensemble_gui.test_base.test_MetaWidget__silent_update
@@ -200,6 +200,5 @@ MISSING tests.tools.build_ensemble_gui.test_titration.test_TitrationWidget_get_v
 MISSING tests.tools.build_ensemble_gui.test_titration.test_TitrationWidget_update
 MISSING tests.tools.build_ensemble_gui.test_titration.test_TitrationWidget_widget
 FOUND & EXTRA tests._private.check.test_check_ensemble.test_check_ensemble
+FOUND & EXTRA tests.analysis.wf.test_analysis.test_extract_alignment
 FOUND & EXTRA tests.calcs.test_simulation_calcs___init__.test__get_calc_available
-FOUND & EXTRA tests.io.test_io_read_tree.test_read_tree
-FOUND & EXTRA tests.io.test_io_write_tree.test_write_tree

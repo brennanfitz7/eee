@@ -1,6 +1,6 @@
 
 import eee
-from eee.tools.plots import plt
+from eee.analysis.plots import plt
 
 import numpy as np
 

@@ -45,7 +45,7 @@ def get_epistasis(m00,m10,m01,m11):
     sign1 = (m11 - m01)/(m10 - m00)
     sign1 = sign1 < 0
 
-    # Sign of mutation 1 (will be False if mutation effect has same
+    # Sign of mutation 2 (will be False if mutation effect has same
     # sign in both backgrounds; True if opposite signs)
     sign2 = (m11 - m10)/(m01 - m00)
     sign2 = sign2 < 0
@@ -62,7 +62,8 @@ def get_epistasis(m00,m10,m01,m11):
     # Separate reciprocal from simple sign epistasis
     is_recip = np.logical_and(sign1,sign2)
     
-    is_sign = np.logical_and(is_sign,np.logical_not(is_recip))
+    is_sign = np.logical_and(is_sign,
+                             np.logical_not(is_recip))
 
     # Filter all classes of epistasis based on magnitude
     is_mag = np.logical_and(is_mag,is_epistasis)

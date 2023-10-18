@@ -234,7 +234,8 @@ def follow_tree(gc,
                 pbar.update(n=1)
 
     # Write tree
-    tree.write(format=3,outfile=f"{write_prefix}.newick")
+    tree.write(format=3,
+               outfile=f"{write_prefix}.newick")
 
     # Write genotypes
     gc.df.to_csv(f"{write_prefix}_genotypes.csv")

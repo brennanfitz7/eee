@@ -5,7 +5,7 @@ Functions for summarizing the result of a Wright-Fisher simulation.
 # Need to think through how to have unified plot rc (or even if we should) 
 # across package. this should bring in matplotlib rc settings from basic plot 
 # interface. 
-from eee.tools.plots import plt
+from eee.analysis.plots import plt
 
 from eee.calcs.read_json import read_json
 from eee._private.interface import MockContextManager

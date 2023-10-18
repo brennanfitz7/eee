@@ -2,6 +2,7 @@
 Base class for running simulations on thermodynamic ensembles under 
 different selective conditions. Must be sub-classed to be used.  
 """
+import eee
 
 from eee._private.check.ensemble import check_ensemble
 from eee._private.check.standard import check_int
@@ -232,6 +233,7 @@ class Simulation:
 
         # Convert to python data types so we can write out
         out = prep_for_json(out)
+        out["eee_version"] = eee.__version__
         
         # write json. 
         with open("simulation.json",'w') as f:

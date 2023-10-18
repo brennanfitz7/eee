@@ -5,6 +5,7 @@ from . import ddg
 from . import core
 from . import structure
 from . import io
+from . import calcs
 
 def _check_for_notebook():
     """
@@ -30,3 +31,7 @@ def _check_for_notebook():
         return None
 
 _in_notebook = _check_for_notebook()
+
+from .__version__ import __version__
+
+

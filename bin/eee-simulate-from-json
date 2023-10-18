@@ -3,7 +3,7 @@
 Command line interface to run a generation eee simulation from a json file. 
 """
 
-from eee.simulation.io import read_json
+from eee.io import read_json
 
 import os
 import shutil

@@ -1,8 +1,14 @@
+"""
+Read an ensemble from a file or dictionary/dataframe input.
+"""
+
 import eee
+from eee.core.data import GAS_CONSTANT
+
+import pandas as pd
 
 import json
 import os
-import inspect
 
 def _search_for_key(some_dict,
                     search_key,
@@ -42,79 +48,31 @@ def _search_for_key(some_dict,
                 
     return current_stack
 
-def _spreadsheet_to_ensemble(df,gas_constant=None):
+def _spreadsheet_to_ensemble(df,
+                             gas_constant=GAS_CONSTANT):
     """
     Load a spreadsheet and try to convert to an ensemble. Rows are treated as 
-    different species; columns as keyword parameters (dG0, mu_stoich, etc.)
+    different species; columns as keyword parameters (dG0, ligands, etc.)
     """
 
-    # Figure out gas constant (can't come from spreadsheet)
-    if gas_constant is None:
-        gas_constant = eee.Ensemble()._gas_constant
-
-    # Create ensemble
-    ens = eee.Ensemble(gas_constant=gas_constant)
+    #print("Loading ensemble from a spreadsheet\n",flush=True)
     
-    # Figure out the required and allowed keyword arguments to add_species. 
-    required = []
-    allowed = []
-    allowed_args = inspect.signature(ens.add_species).parameters
-    for k in allowed_args:
-        if allowed_args[k].default is inspect._empty:
-            required.append(k)
-        else:
-            allowed.append(k)
-        
-    required = set(required)
-    allowed = set(allowed)
-
-    print("Loading ensemble from a spreadsheet\n")
-
-    # Read spreadsheet
-    df = eee.io.read_dataframe(df)
-        
     # Get columns from spreadsheet
-    columns = set(df.columns)
-
-    # Look for missing required arguments
-    missing_required = required - columns
-    if len(missing_required) > 0:
-        err = "\nspreadsheet does not have all required columns.\n"
-        err += "Missing columns are:\n"
-        for m in missing_required:
-            err += f"    {m}\n"
+    df = eee.io.read_dataframe(df)
+    if "name" not in df.columns:
+        err = "\nspreadsheet must have a 'name' column\n\n"
         raise ValueError(err)
 
-    # Figure out which columns to send in as stoichiometries and which to send
-    # in as keywords. 
-    pass_as_mu = columns - allowed - required
-    pass_as_kwargs = columns - pass_as_mu
-    
-    # Print kwarg status
-    pass_as_kwargs = list(pass_as_kwargs)
-    pass_as_kwargs.sort()
-    for k in pass_as_kwargs:
-        print(f"Interpreting column '{k}' as a ensemble.add_species keyword")
-
-    # Print mu status
-    pass_as_mu = list(pass_as_mu)
-    pass_as_mu.sort()
-    for m in pass_as_mu:
-        print(f"Interpreting column '{m}' as a stoichiometry")
+    # Create ensemble
+    ens = eee.core.Ensemble(gas_constant=gas_constant)
 
     # Now load each row in as a species. 
     for idx in df.index:
 
         # Construct kwargs
         kwargs = {}
-        for k in pass_as_kwargs:
+        for k in df.columns:
             kwargs[k] = df.loc[idx,k]
-            
-        # Construct mu_stoich
-        mu_stoich = {}
-        for m in pass_as_mu:
-            mu_stoich[m] = df.loc[idx,m]
-        kwargs["mu_stoich"] = mu_stoich
             
         # Add species
         ens.add_species(**kwargs)
@@ -122,37 +80,45 @@ def _spreadsheet_to_ensemble(df,gas_constant=None):
     return ens
 
 
-def _json_to_ensemble(json_file):
+def _json_to_ensemble(calc_input,
+                      base_path=None):
+    """
+    Read json and try to convert to an ensemble. 
+    """
 
-    # Read json file
-    with open(json_file) as f:
-        calc_input = json.load(f)
-    
+    #print("Loading ensemble from json\n",flush=True)
+
+    if base_path is None:
+        base_path = ""
+
+    # Look for gas constant somewhere in input. If not there, use default
+    key_stack = _search_for_key(calc_input,"gas_constant")
+    if len(key_stack) > 0:
+        gc = calc_input
+        for k in key_stack:
+            gc = gc[k]
+        gas_constant = gc
+    else:
+        gas_constant = GAS_CONSTANT
+
     # Look for "ens" key somewhere in the json output. If it's there, pull that
     # sub-dictionary out by itself
     key_stack = _search_for_key(calc_input,"ens")
     if len(key_stack) == 0:
         err = "\njson file does not have an 'ens' key\n\n"
         raise ValueError(err)
-    
     for k in key_stack:
         calc_input = calc_input[k]
-            
-    # If specified, get gas constant out of dictionary
-    if "gas_constant" in calc_input:
-        gas_constant = calc_input.pop("gas_constant")
-    else:
-        # Get default from Ensemble class
-        gas_constant = eee.Ensemble()._gas_constant
-
-    # {"spreadsheet":some_file} case
-    if "spreadsheet" in calc_input:
-        return _spreadsheet_to_ensemble(df=calc_input["spreadsheet"],
-                                        gas_constant=gas_constant)
+    
+    # If what remains is a string, read it as a file
+    if issubclass(type(calc_input),str):
+        df = os.path.join(base_path,calc_input)
+        return _spreadsheet_to_ensemble(df=df,gas_constant=gas_constant)
     
     # Create ensemble from entries and validate. 
-    ens = eee.Ensemble(gas_constant=gas_constant)
+    ens = eee.core.Ensemble(gas_constant=gas_constant)
     for s in calc_input:
+        
         try:
             ens.add_species(name=s,**calc_input[s])
         except TypeError:
@@ -161,16 +127,49 @@ def _json_to_ensemble(json_file):
 
     return ens
 
-
-def read_ensemble(input_file):
+def _file_to_ensemble(input_file,
+                      base_path=None):
     """
-    Read an ensemble from a file. The file can either be json file or a 
-    spreadsheet (csv, tsv, xlsx). 
+    Open file and choose whether or not to read as json or spreadsheet. 
+    """
+
+    #print(f"Reading ensemble from {input_file}.",flush=True)
+
+    # Make sure the file exists.
+    if not os.path.isfile(input_file):
+        err = f"\ninput_file '{input_file}' could not be read as file\n\n"
+        raise FileNotFoundError(err)
+    
+    # If it has a .json extension
+    if input_file[-5:].lower() == ".json":
+
+        # Read json
+        with open(input_file) as f: 
+            input_json = json.load(f)
+        
+        # Construct ensemble
+        ens = _json_to_ensemble(input_json,base_path=base_path)
+
+    # Otherwise, assume it's a spreadsheet. _spreadsheet_to_ensemble uses a 
+    # flexible df loader that loads files, so pass in un-edited. 
+    else:
+        ens = _spreadsheet_to_ensemble(df=input_file)
+
+    return ens
+
+
+def read_ensemble(input_value,
+                  base_path=None):
+    """
+    Read an ensemble from input. The function will try to interpret the input
+    as a file (json file or spreadsheet), raw json, or a pandas.DataFrame. 
 
     Parameters
     ----------
-    input_file : str
-        input file to read
+    input_value : 
+        input to read
+    base_path : str, optional
+        path to any files that might be encountered when reading the input
 
     Notes
     -----
@@ -185,32 +184,31 @@ def read_ensemble(input_file):
 
         {
           "ens":{
-            "one":{"dG0":0,"mu_stoich":{"X":1},"observable":true,"folded":false},
-            "two":{"dG0":0,"mu_stoich":{"Y":1},"observable":false,"folded":false},
+            "one":{"dG0":0,"observable":true,"folded":false,"X":1},
+            "two":{"dG0":0,"observable":false,"folded":false,"Y":1},
           }
         }
 
-    You can add the special key "gas_constant" to define the gas constant:
+    You can add the special key "gas_constant" on the same level as "ens" to
+    define the gas constant :
 
     ..code-block:: json
 
         {
+          "gas_constant":0.00197,
           "ens":{
-            "gas_constant":0.00197,
-            "one":{"dG0":0,"mu_stoich":{"X":1},"observable":true,"folded":false},
-            "two":{"dG0":0,"mu_stoich":{"Y":1},"observable":false,"folded":false},
+            "one":{"dG0":0,"observable":true,"folded":false,"X":1},
+            "two":{"dG0":0,"observable":false,"folded":false,"Y":1},
           }
         }
 
-    You can also use the special key "spreadsheet" to point to a spreadsheet
-    file defining the ensemble. This key, if present, overrides all others. 
+    You can also point to a spreadsheet file defining the ensemble.
 
     ..code-block:: json
 
         {
-          "ens":{
-            "gas_constant":0.00197,
-            "spreadsheet":"ensemble.xlsx"
+          "gas_constant":0.00197,
+          "ens":"ensemble.xlsx"
           }
         }
 
@@ -226,10 +224,10 @@ def read_ensemble(input_file):
                 "param_1":10,
                 "param_2":0.01
             },
+            "gas_constant":0.00197,
             "ens":{
-                "gas_constant":0.00197,
-                "one":{"dG0":0,"mu_stoich":{"X":1},"observable":true,"folded":false},
-                "two":{"dG0":0,"mu_stoich":{"Y":1},"observable":false,"folded":false},
+                "one":{"dG0":0,"observable":true,"folded":false,"X":1},
+                "two":{"dG0":0,"observable":false,"folded":false,"Y":1},
             }
         }
 
@@ -237,11 +235,11 @@ def read_ensemble(input_file):
     as values. It looks for columns corresponding to the keyword arguments to 
     :code:`Ensemble.add_species` and uses those values when adding each row to 
     the ensemble. Omitted keywords use their default values from the method. 
-    The :code:`mu_stoich` key should *not* be used. Instead, any columns in the
-    spreadsheet that do not correspond to a keyword are treated as chemical 
-    potential stoichiometries. The following spreadsheet defines two species, 
-    s1 and s2. s1 interacts with molecule "X" with a stoichiometry of 1, s2 
-    interacts with molecule "Y" with a stoichiometry of 2.
+    Any columns in the spreadsheet that do not correspond to a keyword (name,
+    dG0, observable, folded) are treated as ligand stoichiometries.  The
+    following spreadsheet defines two species, s1 and s2. s1 interacts with
+    molecule "X" with a stoichiometry of 1, s2 interacts with molecule "Y" with
+    a stoichiometry of 2. 
 
     +------+-----+------------+---+---+
     | name | dG0 | observable | X | Y | 
@@ -250,22 +248,35 @@ def read_ensemble(input_file):
     +------+-----+------------+---+---+
     | s2   | 5   | FALSE      | 0 | 2 |
     +------+-----+------------+---+---+
+
+    A spreadsheet does NOT define a gas constant, so the default defined in 
+    eee.core.data.GAS_CONSTANT is used. 
     """
 
-    input_file = f"{input_file}"
-    if not os.path.isfile(input_file):
-        err = "\ninput_file '{input_file}' is not a file\n\n"
-        raise FileNotFoundError(err)
+    v_type = type(input_value)
 
-    # Parse as json or spreadsheet. 
-    if input_file[-5:] == ".json":
-        ens = _json_to_ensemble(input_file)
-    else:
-        ens = _spreadsheet_to_ensemble(input_file)
+    # If it's a string, parse as a file
+    if issubclass(v_type,str):
+        ens = _file_to_ensemble(input_value,
+                                base_path=base_path)
+
+    # If it's a dataframe, parse as a dataframe
+    elif issubclass(v_type,pd.DataFrame):
+        ens = _spreadsheet_to_ensemble(input_value)
+
+    # If it's dict, treat as json
+    elif issubclass(v_type,dict):
+        ens = _json_to_ensemble(input_value,
+                                base_path=base_path)
     
+    # Otherwise, throw an error
+    else: 
+        err = f"\ninput_value '{input_value}' could not be read as an ensemble\n\n"
+        raise ValueError(err)
+
     # Print status of loaded ensemble
-    print("\nBuilt the following ensemble\n")
-    print(ens.species_df)
-    print()
+    #print("\nBuilt the following ensemble\n")
+    #print(ens.species_df)
+    #print()
 
     return ens

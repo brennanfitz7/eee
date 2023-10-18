@@ -3,7 +3,7 @@ Load an rcsb file (pdb or cif) into a pandas data frame, pre-processing to
 remove solvent atoms, etc. 
 """
 
-from eee.data import AA_3TO1
+from eee.core.data import AA_3TO1
 
 import pandas as pd
 import numpy as np

@@ -1,0 +1,8 @@
+{
+  "X":[0,1],
+  "Y":[1,0],
+  "fitness_fcn":["on","off"],
+  "select_on":["fx_obs","fx_obs"],
+  "select_on_folded":[true,true],
+  "temperature":[298.15,298.15]
+}

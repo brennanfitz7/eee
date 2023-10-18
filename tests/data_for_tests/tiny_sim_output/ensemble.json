@@ -1,0 +1,43 @@
+{
+  "calc_type":"wf_sim",
+  "calc_params":{
+    "population_size": 1000,
+    "mutation_rate": 0.001,
+    "num_generations": 100,
+    "write_prefix": "eee_sim",
+    "write_frequency": 1000
+  },
+  "gas_constant": 0.001987,
+  "ddg_df": "ddg.csv",
+  "ens": {
+    "hdna": {
+      "dG0": 0.0,
+      "observable": true,
+      "folded": true
+    },
+    "h": {
+      "dG0": 5.0,
+      "observable": false,
+      "folded": true
+    },
+    "l2e": {
+      "dG0": 5.0,
+      "observable": false,
+      "iptg":4.0,
+      "folded": true
+    },
+    "unfolded": {
+      "dG0": 10.0,
+      "observable": false,
+      "folded": false
+    }
+  },
+  "conditions":{
+    "fitness_fcns": ["on","off"],
+    "iptg": [ 1.0, 3.0 ],
+    "select_on": "fx_obs",
+    "select_on_folded": true,
+    "fitness_kwargs": {},
+    "temperature": 298.15,
+  }
+}

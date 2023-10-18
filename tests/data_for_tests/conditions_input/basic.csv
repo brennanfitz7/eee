@@ -1,0 +1,3 @@
+X,Y,fitness_fcn,fitness_kwargs,select_on,select_on_folded,temperature
+0,1,on,{},fx_obs,TRUE,298.15
+1,0,off,{},fx_obs,TRUE,298.15

@@ -4,7 +4,7 @@ import pytest
 from eee.structure.align_structure_seqs import _run_muscle
 from eee.structure.align_structure_seqs import align_structure_seqs
 from eee.io.read_structure import read_structure
-from eee.data import AA_1TO3
+from eee.core.data import AA_1TO3
 
 import numpy as np
 

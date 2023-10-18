@@ -2,7 +2,7 @@
 Validate an ensemble is ready for a calculation. 
 """
 
-from eee.ensemble import Ensemble
+from eee.core import Ensemble
 
 def check_ensemble(ens,check_obs=False):
     """
@@ -10,7 +10,7 @@ def check_ensemble(ens,check_obs=False):
     
     Parameters
     ----------
-    ens : eee.Ensemble
+    ens : eee.core.Ensemble
         ensemble to validate
     check_obs : bool, default=False
         make sure the observable function can be used. This will raise a 
@@ -18,7 +18,7 @@ def check_ensemble(ens,check_obs=False):
     
     Returns
     -------
-    ens : eee.Ensemble
+    ens : eee.core.Ensemble
         pointer to the ensmeble passed into the function. 
     """
 

@@ -13,7 +13,7 @@
       "on",
       "off"
     ],
-    "mu_dict": {
+    "ligand_dict": {
       "iptg": [
         1.0,
         4.0
@@ -22,7 +22,7 @@
     "select_on": "dG_obs",
     "select_on_folded": false,
     "fitness_kwargs": {},
-    "T": [
+    "temperature": [
       310.15,
       310.15
     ],

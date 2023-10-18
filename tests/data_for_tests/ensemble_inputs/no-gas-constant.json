@@ -2,27 +2,22 @@
     "hdna": {
       "dG0": 0.0,
       "observable": true,
-      "mu_stoich": {},
       "folded": true
     },
     "h": {
       "dG0": 5.0,
       "observable": false,
-      "mu_stoich": {},
       "folded": true
     },
     "l2e": {
       "dG0": 5.0,
       "observable": false,
-      "mu_stoich": {
-        "iptg": 4.0
-      },
+      "iptg":4.0,
       "folded": true
     },
     "unfolded": {
       "dG0": 10.0,
       "observable": false,
-      "mu_stoich": {},
       "folded": false
     }
   }

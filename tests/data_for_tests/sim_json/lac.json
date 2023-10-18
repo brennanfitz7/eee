@@ -7,54 +7,38 @@
     "write_prefix": "eee_sim_test",
     "write_frequency": 10000
   },
-  "system":{
-    "seed": 487698321712,
-    "fitness_fcns": [
-      "on",
-      "off"
-    ],
-    "ens": {
-      "gas_constant": 0.008314,
-      "hdna": {
-        "dG0": 0.0,
-        "observable": true,
-        "mu_stoich": {},
-        "folded": true
-      },
-      "h": {
-        "dG0": 5.0,
-        "observable": false,
-        "mu_stoich": {},
-        "folded": true
-      },
-      "l2e": {
-        "dG0": 5.0,
-        "observable": false,
-        "mu_stoich": {
-          "iptg": 4.0
-        },
-        "folded": true
-      },
-      "unfolded": {
-        "dG0": 10.0,
-        "observable": false,
-        "mu_stoich": {},
-        "folded": false
-      }
+  "seed": 487698321712,
+  "ddg_df": "ddg.csv",
+  "gas_constant": 0.008314,
+  "ens": {
+    "hdna": {
+      "dG0": 0.0,
+      "observable": true,
+      "folded": true
     },
-    "mu_dict": {
-      "iptg": [
-        1.0,
-        4.0
-      ]
+    "h": {
+      "dG0": 5.0,
+      "observable": false,
+      "folded": true
     },
-    "select_on": "dG_obs",
-    "select_on_folded": false,
-    "fitness_kwargs": {},
-    "T": [
-      310.15,
-      310.15
-    ],
-    "ddg_df": "ddg.csv"
+    "l2e": {
+      "dG0": 5.0,
+      "observable": false,
+      "iptg":4.0,
+      "folded": true
+    },
+    "unfolded": {
+      "dG0": 10.0,
+      "observable": false,
+      "folded": false
+    }
+  },
+  "conditions":{
+    "iptg": [1.0,4.0],
+    "select_on": ["dG_obs","dG_obs"],
+    "select_on_folded": [false,false],
+    "fitness_kwargs": [{},{}],
+    "temperature": [310.15,310.15],
+    "fitness_fcn": ["on","off"]
   }
 }

@@ -4,11 +4,11 @@ import pytest
 import matplotlib
 matplotlib.use('pdf')
 
-from eee.ensemble import Ensemble
-from eee.simulation.core.fitness.fitness import Fitness
-from eee.simulation.core.fitness.ff import ff_on
-from eee.simulation.core.fitness.ff import ff_off
-from eee.simulation.core.genotype import Genotype
+from eee.core.ensemble import Ensemble
+from eee.core.fitness.fitness import Fitness
+from eee.core.fitness.ff import ff_on
+from eee.core.fitness.ff import ff_off
+from eee.core.genotype import Genotype
 
 import numpy as np
 import pandas as pd
@@ -85,20 +85,29 @@ def sim_json():
     return _file_globber("data_for_tests","sim_json","*.json")
 
 @pytest.fixture(scope="module")
+def conditions_input():
+
+    return _file_globber("data_for_tests","conditions_input","*.*")
+
+@pytest.fixture(scope="module")
 def ens_test_data():
 
     # Basic ensemble
     ens = Ensemble(gas_constant=1)
     ens.add_species(name="s1",
                     observable=True,
-                    mu_stoich={"X":1})
+                    X=1)
     ens.add_species(name="s2",
                     observable=False,
-                    mu_stoich={"Y":1})
+                    Y=1)
     
-    # basic mu_dict 
-    mu_dict = {"X":[0,1],
-               "Y":[1,0]}
+    # Selection conditions
+    conditions = {"X":[0,1],
+                  "Y":[1,0],
+                  "fitness_fcn":["on","off"],
+                  "select_on":["fx_obs","fx_obs"],
+                  "select_on_folded":[True,True],
+                  "temperature":[298.15,298.15]}
 
     ddg_df = pd.DataFrame({"site":[1,1,2,2],
                            "mut":["M1A","M1V","P2R","P2Q"],
@@ -112,20 +121,13 @@ def ens_test_data():
     ddg_dict[2] = {"P2R":np.array([0,1]),
                    "P2Q":np.array([0,0])}
 
-    fitness_fcns = [ff_on,ff_off]
-
-    fc = Fitness(ens,
-                 mu_dict,
-                 [ff_on,ff_off],
-                 select_on="fx_obs",
-                 fitness_kwargs={},
-                 T=298.15)
+    fc = Fitness(ens=ens,
+                 conditions=conditions)
     
     out = {"ens":ens,
-           "mu_dict":mu_dict,
+           "conditions":conditions,
            "ddg_df":ddg_df,
            "ddg_dict":ddg_dict,
-           "fitness_fcns":fitness_fcns,
            "fc":fc}
     
     return out
@@ -142,21 +144,23 @@ def ens_with_fitness():
     ens.add_species(name="s2",
                     dG0=0.167,
                     observable=False,
-                    mu_stoich={"X":2})
+                    X=2)
 
-    mu_dict = {"X":[0,3.333]}
+    # Selection conditions
+    conditions = {"X":[0,3.333],
+                  "fitness_fcn":["on","off"],
+                  "select_on":"fx_obs",
+                  "select_on_folded":True,
+                  "temperature":1}
+
 
     ddg_df = pd.DataFrame({"site":[1,1],
                            "mut":["A1V","A1P"],
                            "s1":[-1.677,0.167],
                            "s2":[3.333,-5000]})
 
-    fc = Fitness(ens,
-                 mu_dict,
-                 [ff_on,ff_off],
-                 select_on="fx_obs",
-                 fitness_kwargs={},
-                 T=1)
+    fc = Fitness(ens=ens,
+                 conditions=conditions)
 
     gc = Genotype(ens=ens,
                   fitness_function=fc.fitness,
@@ -164,7 +168,7 @@ def ens_with_fitness():
     
 
     out = {"ens":ens,
-           "mu_dict":mu_dict,
+           "conditions":conditions,
            "ddg_df":ddg_df,
            "fc":fc,
            "gc":gc}
@@ -182,21 +186,22 @@ def ens_with_fitness_two_site():
     ens.add_species(name="s2",
                     dG0=0.167,
                     observable=False,
-                    mu_stoich={"X":2})
+                    X=2)
 
-    mu_dict = {"X":[0,3.333]}
+    # Selection conditions
+    conditions = {"X":[0,3.333],
+                  "fitness_fcn":["on","off"],
+                  "select_on":"fx_obs",
+                  "select_on_folded":True,
+                  "temperature":1}
 
     ddg_df = pd.DataFrame({"site":[1,1,2],
                            "mut":["A1V","A1P","A2C"],
                            "s1":[-1.677,0.167,0],
                            "s2":[3.333,-5000,0]})
 
-    fc = Fitness(ens,
-                 mu_dict,
-                 [ff_on,ff_off],
-                 select_on="fx_obs",
-                 fitness_kwargs={},
-                 T=1)
+    fc = Fitness(ens=ens,
+                 conditions=conditions)
 
     gc = Genotype(ens=ens,
                   fitness_function=fc.fitness,
@@ -204,7 +209,7 @@ def ens_with_fitness_two_site():
     
 
     out = {"ens":ens,
-           "mu_dict":mu_dict,
+           "conditions":conditions,
            "ddg_df":ddg_df,
            "fc":fc,
            "gc":gc}
@@ -236,6 +241,14 @@ def programs():
         out_dict[f] = os.path.join(base_dir,f)
 
     return out_dict
+
+@pytest.fixture(scope="module")
+def tiny_sim_output():
+    """
+    Tiny but complete simulation outputs.
+    """
+
+    return _file_globber("data_for_tests","tiny_sim_output","*")
 
 
 @pytest.fixture(scope="module")

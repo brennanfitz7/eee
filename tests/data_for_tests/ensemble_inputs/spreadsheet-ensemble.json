@@ -7,29 +7,16 @@
     "write_prefix": "eee_sim_test",
     "write_frequency": 10000
   },
-  "system":{
-    "seed": 487698321712,
-    "fitness_fcns": [
-      "on",
-      "off"
-    ],
-    "ens": {
-      "gas_constant": 0.008314,
-      "spreadsheet": "s1s2_folded.xlsx"
-    },
-    "mu_dict": {
-      "iptg": [
-        1.0,
-        4.0
-      ]
-    },
+  "gas_constant": 0.008314,
+  "seed": 487698321712,
+  "ddg_df": "ddg.csv",
+  "ens": "s1s2_folded.xlsx",
+  "conditions":{
+    "fitness_fcns": ["on","off"],
+    "iptg": [1.0,4.0],
     "select_on": "dG_obs",
     "select_on_folded": false,
     "fitness_kwargs": {},
-    "T": [
-      310.15,
-      310.15
-    ],
-    "ddg_df": "ddg.csv"
+    "temperature": [310.15,310.15]
   }
 }

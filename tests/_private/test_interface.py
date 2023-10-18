@@ -7,7 +7,7 @@ from eee._private.interface import create_new_dir
 from eee._private.interface import copy_input_file
 from eee._private.interface import run_cleanly
 from eee._private.interface import rmtree
-from eee._private.interface import MockTqdm
+from eee._private.interface import MockContextManager
 
 import os
 import sys
@@ -56,10 +56,11 @@ def test_run_cleanly(tmpdir):
     os.chdir(cwd)
 
     
-def test_MockTqdm():
+def test_MockContextManager():
 
     # Mock function. Only needs to be able to be initialized and have 
-    m = MockTqdm()
+    # appropriate mock methods. 
+    m = MockContextManager()
     assert hasattr(m,"__enter__")
     assert hasattr(m,"__exit__")
     assert hasattr(m,"update")
@@ -69,10 +70,11 @@ def test_MockTqdm():
     assert m.update() is None
 
 
-def test_MockTqdm___enter__():
-
-    m = MockTqdm()
+def test_MockContextManager___enter__():
+    
+    m = MockContextManager()
     assert m.__enter__() is m
+    
 
 def test_gen_seed():
 

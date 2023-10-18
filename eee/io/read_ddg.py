@@ -1,5 +1,5 @@
 """
-Functions for manipulating ddg files.
+Read a ddg spreadsheet file.
 """
 import numpy as np
 

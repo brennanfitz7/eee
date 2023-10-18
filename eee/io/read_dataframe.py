@@ -6,7 +6,7 @@ inputs.
 import pandas as pd
 import numpy as np
 
-def read_dataframe(input,remove_extra_index=True):
+def read_dataframe(df,remove_extra_index=True):
     """
     Read a spreadsheet. Handles .csv, .tsv, .xlsx/.xls. If extension is
     not one of these, attempts to parse text as a spreadsheet using
@@ -27,9 +27,9 @@ def read_dataframe(input,remove_extra_index=True):
     """
 
     # If this is a string, try to load it as a file
-    if type(input) is str:
+    if issubclass(type(df),str):
 
-        filename = input
+        filename = df
 
         ext = filename.split(".")[-1].strip().lower()
 
@@ -44,12 +44,12 @@ def read_dataframe(input,remove_extra_index=True):
             df = pd.read_csv(filename,sep=None,engine="python")
 
     # If this is a pandas dataframe, work in a copy of it.
-    elif type(input) is pd.DataFrame:
-        df = input.copy()
+    elif issubclass(type(df),pd.DataFrame):
+        df = df.copy()
 
     # Otherwise, fail
     else:
-        err = f"\n\n'input' {input} not recognized. Should be the filename of\n"
+        err = f"\n\n'df' {df} not recognized. Should be the filename of\n"
         err += "spreadsheet or a pandas dataframe.\n"
         raise ValueError(err)
 
@@ -57,6 +57,7 @@ def read_dataframe(input,remove_extra_index=True):
     # pandas frame manually, then re-read). Looks for columns that start with 
     # Unnamed and have data type int. 
     if remove_extra_index:
+
         to_drop = []
 
         possible_extra = [c for c in df.columns if c.startswith("Unnamed:")]

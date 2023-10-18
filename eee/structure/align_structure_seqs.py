@@ -1,5 +1,6 @@
 
-from eee.data import AA_3TO1
+from eee.core.data import AA_3TO1
+
 from eee._private.interface import create_new_dir
 from eee._private.interface import launch
 from eee._private.interface import rmtree

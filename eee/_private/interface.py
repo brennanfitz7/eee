@@ -41,11 +41,15 @@ def run_cleanly(func):
     
     return wrapper
 
-class MockTqdm():
+class MockContextManager():
     """
-    Fake tqdm progress bar so we don't have to show a status bar if we don't
-    want to. Can be substituted wherever we would use tqdm (i.e.
-    tqdm(range(10)) --> MockTqdm(range(10)).
+    Fake context manager. Initialized object can replace progress bars, 
+    ipywidget contexts, etc. It has an update method so it can drop in for a
+    tqdm bar. Usage: 
+
+    cm = MockContextManager(*args,**kwargs)
+    with cm:
+        do_stuff_here()
     """
 
     def __init__(self,*args,**kwargs):

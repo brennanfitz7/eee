@@ -1,14 +1,10 @@
 
-from . import structure
-from . import simulation
-from . import epistasis
-from . import io
-from . import ddg
-
-from .ensemble import Ensemble
-
 __authors__ = "Brennan Fitzgerald, Michael J. Harms"
 
+from . import ddg
+from . import core
+from . import structure
+from . import io
 
 def _check_for_notebook():
     """

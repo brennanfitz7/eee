@@ -31,6 +31,9 @@ See the `examples` directory for example jupyter notebooks.
 + matplotlib
 + tqdm
 + pytest
++ ete3
++ scikit-learn
+
 
 ### External software
 

@@ -1,61 +1,45 @@
 {
   "calc_type": "wf_tree_sim",
-  "system":{
-    "seed": 873512453322,
-    "fitness_fcns": [
-      "on",
-      "off"
-    ],
-    "ens": {
-      "gas_constant": 0.001987,
-      "hdna": {
-        "dG0": 0.0,
-        "observable": true,
-        "mu_stoich": {},
-        "folded": true
-      },
-      "h": {
-        "dG0": 5.0,
-        "observable": false,
-        "mu_stoich": {},
-        "folded": true
-      },
-      "l2e": {
-        "dG0": 5.0,
-        "observable": false,
-        "mu_stoich": {
-          "iptg": 4.0
-        },
-        "folded": true
-      },
-      "unfolded": {
-        "dG0": 10.0,
-        "observable": false,
-        "mu_stoich": {},
-        "folded": false
-      }
-    },
-    "mu_dict": {
-      "iptg": [
-        1.0,
-        4.0
-      ]
-    },
-    "select_on": "fx_obs",
-    "select_on_folded": false,
-    "fitness_kwargs": {},
-    "T": [
-      298.15,
-      298.15
-    ],
-    "ddg_df": "ddg.csv"
-  },
   "calc_params": {
-    "newick": "eee_sim.newick",
+    "tree": "eee_sim.newick",
     "population_size": 100,
     "mutation_rate": 0.1,
     "num_generations": 1000,
     "write_prefix": "eee_sim",
     "burn_in_generations": 10
+  },
+  "seed": 873512453322,
+  "ddg_df": "ddg.csv",
+  "gas_constant": 0.001987,
+  "ens": {
+    "hdna": {
+      "dG0": 0.0,
+      "observable": true,
+      "folded": true
+    },
+    "h": {
+      "dG0": 5.0,
+      "observable": false,
+      "folded": true
+    },
+    "l2e": {
+      "dG0": 5.0,
+      "observable": false,
+      "iptg":4.0,
+      "folded": true
+    },
+    "unfolded": {
+      "dG0": 10.0,
+      "observable": false,
+      "folded": false
+    }
+  },
+  "conditions":{
+    "fitness_fcn": ["on","off"],
+    "iptg": [1.0,4.0],
+    "select_on": ["fx_obs","fx_obs"],
+    "select_on_folded": [false,false],
+    "fitness_kwargs": [{},{}],
+    "temperature": [298.15,298.15]
   }
 }

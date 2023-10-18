@@ -1,0 +1,43 @@
+{
+  "calc_type": "accessible_paths",
+  "calc_params": {
+    "max_depth": 2,
+    "allow_neutral": true,
+    "find_all_paths": true,
+    "output_file": "eee_accessible.csv"
+  },
+  "seed": 507251722968,
+  "ddg_df": "ddg.csv",
+  "gas_constant": 0.001987,
+  "ens": {
+    "hdna": {
+      "dG0": 0.0,
+      "observable": true,
+      "folded": true
+    },
+    "h": {
+      "dG0": 5.0,
+      "observable": false,
+      "folded": true
+    },
+    "l2e": {
+      "dG0": 5.0,
+      "observable": false,
+      "iptg":4.0,
+      "folded": true
+    },
+    "unfolded": {
+      "dG0": 10.0,
+      "observable": false,
+      "folded": false
+    }
+  },
+  "conditions":{
+    "iptg": [1.0,3.0],
+    "select_on": ["fx_obs","fx_obs"],
+    "select_on_folded": [true,true],
+    "fitness_kwargs": [{},{}],
+    "temperature": [298.15,298.15],
+    "fitness_fcn": ["on","off"]
+  }
+}

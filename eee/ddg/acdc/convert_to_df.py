@@ -29,10 +29,17 @@ def convert_to_df(ddg_output:str):
     ddg_list=[]
     for item in output_list:
         if item[3:len(item)].isdigit()==True:
-            #adds tod ddg_list and also multiplies by -1 to switch signs (stabilizing mutaitons are now negative)
-            ddg_list.append(item*-1)
+            #adds tod ddg_list 
+            ddg_list.append(-item)
         else:
             continue
+    
+    # multiplies by -1 to switch signs (stabilizing mutaitons are now negative)
+    #rev_sign_ddg_list=[]
+    #for i in ddg_list:
+
+
+
         
     
     input_df=pd.read_table(muts_file, delimiter='\t',names=['Mutation', 'Prof', 'PDB','Chain'])

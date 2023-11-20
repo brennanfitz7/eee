@@ -1,4 +1,4 @@
-from eee.data import AA_3TO1
+from eee.core.data import AA_3TO1
 
 import pandas as pd
 

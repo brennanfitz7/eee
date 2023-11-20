@@ -12,6 +12,31 @@ import argparse
 import shutil
 
 
+def regularize_data(df, stats_dict,stdev_rosetta=13.228994023873321):
+    """
+    Regularize data from a different ∆∆G calculator to Rosetta's standard
+
+    Parameters
+    ----------
+    df : pandas DataFrame
+        dataframe output from convert_to_df function
+
+    stats_dict : dict
+        dictionary with mean and stdev for whichever calculator the data is from. Should contain keys "mean" and "stdev"
+    
+    stdev_rosetta : float
+        the standard deviation for rosseta data--will be updated as more data is obtained
+        
+    Returns
+    -------
+    DataFrame with regularized data
+    """
+    mean_other=stats_dict.get('mean')
+    stdev_other=stats_dict.get('stdev')
+    for column in df.columns[2:-1]:
+        df[column] = df[column].map(lambda item: ((((item-mean_other)/stdev_other)*stdev_rosetta)+((stdev_rosetta/stdev_other)*mean_other)))
+
+    return df
 
 def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
     """
@@ -34,14 +59,18 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
         
     Returns
     -------
-    None
+    Dataframe with ∆∆G's for each mutation for each residue for every file in the ensemble
     """
     pdb_df=pd.read_csv(pdb_csv)
     pdb_list=pdb_df['PDB']
     name_list=pdb_df['NAME']
     name_dict = dict(zip(pdb_list, name_list)) #sets pdbs as keys and names as values
+    #module dict to take it from string to actual module
     module_dict={'acdc':acdc,'foldx':foldx}
     calculator=module_dict.get(module)
+    #dicts for regularizing data
+    foldx_dict={'mean': 4.043667500801383, 'stdev': 28.70340193260126}
+    acdc_dict={'mean': 0.24449510098968205, 'stdev': 0.6223300393521769}
     if calculator==acdc:
         acdc_info=pdb_df['ACDC'].tolist()
         hhblits_path=acdc_info[0]
@@ -73,10 +102,10 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
                 print('just_a_test argument entered incorrectly in run_ensemble')
             calculator.ddg_calc(muts_file=pdb_id+'_'+module+'_muts.txt', pdb_file=pdb_file)
             ddg_df=calculator.convert_to_df('PS_'+pdb_file[0:-4]+'_scanning_output.txt')
+            #This will regularize the data to rosetta's standard
+            ddg_df=regularize_data(ddg_df, foldx_dict)
             ddg_df.name=pdb.split('_')[0]
             df_list.append(ddg_df)
-
-            
 
             
         if calculator==acdc:
@@ -91,6 +120,8 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
             #run ddg_calc and convert_to_df
             calculator.ddg_calc(pdb_id+'_'+module+'_muts.tsv')
             ddg_df=calculator.convert_to_df(pdb_id+'_'+module+'_raw_ddgs.txt')
+            #This will regularize the data to rosetta's standard
+            ddg_df=regularize_data(ddg_df, acdc_dict)
             ddg_df.name=pdb.split('_')[0]
             df_list.append(ddg_df)
 
@@ -112,14 +143,25 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
         clean_df.name=df.name
         clean_df_list.append(clean_df)
 
+    #making combined_df--starting with "mut" column
     mut_source=clean_df_list[0]
-    combined_df=mut_source[['Mutation']].copy()
+    mut_list=mut_source['Mutation'].tolist()
+    combined_df=pd.DataFrame(mut_list, columns=['mut'])
 
     for df in clean_df_list:
         DDG_col = df['DDG']
         ##use name_dict to get the correct name for the pdb file
         name_of_df=name_dict.get(df.name)
         combined_df[name_of_df] = DDG_col
+
+    #making site column
+    site=[]
+    for index,row in combined_df.iterrows():
+        site.append(row[0][1:-1])
+    combined_df.insert(loc=0, column='site',value=site)
+
+    #making unfolded column
+    combined_df.insert(loc=5, column='unfolded',value=0)
     
     combined_df.to_csv(prot_name+'_'+module+'_ddgs.csv', index=False)
     

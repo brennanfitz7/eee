@@ -1,4 +1,4 @@
-from eee.io import read_dataframe
+from eee.io.read_dataframe import read_dataframe
 
 import pandas as pd
 import numpy as np

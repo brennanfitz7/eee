@@ -29,16 +29,11 @@ def convert_to_df(ddg_output:str):
     ddg_list=[]
     for item in output_list:
         if item[3:len(item)].isdigit()==True:
-            #adds tod ddg_list 
+            #adds tod ddg_list and changes sign so that stabilizing=neg, destab=positive
             ddg_list.append(-(float(item)))
         else:
             continue
     
-    # multiplies by -1 to switch signs (stabilizing mutaitons are now negative)
-    #rev_sign_ddg_list=[]
-    #for i in ddg_list:
-
-
 
         
     

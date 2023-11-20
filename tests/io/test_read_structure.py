@@ -59,7 +59,7 @@ def test_read_structure(test_cifs,test_pdbs):
     assert len(np.unique(df["model"])) == 10
 
     # Make sure remove_alternate_conf flag is working like we think. 
-    df = read_structure(test_cifs["5qu4.cif"],remove_alternate_conf=True)
+    df = read_structure(test_cifs["5qu4.cif"],remve_alternate_conf=True)
     alt = np.unique(df["alternate"])
     alt.sort()
     assert np.array_equal(alt,[".","A"])

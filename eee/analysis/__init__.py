@@ -10,3 +10,5 @@ from .ensemble_fitness import ensemble_fitness
 from .num_genotypes import get_num_genotypes
 
 from . import epistasis
+
+#from eee.analysis.dms_epistasis import dms_epistasis

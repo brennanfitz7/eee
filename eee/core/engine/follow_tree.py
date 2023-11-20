@@ -5,6 +5,7 @@ Simulate evolution of an ensemble along an evolutionary tree.
 from eee.core.genotype import Genotype
 from eee.core.engine import wright_fisher
 from eee.core.engine.wright_fisher import get_num_accumulated_mutations
+from eee.core.engine.wright_fisher import write_wf_outputs
 
 from eee._private.check.eee import check_num_generations
 from eee._private.check.eee import check_mutation_rate
@@ -162,8 +163,11 @@ def follow_tree(gc,
     num_positions = len(f"{num_ancestors}") + 1
     anc_fmt_string = "anc{0:" + f"0{num_positions}" + "d}"
 
-    pbar = tqdm(total=total_branches)
+    gc_filename = f"{write_prefix}_genotypes.csv"
 
+    genotypes_to_keep = []
+
+    pbar = tqdm(total=total_branches)
     with pbar:
 
         # burn in to generate initial population
@@ -174,7 +178,6 @@ def follow_tree(gc,
                                         verbose=False,
                                         write_prefix=None,
                                         rng=rng)
-
 
         pbar.update(n=1)
 
@@ -194,6 +197,11 @@ def follow_tree(gc,
         root.name = anc_fmt_string.format(anc_counter)
         anc_counter += 1
 
+        # Dump genotypes
+        genotypes_to_keep = list(generations[-1].keys())
+        gc.dump_to_csv(filename=gc_filename,
+                       keep_genotypes=genotypes_to_keep)
+
         for n in tree.traverse(strategy="levelorder"):
             
             if not n.is_leaf():
@@ -206,7 +214,6 @@ def follow_tree(gc,
                     left.name = anc_fmt_string.format(anc_counter)
                     anc_counter += 1
 
-
                 _simulate_branch(start_node=n,
                                  end_node=left,
                                  gc=gc,
@@ -214,7 +221,13 @@ def follow_tree(gc,
                                  num_generations=num_generations,
                                  write_prefix=write_prefix,
                                  rng=rng)
-         
+                
+                # Dump genotypes to file
+                genotypes_to_keep.extend(list(left.population.keys()))
+                genotypes_to_keep = list(set(genotypes_to_keep))
+                gc.dump_to_csv(filename=gc_filename,
+                               keep_genotypes=genotypes_to_keep)
+
                 pbar.update(n=1)
 
                 # Simulate evolution from n to right descendent. (implicitly updates
@@ -231,13 +244,21 @@ def follow_tree(gc,
                                  write_prefix=write_prefix,
                                  rng=rng)
                 
+                # Dump genotypes to file
+                genotypes_to_keep.extend(list(right.population.keys()))
+                genotypes_to_keep = list(set(genotypes_to_keep))
+                gc.dump_to_csv(filename=gc_filename,
+                               keep_genotypes=genotypes_to_keep)
+
                 pbar.update(n=1)
+                
 
     # Write tree
     tree.write(format=3,
                outfile=f"{write_prefix}.newick")
 
     # Write genotypes
-    gc.df.to_csv(f"{write_prefix}_genotypes.csv")
+    gc.dump_to_csv(filename=gc_filename,
+                   keep_genotypes=None)
 
     return gc, tree

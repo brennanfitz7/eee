@@ -1871,7 +1871,7 @@
 ./tests/core/engine/test_follow_tree.py:408:17: E128 continuation line under-indented for visual indent
 ./tests/core/engine/test_follow_tree.py:410:26: W292 no newline at end of file
 ./tests/core/engine/test_wright_fisher.py:16:1: E302 expected 2 blank lines, found 1
-./tests/core/engine/test_wright_fisher.py:16:41: E231 missing whitespace after ','
+./tests/core/engine/test_wright_fisher.py:16:43: E231 missing whitespace after ','
 ./tests/core/engine/test_wright_fisher.py:17:1: W293 blank line contains whitespace
 ./tests/core/engine/test_wright_fisher.py:18:43: E231 missing whitespace after ','
 ./tests/core/engine/test_wright_fisher.py:22:30: E231 missing whitespace after ','
@@ -1880,16 +1880,41 @@
 ./tests/core/engine/test_wright_fisher.py:40:1: W293 blank line contains whitespace
 ./tests/core/engine/test_wright_fisher.py:45:39: E231 missing whitespace after ','
 ./tests/core/engine/test_wright_fisher.py:46:1: W293 blank line contains whitespace
+./tests/core/engine/test_wright_fisher.py:54:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:55:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:56:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:57:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:58:38: E128 continuation line under-indented for visual indent
 ./tests/core/engine/test_wright_fisher.py:59:1: W293 blank line contains whitespace
+./tests/core/engine/test_wright_fisher.py:76:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:77:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:78:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:79:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:80:38: E128 continuation line under-indented for visual indent
 ./tests/core/engine/test_wright_fisher.py:81:1: W293 blank line contains whitespace
 ./tests/core/engine/test_wright_fisher.py:87:1: W293 blank line contains whitespace
 ./tests/core/engine/test_wright_fisher.py:90:1: W293 blank line contains whitespace
 ./tests/core/engine/test_wright_fisher.py:103:5: E303 too many blank lines (2)
+./tests/core/engine/test_wright_fisher.py:110:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:111:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:112:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:113:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:114:38: E128 continuation line under-indented for visual indent
 ./tests/core/engine/test_wright_fisher.py:115:1: W293 blank line contains whitespace
 ./tests/core/engine/test_wright_fisher.py:121:1: W293 blank line contains whitespace
 ./tests/core/engine/test_wright_fisher.py:124:1: W293 blank line contains whitespace
+./tests/core/engine/test_wright_fisher.py:140:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:141:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:142:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:143:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:144:38: E128 continuation line under-indented for visual indent
 ./tests/core/engine/test_wright_fisher.py:145:1: W293 blank line contains whitespace
 ./tests/core/engine/test_wright_fisher.py:151:1: W293 blank line contains whitespace
+./tests/core/engine/test_wright_fisher.py:169:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:170:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:171:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:172:38: E128 continuation line under-indented for visual indent
+./tests/core/engine/test_wright_fisher.py:173:38: E128 continuation line under-indented for visual indent
 ./tests/core/engine/test_wright_fisher.py:174:1: W293 blank line contains whitespace
 ./tests/core/engine/test_wright_fisher.py:180:1: W293 blank line contains whitespace
 ./tests/core/engine/test_wright_fisher.py:189:1: C901 'test_wright_fisher' is too complex (15)
@@ -2580,11 +2605,13 @@
 ./tests/analysis/test_ensemble_fitness.py:145:1: W293 blank line contains whitespace
 ./tests/analysis/test_ensemble_fitness.py:146:43: E231 missing whitespace after ','
 ./tests/analysis/test_ensemble_fitness.py:146:46: E231 missing whitespace after ','
-./tests/analysis/wf/test_analysis.py:1:1: F401 'eee.analysis.get_genotype_frequencies' imported but unused
-./tests/analysis/wf/test_analysis.py:2:1: F401 'eee.analysis.get_most_common' imported but unused
+./tests/analysis/wf/test_analysis.py:1:1: F401 'eee.analysis.wf.on_tree.read_genotypes_file' imported but unused
+./tests/analysis/wf/test_analysis.py:2:1: F401 'eee.analysis.get_genotype_frequencies' imported but unused
+./tests/analysis/wf/test_analysis.py:3:1: F401 'eee.analysis.get_most_common' imported but unused
+./tests/analysis/wf/test_analysis.py:5:1: E302 expected 2 blank lines, found 1
 ./tests/analysis/wf/test_analysis.py:8:1: E302 expected 2 blank lines, found 1
 ./tests/analysis/wf/test_analysis.py:11:1: E302 expected 2 blank lines, found 1
-./tests/analysis/wf/test_analysis.py:12:9: W292 no newline at end of file
+./tests/analysis/wf/test_on_tree.py:4:9: W292 no newline at end of file
 ./tests/data_for_tests/programs/write_to_file_over_time.py:2:11: E401 multiple imports on one line
 ./tests/data_for_tests/programs/write_to_file_over_time.py:4:1: E302 expected 2 blank lines, found 1
 ./tests/data_for_tests/programs/write_to_file_over_time.py:4:28: E231 missing whitespace after ','
@@ -4975,7 +5002,8 @@
 ./eee/core/data/__init__.py:24:11: E231 missing whitespace after ','
 ./eee/core/data/__init__.py:26:22: E231 missing whitespace after ','
 ./eee/core/data/__init__.py:27:22: E231 missing whitespace after ','
-./eee/core/data/__init__.py:29:24: W292 no newline at end of file
+./eee/core/data/__init__.py:29:21: E231 missing whitespace after ','
+./eee/core/data/__init__.py:33:24: W292 no newline at end of file
 ./eee/core/engine/pathfinder.py:14:1: E302 expected 2 blank lines, found 1
 ./eee/core/engine/pathfinder.py:23:67: W291 trailing whitespace
 ./eee/core/engine/pathfinder.py:24:78: W291 trailing whitespace
@@ -5052,61 +5080,62 @@
 ./eee/core/engine/exhaustive.py:108:1: W293 blank line contains whitespace
 ./eee/core/engine/exhaustive.py:108:5: W292 no newline at end of file
 ./eee/core/engine/follow_tree.py:2:62: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:20:1: E302 expected 2 blank lines, found 1
-./eee/core/engine/follow_tree.py:28:77: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:29:75: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:30:73: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:31:44: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:33:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:36:77: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:40:63: E231 missing whitespace after ','
-./eee/core/engine/follow_tree.py:44:76: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:45:35: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:49:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:55:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:64:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:65:52: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:67:26: E231 missing whitespace after ','
-./eee/core/engine/follow_tree.py:68:32: E231 missing whitespace after ','
-./eee/core/engine/follow_tree.py:70:38: E231 missing whitespace after ','
-./eee/core/engine/follow_tree.py:73:1: C901 'follow_tree' is too complex (11)
-./eee/core/engine/follow_tree.py:82:67: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:83:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:87:73: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:88:78: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:89:66: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:95:78: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:97:76: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:100:77: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:101:51: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:103:72: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:104:80: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:105:17: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:107:79: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:112:44: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:114:60: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:117:28: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:122:79: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:126:75: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:127:31: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:128:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:131:31: E231 missing whitespace after ','
-./eee/core/engine/follow_tree.py:133:30: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:134:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:135:33: E231 missing whitespace after ','
-./eee/core/engine/follow_tree.py:137:30: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:144:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:179:9: E303 too many blank lines (2)
-./eee/core/engine/follow_tree.py:183:49: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:186:30: E231 missing whitespace after ','
-./eee/core/engine/follow_tree.py:187:36: E231 missing whitespace after ','
-./eee/core/engine/follow_tree.py:193:38: E231 missing whitespace after ','
-./eee/core/engine/follow_tree.py:198:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:204:64: W291 trailing whitespace
-./eee/core/engine/follow_tree.py:210:17: E303 too many blank lines (2)
-./eee/core/engine/follow_tree.py:217:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:233:1: W293 blank line contains whitespace
-./eee/core/engine/follow_tree.py:243:20: W292 no newline at end of file
+./eee/core/engine/follow_tree.py:8:1: F401 'eee.core.engine.wright_fisher.write_wf_outputs' imported but unused
+./eee/core/engine/follow_tree.py:21:1: E302 expected 2 blank lines, found 1
+./eee/core/engine/follow_tree.py:29:77: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:30:75: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:31:73: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:32:44: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:34:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:37:77: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:41:63: E231 missing whitespace after ','
+./eee/core/engine/follow_tree.py:45:76: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:46:35: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:50:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:56:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:65:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:66:52: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:68:26: E231 missing whitespace after ','
+./eee/core/engine/follow_tree.py:69:32: E231 missing whitespace after ','
+./eee/core/engine/follow_tree.py:71:38: E231 missing whitespace after ','
+./eee/core/engine/follow_tree.py:74:1: C901 'follow_tree' is too complex (11)
+./eee/core/engine/follow_tree.py:83:67: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:84:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:88:73: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:89:78: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:90:66: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:96:78: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:98:76: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:101:77: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:102:51: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:104:72: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:105:80: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:106:17: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:108:79: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:113:44: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:115:60: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:118:28: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:123:79: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:127:75: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:128:31: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:129:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:132:31: E231 missing whitespace after ','
+./eee/core/engine/follow_tree.py:134:30: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:135:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:136:33: E231 missing whitespace after ','
+./eee/core/engine/follow_tree.py:138:30: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:145:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:186:49: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:189:30: E231 missing whitespace after ','
+./eee/core/engine/follow_tree.py:190:36: E231 missing whitespace after ','
+./eee/core/engine/follow_tree.py:196:38: E231 missing whitespace after ','
+./eee/core/engine/follow_tree.py:206:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:212:64: W291 trailing whitespace
+./eee/core/engine/follow_tree.py:224:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:246:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:254:1: W293 blank line contains whitespace
+./eee/core/engine/follow_tree.py:256:5: E303 too many blank lines (2)
+./eee/core/engine/follow_tree.py:264:20: W292 no newline at end of file
 ./eee/core/engine/wright_fisher.py:23:1: E302 expected 2 blank lines, found 1
 ./eee/core/engine/wright_fisher.py:29:1: W293 blank line contains whitespace
 ./eee/core/engine/wright_fisher.py:42:58: E231 missing whitespace after ','
@@ -5649,24 +5678,34 @@
 ./eee/analysis/plots/_titration.py:70:1: W293 blank line contains whitespace
 ./eee/analysis/plots/_titration.py:71:19: W292 no newline at end of file
 ./eee/analysis/wf/analysis.py:2:77: W291 trailing whitespace
-./eee/analysis/wf/analysis.py:10:1: C901 'get_genotype_frequencies' is too complex (13)
-./eee/analysis/wf/analysis.py:10:41: E231 missing whitespace after ','
-./eee/analysis/wf/analysis.py:12:50: W291 trailing whitespace
-./eee/analysis/wf/analysis.py:13:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:20:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:24:79: W291 trailing whitespace
-./eee/analysis/wf/analysis.py:25:53: W291 trailing whitespace
-./eee/analysis/wf/analysis.py:36:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:40:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:43:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:48:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:51:48: E231 missing whitespace after ','
-./eee/analysis/wf/analysis.py:57:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:59:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:63:50: W291 trailing whitespace
-./eee/analysis/wf/analysis.py:65:1: W293 blank line contains whitespace
-./eee/analysis/wf/analysis.py:68:30: E231 missing whitespace after ','
-./eee/analysis/wf/analysis.py:70:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:13:1: E302 expected 2 blank lines, found 1
+./eee/analysis/wf/analysis.py:17:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:25:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:31:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:32:53: E231 missing whitespace after ','
+./eee/analysis/wf/analysis.py:37:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:60:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:64:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:67:55: E231 missing whitespace after ','
+./eee/analysis/wf/analysis.py:70:1: C901 'get_genotype_frequencies' is too complex (13)
+./eee/analysis/wf/analysis.py:70:1: E302 expected 2 blank lines, found 1
+./eee/analysis/wf/analysis.py:70:41: E231 missing whitespace after ','
+./eee/analysis/wf/analysis.py:72:50: W291 trailing whitespace
+./eee/analysis/wf/analysis.py:73:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:80:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:84:79: W291 trailing whitespace
+./eee/analysis/wf/analysis.py:85:53: W291 trailing whitespace
+./eee/analysis/wf/analysis.py:96:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:100:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:103:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:108:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:111:48: E231 missing whitespace after ','
+./eee/analysis/wf/analysis.py:117:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:119:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:123:50: W291 trailing whitespace
+./eee/analysis/wf/analysis.py:125:1: W293 blank line contains whitespace
+./eee/analysis/wf/analysis.py:128:30: E231 missing whitespace after ','
+./eee/analysis/wf/analysis.py:130:1: W293 blank line contains whitespace
 ./eee/analysis/wf/summary.py:2:68: W291 trailing whitespace
 ./eee/analysis/wf/summary.py:5:75: W291 trailing whitespace
 ./eee/analysis/wf/summary.py:6:78: W291 trailing whitespace
@@ -5921,44 +5960,87 @@
 ./eee/analysis/wf/traj_epistasis.py:199:13: E231 missing whitespace after ','
 ./eee/analysis/wf/traj_epistasis.py:200:1: W293 blank line contains whitespace
 ./eee/analysis/wf/traj_epistasis.py:217:23: W292 no newline at end of file
-./eee/analysis/wf/on_tree.py:11:1: E302 expected 2 blank lines, found 1
-./eee/analysis/wf/on_tree.py:15:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:21:75: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:22:78: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:23:30: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:24:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:31:75: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:34:72: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:35:22: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:37:60: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:45:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:50:5: E303 too many blank lines (2)
-./eee/analysis/wf/on_tree.py:55:37: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:58:77: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:61:37: E128 continuation line under-indented for visual indent
-./eee/analysis/wf/on_tree.py:66:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:70:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:73:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:77:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:81:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:83:44: E231 missing whitespace after ','
-./eee/analysis/wf/on_tree.py:84:30: E231 missing whitespace after ','
-./eee/analysis/wf/on_tree.py:87:77: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:92:36: E231 missing whitespace after ','
-./eee/analysis/wf/on_tree.py:95:60: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:2:1: F401 'eee' imported but unused
+./eee/analysis/wf/on_tree.py:19:1: F401 'itertools' imported but unused
+./eee/analysis/wf/on_tree.py:26:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:32:75: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:33:76: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:34:61: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:35:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:42:75: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:45:72: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:46:22: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:48:60: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:56:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:61:5: E303 too many blank lines (2)
+./eee/analysis/wf/on_tree.py:66:37: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:69:77: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:72:37: E128 continuation line under-indented for visual indent
+./eee/analysis/wf/on_tree.py:82:11: F541 f-string is missing placeholders
+./eee/analysis/wf/on_tree.py:82:41: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:89:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:93:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:96:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:100:1: W293 blank line contains whitespace
 ./eee/analysis/wf/on_tree.py:104:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:111:73: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:112:72: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:113:26: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:114:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:120:78: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:121:40: W291 trailing whitespace
-./eee/analysis/wf/on_tree.py:124:24: E203 whitespace before ','
-./eee/analysis/wf/on_tree.py:125:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:131:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:151:1: W293 blank line contains whitespace
-./eee/analysis/wf/on_tree.py:154:37: E231 missing whitespace after ','
-./eee/analysis/wf/on_tree.py:174:26: W292 no newline at end of file
+./eee/analysis/wf/on_tree.py:106:48: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:107:34: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:110:81: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:115:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:117:40: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:122:43: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:135:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:142:73: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:143:72: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:144:26: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:145:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:151:78: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:152:40: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:155:24: E203 whitespace before ','
+./eee/analysis/wf/on_tree.py:157:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:163:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:183:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:186:37: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:208:1: E302 expected 2 blank lines, found 1
+./eee/analysis/wf/on_tree.py:211:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:216:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:220:77: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:230:35: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:230:45: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:232:20: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:235:17: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:235:22: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:235:28: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:235:34: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:235:39: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:235:44: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:235:50: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:235:55: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:235:60: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:236:24: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:237:20: E231 missing whitespace after ':'
+./eee/analysis/wf/on_tree.py:237:23: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:237:28: E231 missing whitespace after ':'
+./eee/analysis/wf/on_tree.py:237:31: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:237:37: E231 missing whitespace after ':'
+./eee/analysis/wf/on_tree.py:243:47: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:243:50: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:244:41: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:246:27: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:249:51: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:249:54: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:250:45: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:251:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:253:50: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:253:53: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:253:57: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:253:64: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:254:63: E231 missing whitespace after ','
+./eee/analysis/wf/on_tree.py:271:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:289:41: W291 trailing whitespace
+./eee/analysis/wf/on_tree.py:296:5: E303 too many blank lines (2)
+./eee/analysis/wf/on_tree.py:298:1: W293 blank line contains whitespace
+./eee/analysis/wf/on_tree.py:299:27: W292 no newline at end of file
 ./eee/io/read_dataframe.py:9:1: E302 expected 2 blank lines, found 1
 ./eee/io/read_dataframe.py:9:22: E231 missing whitespace after ','
 ./eee/io/read_dataframe.py:30:27: E231 missing whitespace after ','
@@ -6846,18 +6928,18 @@
 1     E122 continuation line missing indentation or outdented
 1     E124 closing bracket does not match visual indentation
 56    E127 continuation line over-indented for visual indent
-143   E128 continuation line under-indented for visual indent
+168   E128 continuation line under-indented for visual indent
 3     E201 whitespace after '{'
 1     E203 whitespace before ','
 1     E221 multiple spaces before operator
 3     E222 multiple spaces after operator
 6     E225 missing whitespace around operator
-4130  E231 missing whitespace after ','
+4164  E231 missing whitespace after ','
 3     E261 at least two spaces before inline comment
 10    E265 block comment should start with '# '
 1     E266 too many leading '#' for block comment
 2     E301 expected 1 blank line, found 0
-207   E302 expected 2 blank lines, found 1
+210   E302 expected 2 blank lines, found 1
 107   E303 too many blank lines (2)
 5     E305 expected 2 blank lines after class or function definition, found 1
 4     E401 multiple imports on one line
@@ -6867,12 +6949,12 @@
 109   E712 comparison to True should be 'if cond is True:' or 'if cond:'
 2     E714 test for object identity should be 'is not'
 2     E722 do not use bare 'except'
-85    F401 'glob' imported but unused
-9     F541 f-string is missing placeholders
+89    F401 'glob' imported but unused
+10    F541 f-string is missing placeholders
 8     F841 local variable 'value' is assigned to but never used
-795   W291 trailing whitespace
+797   W291 trailing whitespace
 82    W292 no newline at end of file
-984   W293 blank line contains whitespace
+997   W293 blank line contains whitespace
 17    W391 blank line at end of file
 4     W605 invalid escape sequence '\('
-6840
+6922

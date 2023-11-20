@@ -26,7 +26,8 @@ AA = [("A","ALA"),
 AA_3TO1 = dict([(a[1],a[0]) for a in AA])
 AA_1TO3 = dict([(a[0],a[1]) for a in AA])
 
-
-AA_3TO1.update({'H1S':'H','H2S':'H','H3S':'H'})
+AA_TO_INT = dict([(a,i) for i, a in enumerate(AA_1TO3)])
+AA_TO_INT["-"] = len(AA_TO_INT) + 1
+INT_TO_AA = list(AA_TO_INT.keys())
 
 GAS_CONSTANT = 0.001987

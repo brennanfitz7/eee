@@ -1,6 +1,6 @@
 import pytest
 
-from eee.core.engine.wright_fisher import _write_outputs
+from eee.core.engine.wright_fisher import write_wf_outputs
 from eee.core.engine.wright_fisher import wright_fisher
 
 from eee.core.genotype import Genotype
@@ -13,7 +13,7 @@ import glob
 import copy
 import pickle
 
-def test__write_outputs(ens_with_fitness,tmpdir):
+def test_write_wf_outputs(ens_with_fitness,tmpdir):
     
     def _check_write_integrity(pickle_file,generations):
 
@@ -50,7 +50,7 @@ def test__write_outputs(ens_with_fitness,tmpdir):
     gc = copy.deepcopy(template_gc)
     generations = copy.deepcopy(template_generations)
 
-    out_gc, out_gen = _write_outputs(gc=gc,
+    out_gc, out_gen = write_wf_outputs(gc=gc,
                                      generations=generations,
                                      write_prefix=None,
                                      write_counter=0,
@@ -72,7 +72,7 @@ def test__write_outputs(ens_with_fitness,tmpdir):
 
     total_num_genotypes = len(gc.genotypes)
 
-    out_gc, out_gen = _write_outputs(gc=gc,
+    out_gc, out_gen = write_wf_outputs(gc=gc,
                                      generations=generations,
                                      write_prefix="test",
                                      write_counter=0,
@@ -106,7 +106,7 @@ def test__write_outputs(ens_with_fitness,tmpdir):
     gc = copy.deepcopy(template_gc)
     generations = copy.deepcopy(template_generations)
 
-    out_gc, out_gen = _write_outputs(gc=gc,
+    out_gc, out_gen = write_wf_outputs(gc=gc,
                                      generations=generations,
                                      write_prefix="test",
                                      write_counter=0,
@@ -136,7 +136,7 @@ def test__write_outputs(ens_with_fitness,tmpdir):
     gc = copy.deepcopy(template_gc)
     generations = copy.deepcopy(template_generations)
 
-    out_gc, out_gen = _write_outputs(gc=gc,
+    out_gc, out_gen = write_wf_outputs(gc=gc,
                                      generations=generations,
                                      write_prefix="test",
                                      write_counter=10,
@@ -165,7 +165,7 @@ def test__write_outputs(ens_with_fitness,tmpdir):
     gc = copy.deepcopy(template_gc)
     generations = copy.deepcopy(template_generations)
 
-    out_gc, out_gen = _write_outputs(gc=gc,
+    out_gc, out_gen = write_wf_outputs(gc=gc,
                                      generations=generations,
                                      write_prefix="test",
                                      write_counter=10,

@@ -20,12 +20,12 @@ import pickle
 import os
 import glob
 
-def _write_outputs(gc,
-                   generations,
-                   write_prefix,
-                   write_counter,
-                   num_write_digits,
-                   final_dump=False):
+def write_wf_outputs(gc,
+                     generations,
+                     write_prefix,
+                     write_counter,
+                     num_write_digits,
+                     final_dump=False):
     
     if write_prefix is not None:
 
@@ -254,12 +254,12 @@ def wright_fisher(gc,
             
             if i % write_frequency == 0:
                 
-                gc, generations = _write_outputs(gc=gc,
-                                                 generations=generations,
-                                                 write_prefix=write_prefix,
-                                                 write_counter=write_counter,
-                                                 num_write_digits=num_write_digits,
-                                                 final_dump=False)
+                gc, generations = write_wf_outputs(gc=gc,
+                                                   generations=generations,
+                                                   write_prefix=write_prefix,
+                                                   write_counter=write_counter,
+                                                   num_write_digits=num_write_digits,
+                                                   final_dump=False)
 
                 write_counter += 1
 
@@ -267,12 +267,12 @@ def wright_fisher(gc,
 
 
     if write_prefix is not None:
-        gc, generations = _write_outputs(gc=gc,
-                                         generations=generations,
-                                         write_prefix=write_prefix,
-                                         write_counter=write_counter,
-                                         num_write_digits=num_write_digits,
-                                         final_dump=True)
+        gc, generations = write_wf_outputs(gc=gc,
+                                           generations=generations,
+                                           write_prefix=write_prefix,
+                                           write_counter=write_counter,
+                                           num_write_digits=num_write_digits,
+                                           final_dump=True)
 
     # Warn if we did not get all of the requested mutations
     if num_mutations is not None and not hit_target_num_mutations:

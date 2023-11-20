@@ -2,10 +2,70 @@
 Scripts for analyzing the results of Wright-Fisher evolutionary simulations. 
 """
 
+import eee
+
 import numpy as np
 import pandas as pd
 from tqdm.auto import tqdm
 
+from io import StringIO
+
+def read_genotypes_file(genotypes_file,
+                        only_genotypes=None):
+    """
+    Read a genotypes file.
+    
+    Parameters
+    ----------
+    genotypes_file : str
+        path to genotypes file written out in a Wright-Fisher simulation
+    only_genotypes : iterable, optional
+        only get the genotypes in a list. should be a list of integers. Used to
+        avoid loading a huge genotypes file into memory
+    
+    Returns
+    -------
+    genotypes : pandas.DataFrame
+        genotypes as a dataframe
+    """
+    
+    print(f"Reading genotypes file {genotypes_file}",flush=True)
+
+    if only_genotypes is None:
+        genotypes = eee.io.read_dataframe(genotypes_file)
+        return genotypes
+    
+    only_genotypes = set(only_genotypes)
+
+    # Count the number of lines in the file for a status bar
+    def _make_gen(reader):
+        b = reader(1024 * 1024)
+        while b:
+            yield b
+            b = reader(1024*1024)
+
+    f = open(genotypes_file, 'rb')
+    f_gen = _make_gen(f.raw.read)
+    num_lines = sum(buf.count(b'\n') for buf in f_gen) - 1
+
+    pbar = tqdm(total=num_lines)
+    with pbar:
+
+        to_read = []
+        with open(genotypes_file) as f:
+            for line in f:
+                if len(to_read) == 0:
+                    to_read.append(line)
+                    continue
+                
+                col = line.split(",")
+                if int(col[0]) in only_genotypes:
+                    to_read.append(line)
+            
+                pbar.update(n=1)
+
+    genotypes = pd.read_csv(StringIO("".join(to_read)),sep=",")
+    return genotypes
 
 def get_genotype_frequencies(generations,cutoff=50):
     """

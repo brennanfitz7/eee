@@ -52,6 +52,11 @@ def main(argv=None):
     parser.add_argument("--keep_temporary",
                         action="store_true",
                         dest="keep_temporary")
+    
+    parser.add_argument("--remove_multiple_models",
+                        type=bool,
+                        dest="remove_multiple_models",
+                        help="whether or not to remove all but one model in pdb file")
 
 
     args = parser.parse_args(argv)
@@ -60,7 +65,8 @@ def main(argv=None):
         out_dir=args.out_dir,
         overwrite=args.overwrite,
         verbose=args.verbose,
-        keep_temporary=args.keep_temporary)
+        keep_temporary=args.keep_temporary,
+        remove_multiple_models=args.remove_multiple_models)
 
 
 if __name__ == "__main__":

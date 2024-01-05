@@ -2,7 +2,7 @@ from eee.io.read_structure import read_structure
 
 import pandas as pd
 
-def make_mutation_file(pdb_file:str):
+def make_mutation_file(pdb_file:str,remove_multiple_models:bool):
     """
     Makes a dataframe with all possible mutations from a pdb file. 
 
@@ -18,7 +18,10 @@ def make_mutation_file(pdb_file:str):
     """
     
     #get dataframe from pdb, select for atoms, and drop duplicates
-    raw_prot=read_structure(pdb_file)
+    if remove_multiple_models==True:
+        raw_prot=read_structure(pdb_file)
+    if remove_multiple_models==False:
+        raw_prot=read_structure(pdb_file, remove_multiple_models=False)
     prot_seq=raw_prot[raw_prot['class'] == "ATOM"].loc[:,["chain",'resid','resid_num']].drop_duplicates(subset=["resid_num","chain"], keep='first')
     
     #create new mutation dictionary

@@ -38,7 +38,7 @@ def regularize_data(df, stats_dict,stdev_rosetta=13.228994023873321):
 
     return df
 
-def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
+def run_ensemble(pdb_csv:str,prot_name:str,module:str,remove_multiple_models:bool,just_a_test=True):
     """
     Runs three pdb file (cif files eventually) and create ddg csv.
 
@@ -53,6 +53,9 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
     
     module : str
         the name of the module being used to calculate DDG. For now, must be 'acdc' or 'foldx'.
+
+    remove_multiple_models: bool
+        bool for whether to remov multiple models from pdb file. Multiple models should be removed for NMR structures but kept for biological assemblies that contain multiple asymmetric units. 
     
     just_a_test : bool
         bool that determines whether the full mutation file is run or only a test file of 10 mutations
@@ -94,16 +97,22 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
         if calculator==foldx:
             pdb_file=pdb
             pdb_id=pdb_file.split('.')[0]
-            if just_a_test==True:
-                calculator.generate_input(pdb_file)
-            elif just_a_test==False:
-                calculator.generate_input(pdb_file, just_a_test=False)
+            if just_a_test==True and remove_multiple_models==True:
+                calculator.generate_input(pdb_file,remove_multiple_models=True)
+            elif just_a_test==True and remove_multiple_models==False:
+                calculator.generate_input(pdb_file, remove_multiple_models=False)
+            elif just_a_test==False and remove_multiple_models==True:
+                calculator.generate_input(pdb_file, remove_multiple_models==True, just_a_test=False)
+            elif just_a_test==False and remove_multiple_models==False:
+                calculator.generate_input(pdb_file, remove_multiple_models=False, just_a_test=False)
             else:
-                print('just_a_test argument entered incorrectly in run_ensemble')
+                print('just_a_test or remove_multiple_models argument entered incorrectly in run_ensemble')
+                
             calculator.ddg_calc(muts_file=pdb_id+'_'+module+'_muts.txt', pdb_file=pdb_file)
             ddg_df=calculator.convert_to_df('PS_'+pdb_file[0:-4]+'_scanning_output.txt')
             #This will regularize the data to rosetta's standard
             ddg_df=regularize_data(ddg_df, foldx_dict)
+            #THIS IS WHERE I COULD ADD IN THE MULTIPLIER
             ddg_df.name=pdb.split('_')[0]
             df_list.append(ddg_df)
 
@@ -122,6 +131,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,just_a_test=True):
             ddg_df=calculator.convert_to_df(pdb_id+'_'+module+'_raw_ddgs.txt')
             #This will regularize the data to rosetta's standard
             ddg_df=regularize_data(ddg_df, acdc_dict)
+            #THIS IS WHERE I COULD ADD IN THE MULTIPLIER
             ddg_df.name=pdb.split('_')[0]
             df_list.append(ddg_df)
 

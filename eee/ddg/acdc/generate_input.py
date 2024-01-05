@@ -13,7 +13,7 @@ import subprocess
 
 
 
-def _make_psi_file(pdb_file:str, psi_file:str,hhblits_path:str,uniref_path:str):
+def _make_psi_file(pdb_file:str, psi_file:str,hhblits_path:str,uniref_path:str,remove_multiple_models:bool):
     """
     Creates a psi file.
 
@@ -32,12 +32,19 @@ def _make_psi_file(pdb_file:str, psi_file:str,hhblits_path:str,uniref_path:str):
     uniref_path : str
         path to uniref database
 
+    remove_multiple_models : bool
+        bool that determines whether multiple models are kept in the pdb file after read_structure
+
     Returns
     -------
     None
     """
     fasta_file=pdb_file.split('.')[0]+'.fasta' ##consider if later you want files to be 1abc.pdb_clean.fasta so you know they're from the clean version--something to consider
-    pdb_df=read_structure(pdb_file)
+    if remove_multiple_models==True:
+        pdb_df=read_structure(pdb_file,remove_multiple_models=True)
+    elif remove_multiple_models==False:
+        pdb_df=read_structure(pdb_file,remove_multiple_models=False)
+    
     write_fasta(pdb_df,fasta_file)
     
     verbose= True
@@ -103,7 +110,7 @@ def _make_prof_file_from_psi(psi_file:str, prof_file:str):
         err = "Program failed.\n"
         raise RuntimeError(err)
 
-def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str,hhblits_path:str,uniref_path:str):
+def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str,hhblits_path:str,uniref_path:str,remove_multiple_models:bool):
     """
     Creates a prof file from a pdb file.
 
@@ -124,15 +131,22 @@ def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str,hhblits_path:str,uni
     uniref_path : str
         path to uniref database
 
+    remove_multiple_models : bool
+        bool that determines whether multiple models are kept in the pdb file after read_structure
+
     Returns
     -------
     None
     """
-    _make_psi_file(pdb_file=pdb_file, psi_file=psi_file, hhblits_path=hhblits_path, uniref_path=uniref_path)
+    if remove_multiple_models==True:
+        _make_psi_file(pdb_file=pdb_file, psi_file=psi_file, hhblits_path=hhblits_path, uniref_path=uniref_path,remove_multiple_models=True)
+    elif remove_multiple_models==False:
+        _make_psi_file(pdb_file=pdb_file, psi_file=psi_file, hhblits_path=hhblits_path, uniref_path=uniref_path,remove_multiple_models=False) 
+   
     _make_prof_file_from_psi(psi_file=psi_file, prof_file=prof_file)
 
 
-def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str,just_a_test=True):
+def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str,remove_multiple_models:bool,just_a_test=True):
     """
     Makes a tab separated file in the format for ACDC_NN batch input.
 
@@ -157,10 +171,16 @@ def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str,just_a_test=True):
     """
 
     ##mut_file=_make_mutation_file(pdb_file) change this when you're not running tests anymore
+
+    if remove_multiple_models==True:
+        mut_file=make_mutation_file(pdb_file,remove_multiple_models=True)
+    if remove_multiple_models==False:
+        mut_file=make_mutation_file(pdb_file,remove_multiple_models=False)
+
+    #if just_a_test is True then only first 10 mutaitons will be in file
     if just_a_test==True:
-        mut_file=make_mutation_file(pdb_file).iloc[0:10]
-    elif just_a_test==False:
-        mut_file=make_mutation_file(pdb_file)
+        mut_file=mut_file.iloc[0:10]
+
     else:
         print("just_a_test argument entered incorrectly in acdc_nn_format")
     mutation_col=[]
@@ -174,7 +194,7 @@ def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str,just_a_test=True):
     
     mut_file.to_csv(tsv_file, sep="\t",header=False, index=False)
     
-def generate_input(pdb_file:str, hhblits_path:str, uniref_path:str, just_a_test=True,):
+def generate_input(pdb_file:str, hhblits_path:str, uniref_path:str, remove_multiple_models:bool,just_a_test=True,):
     """
     Creates a prof file and an tab separated file in the format for ACDC_NN batch input. 
 
@@ -196,6 +216,9 @@ def generate_input(pdb_file:str, hhblits_path:str, uniref_path:str, just_a_test=
     just_a_test : bool
         bool that determines whether the full mutation file is produced or only a test file of 10 mutations
 
+    remove_multiple_models : bool
+        bool that determines whether multiple models are kept in the pdb file after read_structure
+
     Returns
     -------
     None
@@ -206,11 +229,18 @@ def generate_input(pdb_file:str, hhblits_path:str, uniref_path:str, just_a_test=
     prof_file=pdb_id+'.prof'
     tsv_file=pdb_id+'_acdc_muts.tsv'
     
+    if remove_multiple_models==True:
+        _make_prof_file(pdb_file=pdb_file, psi_file=psi_file,prof_file=prof_file, hhblits_path=hhblits_path, uniref_path=uniref_path, remove_multiple_models=True) 
+    elif remove_multiple_models==False:
+        _make_prof_file(pdb_file=pdb_file, psi_file=psi_file,prof_file=prof_file, hhblits_path=hhblits_path, uniref_path=uniref_path, remove_multiple_models=False) 
 
-    _make_prof_file(pdb_file=pdb_file, psi_file=psi_file,prof_file=prof_file, hhblits_path=hhblits_path, uniref_path=uniref_path) 
-    if just_a_test==True:
-        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file)
-    elif just_a_test==False:
-        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file,just_a_test=False)
+    if just_a_test==True and remove_multiple_models==True:
+        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file, remove_multiple_models=True)
+    elif just_a_test==True and remove_multiple_models==False:
+        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file, remove_multiple_models=False)
+    elif just_a_test==False and remove_multiple_models==True:
+        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file,remove_multiple_models=True,just_a_test=False)
+    elif just_a_test==False and remove_multiple_models==False:
+        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file,remove_multiple_models=False,just_a_test=False)
     else: 
-        print('just_a_test argument entered incorrectly in generate input')
+        print('just_a_test or remove_multiple_models argument entered incorrectly in generate input')

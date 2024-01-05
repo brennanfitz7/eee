@@ -15,7 +15,8 @@ import shutil
 def clean_structure(df,
                     foldx_binary="foldx",
                     verbose=False,
-                    keep_temporary=False):
+                    keep_temporary=False,
+                    remove_multiple_models=True):
     """
     Run a structure through foldx to build missing atoms in sidechains. This 
     will delete residues with incomplete backbones.
@@ -30,6 +31,8 @@ def clean_structure(df,
         write out all output to standard output
     keep_temporary : bool, default=False
         do not delete temporary files
+    remove_multiple_models : bool
+        bool that determines whether multiple models are kept in the pdb file after read_structure
 
     Returns
     -------
@@ -51,7 +54,10 @@ def clean_structure(df,
     
     shutil.move(os.path.join(tmp_dir,"PF_input.fxout"),
                 os.path.join(tmp_dir,"tmp-output.pdb"))
-    new_df = read_structure(os.path.join(tmp_dir,"tmp-output.pdb"))
+    if remove_multiple_models==True:
+        new_df = read_structure(os.path.join(tmp_dir,"tmp-output.pdb"),remove_multiple_models=True)
+    elif remove_multiple_models==False:
+        new_df = read_structure(os.path.join(tmp_dir,"tmp-output.pdb"),remove_multiple_models=False)
 
     # foldx will drop all hetatms. bring them back in
     hetatm_df = df.loc[df["class"] == "HETATM",:]

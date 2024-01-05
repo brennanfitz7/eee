@@ -50,7 +50,8 @@ def sync_structures(structure_files,
                     out_dir,
                     overwrite=False,
                     verbose=False,
-                    keep_temporary=False):
+                    keep_temporary=False,
+                    remove_multiple_models=True):
     """
     Take a set of structures, clean up, align, and figure out which sites are
     shared among all structures. Output is a directory with pdb files and a
@@ -104,16 +105,28 @@ def sync_structures(structure_files,
     # Load the specified structure files
     dfs = []
     for f in structure_files:
-        dfs.append(read_structure(f))
+        if remove_multiple_models==True:
+            dfs.append(read_structure(f))
+        if remove_multiple_models==False:
+            dfs.append(read_structure(f,remove_multiple_models=False))
 
     # Clean up structures --> build missing atoms or delete residues with
     # missing backbone atoms. 
     logger.log("Cleaning up structures with FoldX.")
     
-    for i in range(len(dfs)):
-        dfs[i] = clean_structure(dfs[i],
-                                 verbose=verbose,
-                                 keep_temporary=keep_temporary)
+    if remove_multiple_models==True:
+        for i in range(len(dfs)):
+            dfs[i] = clean_structure(dfs[i],
+                                    verbose=verbose,
+                                    keep_temporary=keep_temporary,
+                                    remove_multiple_models=True)
+            
+    elif remove_multiple_models==False:
+        for i in range(len(dfs)):
+            dfs[i] = clean_structure(dfs[i],
+                                    verbose=verbose,
+                                    keep_temporary=keep_temporary,
+                                    remove_multiple_models=False)
 
     # Figure out which residues are shared between what structures
     logger.log("Aligning sequences using muscle.")

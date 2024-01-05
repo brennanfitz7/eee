@@ -107,7 +107,7 @@ def sync_structures(structure_files,
     for f in structure_files:
         if remove_multiple_models==True:
             dfs.append(read_structure(f))
-        if remove_multiple_models==False:
+        elif remove_multiple_models==False:
             dfs.append(read_structure(f,remove_multiple_models=False))
 
     # Clean up structures --> build missing atoms or delete residues with
@@ -132,9 +132,17 @@ def sync_structures(structure_files,
     logger.log("Aligning sequences using muscle.")
     dfs = align_structure_seqs(dfs,verbose=verbose,keep_temporary=keep_temporary)
 
+    print('After align_structure_seqs')
+    for item in dfs:
+        print(item)
+
     # Align structures in 3D
     logger.log("Aligning structures using lovoalign.")
     dfs = align_structures(dfs,verbose=verbose,keep_temporary=keep_temporary)
+
+    print('After align structures')
+    for item in dfs:
+        print(item)
 
     # Create a unique output name for each structure file
     name_mapper = _create_unique_filenames(structure_files)

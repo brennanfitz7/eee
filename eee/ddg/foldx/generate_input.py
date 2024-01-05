@@ -3,13 +3,9 @@ from eee.core.data import AA_3TO1
 
 
 def generate_input(pdb_file:str, remove_multiple_models:bool,just_a_test=True):
-    if remove_multiple_models==True:
-        mut_file_long=make_mutation_file(pdb_file,remove_multiple_models=True)
-    if remove_multiple_models==False:
-        mut_file_long=make_mutation_file(pdb_file,remove_multiple_models=False)
-    else: 
-        print('No arg for remove_multiple_models. Must enter True or False')
-
+    
+    mut_file_long=make_mutation_file(pdb_file,
+                                     remove_multiple_models=remove_multiple_models)
     if just_a_test==True:
         mut_file_long=mut_file_long.iloc[0:10]
 

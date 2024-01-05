@@ -18,10 +18,8 @@ def make_mutation_file(pdb_file:str,remove_multiple_models:bool):
     """
     
     #get dataframe from pdb, select for atoms, and drop duplicates
-    if remove_multiple_models==True:
-        raw_prot=read_structure(pdb_file)
-    if remove_multiple_models==False:
-        raw_prot=read_structure(pdb_file, remove_multiple_models=False)
+    raw_prot=read_structure(pdb_file,
+                            remove_multiple_models=remove_multiple_models)
     prot_seq=raw_prot[raw_prot['class'] == "ATOM"].loc[:,["chain",'resid','resid_num']].drop_duplicates(subset=["resid_num","chain"], keep='first')
     
     #create new mutation dictionary

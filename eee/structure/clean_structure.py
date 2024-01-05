@@ -54,10 +54,8 @@ def clean_structure(df,
     
     shutil.move(os.path.join(tmp_dir,"PF_input.fxout"),
                 os.path.join(tmp_dir,"tmp-output.pdb"))
-    if remove_multiple_models==True:
-        new_df = read_structure(os.path.join(tmp_dir,"tmp-output.pdb"),remove_multiple_models=True)
-    elif remove_multiple_models==False:
-        new_df = read_structure(os.path.join(tmp_dir,"tmp-output.pdb"),remove_multiple_models=False)
+    
+    new_df = read_structure(os.path.join(tmp_dir,"tmp-output.pdb"),remove_multiple_models=remove_multiple_models)
 
     # foldx will drop all hetatms. bring them back in
     hetatm_df = df.loc[df["class"] == "HETATM",:]

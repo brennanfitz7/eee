@@ -97,16 +97,10 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,remove_multiple_models:boo
         if calculator==foldx:
             pdb_file=pdb
             pdb_id=pdb_file.split('.')[0]
-            if just_a_test==True and remove_multiple_models==True:
-                calculator.generate_input(pdb_file,remove_multiple_models=True)
-            elif just_a_test==True and remove_multiple_models==False:
-                calculator.generate_input(pdb_file, remove_multiple_models=False)
-            elif just_a_test==False and remove_multiple_models==True:
-                calculator.generate_input(pdb_file, remove_multiple_models==True, just_a_test=False)
-            elif just_a_test==False and remove_multiple_models==False:
-                calculator.generate_input(pdb_file, remove_multiple_models=False, just_a_test=False)
-            else:
-                print('just_a_test or remove_multiple_models argument entered incorrectly in run_ensemble')
+            calculator.generate_input(pdb_file,
+                                      remove_multiple_models=remove_multiple_models,
+                                      just_a_test=just_a_test)
+        
                 
             calculator.ddg_calc(muts_file=pdb_id+'_'+module+'_muts.txt', pdb_file=pdb_file)
             ddg_df=calculator.convert_to_df('PS_'+pdb_file[0:-4]+'_scanning_output.txt')
@@ -120,12 +114,11 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,remove_multiple_models:boo
         if calculator==acdc:
             pdb_file=str(prot_name+'/'+pdb)
             pdb_id=pdb_file.split('.')[0]
-            if just_a_test==True:
-                calculator.generate_input(pdb_file,hhblits_path=hhblits_path,uniref_path=uniref_path)
-            elif just_a_test==False:
-                calculator.generate_input(pdb_file,hhblits_path=hhblits_path, uniref_path=uniref_path, just_a_test=False)
-            else:
-                print('just_a_test argument entered incorrectly in run_ensemble')
+            calculator.generate_input(pdb_file,
+                                      hhblits_path=hhblits_path,
+                                      uniref_path=uniref_path,
+                                      just_a_test=just_a_test,
+                                      remove_multiple_models=remove_multiple_models)
             #run ddg_calc and convert_to_df
             calculator.ddg_calc(pdb_id+'_'+module+'_muts.tsv')
             ddg_df=calculator.convert_to_df(pdb_id+'_'+module+'_raw_ddgs.txt')

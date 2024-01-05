@@ -40,10 +40,10 @@ def _make_psi_file(pdb_file:str, psi_file:str,hhblits_path:str,uniref_path:str,r
     None
     """
     fasta_file=pdb_file.split('.')[0]+'.fasta' ##consider if later you want files to be 1abc.pdb_clean.fasta so you know they're from the clean version--something to consider
-    if remove_multiple_models==True:
-        pdb_df=read_structure(pdb_file,remove_multiple_models=True)
-    elif remove_multiple_models==False:
-        pdb_df=read_structure(pdb_file,remove_multiple_models=False)
+
+    pdb_df=read_structure(pdb_file,
+                          remove_multiple_models=remove_multiple_models)
+
     
     write_fasta(pdb_df,fasta_file)
     
@@ -138,10 +138,13 @@ def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str,hhblits_path:str,uni
     -------
     None
     """
-    if remove_multiple_models==True:
-        _make_psi_file(pdb_file=pdb_file, psi_file=psi_file, hhblits_path=hhblits_path, uniref_path=uniref_path,remove_multiple_models=True)
-    elif remove_multiple_models==False:
-        _make_psi_file(pdb_file=pdb_file, psi_file=psi_file, hhblits_path=hhblits_path, uniref_path=uniref_path,remove_multiple_models=False) 
+    
+    _make_psi_file(pdb_file=pdb_file, 
+                   psi_file=psi_file, 
+                   hhblits_path=hhblits_path, 
+                   uniref_path=uniref_path,
+                   remove_multiple_models=remove_multiple_models)
+
    
     _make_prof_file_from_psi(psi_file=psi_file, prof_file=prof_file)
 
@@ -172,10 +175,10 @@ def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str,remove_multiple_mo
 
     ##mut_file=_make_mutation_file(pdb_file) change this when you're not running tests anymore
 
-    if remove_multiple_models==True:
-        mut_file=make_mutation_file(pdb_file,remove_multiple_models=True)
-    if remove_multiple_models==False:
-        mut_file=make_mutation_file(pdb_file,remove_multiple_models=False)
+
+    mut_file=make_mutation_file(pdb_file,
+                                remove_multiple_models=remove_multiple_models)
+
 
     #if just_a_test is True then only first 10 mutaitons will be in file
     if just_a_test==True:
@@ -228,19 +231,18 @@ def generate_input(pdb_file:str, hhblits_path:str, uniref_path:str, remove_multi
     psi_file=pdb_id+'.psi'
     prof_file=pdb_id+'.prof'
     tsv_file=pdb_id+'_acdc_muts.tsv'
-    
-    if remove_multiple_models==True:
-        _make_prof_file(pdb_file=pdb_file, psi_file=psi_file,prof_file=prof_file, hhblits_path=hhblits_path, uniref_path=uniref_path, remove_multiple_models=True) 
-    elif remove_multiple_models==False:
-        _make_prof_file(pdb_file=pdb_file, psi_file=psi_file,prof_file=prof_file, hhblits_path=hhblits_path, uniref_path=uniref_path, remove_multiple_models=False) 
 
-    if just_a_test==True and remove_multiple_models==True:
-        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file, remove_multiple_models=True)
-    elif just_a_test==True and remove_multiple_models==False:
-        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file, remove_multiple_models=False)
-    elif just_a_test==False and remove_multiple_models==True:
-        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file,remove_multiple_models=True,just_a_test=False)
-    elif just_a_test==False and remove_multiple_models==False:
-        _acdc_nn_format(pdb_file=pdb_file, prof_file=prof_file, tsv_file=tsv_file,remove_multiple_models=False,just_a_test=False)
-    else: 
-        print('just_a_test or remove_multiple_models argument entered incorrectly in generate input')
+
+    _make_prof_file(pdb_file=pdb_file, 
+                    psi_file=psi_file,
+                    prof_file=prof_file, 
+                    hhblits_path=hhblits_path, 
+                    uniref_path=uniref_path, 
+                    remove_multiple_models=remove_multiple_models) 
+
+
+    _acdc_nn_format(pdb_file=pdb_file, 
+                    prof_file=prof_file, 
+                    tsv_file=tsv_file, 
+                    just_a_test=just_a_test, 
+                    remove_multiple_models=remove_multiple_models)

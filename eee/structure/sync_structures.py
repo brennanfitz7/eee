@@ -105,28 +105,18 @@ def sync_structures(structure_files,
     # Load the specified structure files
     dfs = []
     for f in structure_files:
-        if remove_multiple_models==True:
-            dfs.append(read_structure(f))
-        elif remove_multiple_models==False:
-            dfs.append(read_structure(f,remove_multiple_models=False))
+        dfs.append(read_structure(f,remove_multiple_models=remove_multiple_models))
 
     # Clean up structures --> build missing atoms or delete residues with
     # missing backbone atoms. 
     logger.log("Cleaning up structures with FoldX.")
     
-    if remove_multiple_models==True:
-        for i in range(len(dfs)):
-            dfs[i] = clean_structure(dfs[i],
-                                    verbose=verbose,
-                                    keep_temporary=keep_temporary,
-                                    remove_multiple_models=True)
-            
-    elif remove_multiple_models==False:
-        for i in range(len(dfs)):
-            dfs[i] = clean_structure(dfs[i],
-                                    verbose=verbose,
-                                    keep_temporary=keep_temporary,
-                                    remove_multiple_models=remove_multiple_models)
+
+    for i in range(len(dfs)):
+        dfs[i] = clean_structure(dfs[i],
+                                verbose=verbose,
+                                keep_temporary=keep_temporary,
+                                remove_multiple_models=remove_multiple_models)
             
     print('after cleaning up structure')
     for item in dfs:

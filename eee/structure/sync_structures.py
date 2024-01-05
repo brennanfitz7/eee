@@ -126,7 +126,11 @@ def sync_structures(structure_files,
             dfs[i] = clean_structure(dfs[i],
                                     verbose=verbose,
                                     keep_temporary=keep_temporary,
-                                    remove_multiple_models=False)
+                                    remove_multiple_models=remove_multiple_models)
+            
+    print('after cleaning up structure')
+    for item in dfs:
+        print (item)
 
     # Figure out which residues are shared between what structures
     logger.log("Aligning sequences using muscle.")

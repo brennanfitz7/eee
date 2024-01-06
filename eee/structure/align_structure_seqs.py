@@ -110,7 +110,7 @@ def align_structure_seqs(dfs,
                          verbose=verbose,
                          keep_temporary=keep_temporary)
     
-    print('output of muscle:',output)
+    print('output of muscle:',len(output))
 
     # Convert output into column indexes and column contents. For example: 
     # MAST-
@@ -129,8 +129,8 @@ def align_structure_seqs(dfs,
                 column_indexes[i].append(counter)
                 counter += 1
 
-    print('column contents:',column_contents)
-    print('column indexes',column_indexes)
+    print('length of column contents:',len(column_contents))
+    print('length of column indexes',len(column_indexes))
 
     # Check sequence identity. identical_aa is True if the amino acids are the 
     # same at that site (or a mix of Ser and Cys), False if they differ. Gaps

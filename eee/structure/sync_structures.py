@@ -118,25 +118,13 @@ def sync_structures(structure_files,
                                 keep_temporary=keep_temporary,
                                 remove_multiple_models=remove_multiple_models)
             
-    print('after cleaning up structure')
-    for item in dfs:
-        print (item)
-
     # Figure out which residues are shared between what structures
     logger.log("Aligning sequences using muscle.")
     dfs = align_structure_seqs(dfs,verbose=verbose,keep_temporary=keep_temporary)
 
-    print('After align_structure_seqs')
-    for item in dfs:
-        print(item)
-
     # Align structures in 3D
     logger.log("Aligning structures using lovoalign.")
     dfs = align_structures(dfs,verbose=verbose,keep_temporary=keep_temporary)
-
-    print('After align structures')
-    for item in dfs:
-        print(item)
 
     # Create a unique output name for each structure file
     name_mapper = _create_unique_filenames(structure_files)

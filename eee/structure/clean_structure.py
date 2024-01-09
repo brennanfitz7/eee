@@ -45,7 +45,7 @@ def clean_structure(df,
 
     cmd = [foldx_binary,
             "-c","PDBFile",
-            "--fixSideChains","2",
+            "--fixSideChains","1",
             "--pdb","input.pdb"]
     
     launch(cmd=cmd,

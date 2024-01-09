@@ -192,14 +192,8 @@ def align_structure_seqs(dfs,
             this_resid = residues[i][j]
             this_resid_mask = this_df["_resid_key"] == this_resid
 
-            print('before changing residue numbering:')
-            print(this_df)
-
             # Change residue numbering
             this_df.loc[this_resid_mask,"resid_num"] = f"{idx + 1:d}"
-
-            print('after changing residue numbering')
-            print(this_df)
 
             # Record shared fraction
             this_df.loc[this_resid_mask,"shared_fx"] = shared_column[idx]

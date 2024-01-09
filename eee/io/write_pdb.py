@@ -42,6 +42,7 @@ def write_pdb(df,
     
     last_chain = None
     last_class = None
+    last_model=None
     with open(pdb_file,'w') as f:
         
         counter = 1
@@ -52,6 +53,10 @@ def write_pdb(df,
             chain = row['chain']
             if last_chain is None:
                 last_chain = chain
+
+            model=row['model']
+            if last_model is None:
+                last_model = model
                 
             atom_class = row['class']
             if last_class is None:
@@ -60,6 +65,10 @@ def write_pdb(df,
             if chain != last_chain and last_class == "ATOM":
                 f.write("TER\n")
                 last_chain = chain 
+
+            if model != last_model:
+                f.write("ENDMDL\t\tMODEL",model,'\n')
+                last_model = model
                 
             f.write(f"{row['class']:6s}{counter:5d}")
         

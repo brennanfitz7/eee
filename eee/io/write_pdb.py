@@ -68,7 +68,7 @@ def write_pdb(df,
 
             if model != last_model:
                 f.write("ENDMDL\t\tMODEL")
-                f.write(model)
+                f.write(str(model))
                 f.write('\n')
                 last_model = model
                 

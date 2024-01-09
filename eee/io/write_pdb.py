@@ -67,7 +67,9 @@ def write_pdb(df,
                 last_chain = chain 
 
             if model != last_model:
-                f.write("ENDMDL\t\tMODEL",model,'\n')
+                f.write("ENDMDL\t\tMODEL")
+                f.write(model)
+                f.write('\n')
                 last_model = model
                 
             f.write(f"{row['class']:6s}{counter:5d}")

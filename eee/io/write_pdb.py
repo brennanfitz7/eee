@@ -67,7 +67,7 @@ def write_pdb(df,
                 last_chain = chain 
 
             if model != last_model:
-                f.write("ENDMDL\t\tMODEL")
+                f.write("ENDMDL\nMODEL\t\t")
                 f.write(str(model))
                 f.write('\n')
                 last_model = model

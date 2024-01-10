@@ -45,7 +45,7 @@ def write_pdb(df,
     last_model=None
     with open(pdb_file,'w') as f:
         
-        f.write('MODEL        \n')
+        f.write('MODEL        1\n')
 
         counter = 1
         for i in df.index:

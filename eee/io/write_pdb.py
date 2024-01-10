@@ -45,6 +45,8 @@ def write_pdb(df,
     last_model=None
     with open(pdb_file,'w') as f:
         
+        f.write('MODEL        \n')
+
         counter = 1
         for i in df.index:
             
@@ -67,7 +69,7 @@ def write_pdb(df,
                 last_chain = chain 
 
             if model != last_model:
-                f.write("ENDMDL\nMODEL\t\t")
+                f.write("ENDMDL\nMODEL        ")
                 f.write(str(model))
                 f.write('\n')
                 last_model = model

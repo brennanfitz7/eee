@@ -34,17 +34,24 @@ def convert_to_df(ddg_output:str):
         else:
             continue
     
-
-        
     
     input_df=pd.read_table(muts_file, delimiter='\t',names=['Mutation', 'Prof', 'PDB','Chain'])
     
+    mut_and_chain=[]
+    for index,row in input_df.iterrows():
+        mutation=input_df['Mutation'][index]
+        chain=input_df['Chain'][index]
+        mut_and_chain.append(mutation[0]+chain+mutation[1:])
+        
+    
     ddg_df = pd.DataFrame(
-    {'Mutation': input_df['Mutation'],'DDG': ddg_list})
+    {'Mutation': mut_and_chain,'DDG': ddg_list})
 
     ddg_df.to_csv(output_df, index=False)
     
     return ddg_df
+
+
 
 
 

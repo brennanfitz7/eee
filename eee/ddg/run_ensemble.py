@@ -38,7 +38,7 @@ def regularize_data(df, stats_dict,stdev_rosetta=13.228994023873321):
 
     return df
 
-def run_ensemble(pdb_csv:str,prot_name:str,module:str,remove_multiple_models:bool,just_a_test=True):
+def run_ensemble(pdb_csv:str,prot_name:str,module:str,all_models_necessary:bool,just_a_test=True):
     """
     Runs three pdb file (cif files eventually) and create ddg csv.
 
@@ -54,8 +54,8 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,remove_multiple_models:boo
     module : str
         the name of the module being used to calculate DDG. For now, must be 'acdc' or 'foldx'.
 
-    remove_multiple_models: bool
-        bool for whether to remov multiple models from pdb file. Multiple models should be removed for NMR structures but kept for biological assemblies that contain multiple asymmetric units. 
+    all_models_necessary: bool, default=True
+        bool for whether all models in a pdb are necessary for analysis. Multiple models should be removed for NMR structures but kept for biological assemblies that contain multiple asymmetric units. 
     
     just_a_test : bool
         bool that determines whether the full mutation file is run or only a test file of 10 mutations
@@ -64,6 +64,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,remove_multiple_models:boo
     -------
     Dataframe with ∆∆G's for each mutation for each residue for every file in the ensemble
     """
+    
     pdb_df=pd.read_csv(pdb_csv)
     pdb_list=pdb_df['PDB']
     name_list=pdb_df['NAME']
@@ -79,7 +80,8 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,remove_multiple_models:boo
         hhblits_path=acdc_info[0]
         uniref_path=acdc_info[1]
     
-    sync_structures(structure_files=pdb_list, out_dir=prot_name)
+    sync_structures(structure_files=pdb_list, out_dir=prot_name, all_models_necessary=all_models_necessary)
+    #this is the point at which models have either been incorporated or thrown out
 
     synced_pdbs=glob.glob('*.pdb',root_dir=prot_name)
     #this returns a list of pdb files without the file path
@@ -98,7 +100,6 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,remove_multiple_models:boo
             pdb_file=pdb
             pdb_id=pdb_file.split('.')[0]
             calculator.generate_input(pdb_file,
-                                      remove_multiple_models=remove_multiple_models,
                                       just_a_test=just_a_test)
         
                 
@@ -117,8 +118,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,remove_multiple_models:boo
             calculator.generate_input(pdb_file,
                                       hhblits_path=hhblits_path,
                                       uniref_path=uniref_path,
-                                      just_a_test=just_a_test,
-                                      remove_multiple_models=remove_multiple_models)
+                                      just_a_test=just_a_test)
             #run ddg_calc and convert_to_df
             calculator.ddg_calc(pdb_id+'_'+module+'_muts.tsv')
             ddg_df=calculator.convert_to_df(pdb_id+'_'+module+'_raw_ddgs.txt')

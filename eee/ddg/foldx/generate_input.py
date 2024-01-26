@@ -2,10 +2,9 @@ from eee.ddg.make_mutation_file import make_mutation_file
 from eee.core.data import AA_3TO1
 
 
-def generate_input(pdb_file:str, remove_multiple_models:bool,just_a_test=True):
+def generate_input(pdb_file:str,just_a_test=True):
     
-    mut_file_long=make_mutation_file(pdb_file,
-                                     remove_multiple_models=remove_multiple_models)
+    mut_file_long=make_mutation_file(pdb_file)
     if just_a_test==True:
         mut_file_long=mut_file_long.iloc[0:10]
 

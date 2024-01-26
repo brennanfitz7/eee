@@ -9,6 +9,7 @@ from eee._private import logger
 from eee.structure.clean_structure import clean_structure
 from eee.structure.align_structure_seqs import align_structure_seqs
 from eee.structure.align_structures import align_structures
+from eee.io.incorporate_models import incorporate_models
 
 import os
 import glob
@@ -48,10 +49,10 @@ def _create_unique_filenames(files):
 
 def sync_structures(structure_files,
                     out_dir,
+                    all_models_necessary:bool,
                     overwrite=False,
                     verbose=False,
-                    keep_temporary=False,
-                    remove_multiple_models=True):
+                    keep_temporary=False):
     """
     Take a set of structures, clean up, align, and figure out which sites are
     shared among all structures. Output is a directory with pdb files and a
@@ -78,6 +79,8 @@ def sync_structures(structure_files,
         write out all output to standard output
     keep_temporary : bool, default=False
         do not delete temporary files
+    all_models_necesary: bool
+        if true, all models should be used in syncing
     """
     
     # See if the output directory exists
@@ -104,9 +107,14 @@ def sync_structures(structure_files,
 
     # Load the specified structure files
     dfs = []
-    for f in structure_files:
-        dfs.append(read_structure(f,remove_multiple_models=remove_multiple_models))
-
+    if all_models_necessary==True:
+        for f in structure_files:
+            read_df=read_structure(f,remove_multiple_models=False)
+            dfs.append(incorporate_models(read_df))
+    if all_models_necessary==False:
+        for f in structure_files:
+            dfs.append(read_structure(f))
+    
     # Clean up structures --> build missing atoms or delete residues with
     # missing backbone atoms. 
     logger.log("Cleaning up structures with FoldX.")
@@ -115,8 +123,7 @@ def sync_structures(structure_files,
     for i in range(len(dfs)):
         dfs[i] = clean_structure(dfs[i],
                                 verbose=verbose,
-                                keep_temporary=keep_temporary,
-                                remove_multiple_models=remove_multiple_models)
+                                keep_temporary=keep_temporary) 
             
     # Figure out which residues are shared between what structures
     logger.log("Aligning sequences using muscle.")

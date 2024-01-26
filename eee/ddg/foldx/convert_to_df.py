@@ -23,11 +23,11 @@ def convert_to_df(ddg_output:str):
         one_letter_code=AA_3TO1.get(item[0:3])
         #for mutations to a charged form of histidine
         if item[-1] in 'oef' and one_letter_code!='H':
-            new_mut_list.append(one_letter_code+item[4:len(item)-1]+'H')
+            new_mut_list.append(one_letter_code+item[3]+item[4:len(item)-1]+'H')
             new_ddg_list.append(old_ddg_list[old_mut_list.index(item)])
         #for regular mutations that are not mutate to self
         elif one_letter_code!=item[-1] and item[-1].isupper()==True:
-            new_mut_list.append(one_letter_code+item[4:len(item)])
+            new_mut_list.append(one_letter_code+item[3]+item[4:len(item)])
             new_ddg_list.append(old_ddg_list[old_mut_list.index(item)])
         #in case there is another weird foldx lowercase residue
         elif item[-1].isupper==False and item[-1] not in 'oef':

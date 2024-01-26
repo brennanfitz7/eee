@@ -8,7 +8,8 @@ def write_pdb(df,
               pdb_file,
               overwrite=False,
               bfactor_column=None,
-              occ_column=None):
+              occ_column=None,
+              write_with_models=False):
     """
     Write a pdb file given a pandas dataframe.
 
@@ -44,8 +45,9 @@ def write_pdb(df,
     last_class = None
     last_model=None
     with open(pdb_file,'w') as f:
-        
-        f.write('MODEL        1\n')
+
+        if write_with_models==True:
+            f.write('MODEL        1\n')
 
         counter = 1
         for i in df.index:
@@ -68,7 +70,7 @@ def write_pdb(df,
                 f.write("TER\n")
                 last_chain = chain 
 
-            if model != last_model:
+            if write_with_models==True and model != last_model:
                 f.write("ENDMDL\nMODEL        ")
                 f.write(str(model))
                 f.write('\n')

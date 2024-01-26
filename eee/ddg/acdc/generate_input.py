@@ -149,7 +149,7 @@ def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str,hhblits_path:str,uni
     _make_prof_file_from_psi(psi_file=psi_file, prof_file=prof_file)
 
 
-def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str,remove_multiple_models:bool,just_a_test=True):
+def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str,just_a_test=True):
     """
     Makes a tab separated file in the format for ACDC_NN batch input.
 
@@ -176,8 +176,7 @@ def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str,remove_multiple_mo
     ##mut_file=_make_mutation_file(pdb_file) change this when you're not running tests anymore
 
 
-    mut_file=make_mutation_file(pdb_file,
-                                remove_multiple_models=remove_multiple_models)
+    mut_file=make_mutation_file(pdb_file)
 
 
     #if just_a_test is True then only first 10 mutaitons will be in file

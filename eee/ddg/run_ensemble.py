@@ -10,6 +10,7 @@ import glob
 import sys
 import argparse
 import shutil
+import pickle
 
 
 def regularize_data(df, stats_dict,stdev_rosetta=13.228994023873321):
@@ -106,8 +107,14 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,all_models_necessary:bool,
             calculator.ddg_calc(muts_file=pdb_id+'_'+module+'_muts.txt', pdb_file=pdb_file)
             ddg_df=calculator.convert_to_df('PS_'+pdb_file[0:-4]+'_scanning_output.txt')
             #This will regularize the data to rosetta's standard
-            ddg_df=regularize_data(ddg_df, foldx_dict)
-            #THIS IS WHERE I COULD ADD IN THE MULTIPLIER
+            #ddg_df=regularize_data(ddg_df, foldx_dict)
+            #^^MAY ADD THIS BACK LATER
+            #multiply each DDG by the multiplier provided by the pickle (based on the number of identical chains)
+            mult_dict = pickle.load(pdb_id+'_ddg_mult.pkl','rb')
+            for index,row in ddg_df.iterrows():
+                chain=ddg_df['Mutation'][index][1]
+                if chain in mult_dict.keys():
+                    ddg_df.loc[index, "DDG"] = mult_dict[chain]*ddg_df['DDG'][index]
             ddg_df.name=pdb.split('_')[0]
             df_list.append(ddg_df)
 
@@ -123,10 +130,17 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,all_models_necessary:bool,
             calculator.ddg_calc(pdb_id+'_'+module+'_muts.tsv')
             ddg_df=calculator.convert_to_df(pdb_id+'_'+module+'_raw_ddgs.txt')
             #This will regularize the data to rosetta's standard
-            ddg_df=regularize_data(ddg_df, acdc_dict)
-            #THIS IS WHERE I COULD ADD IN THE MULTIPLIER
+            #ddg_df=regularize_data(ddg_df, acdc_dict)
+            #^^MAY ADD THIS BACK LATER
+            #multiply each DDG by the multiplier provided by the pickle (based on the number of identical chains)
+            mult_dict = pickle.load(pdb_id+'_ddg_mult.pkl','rb')
+            for index,row in ddg_df.iterrows():
+                chain=ddg_df['Mutation'][index][1]
+                if chain in mult_dict.keys():
+                    ddg_df.loc[index, "DDG"] = mult_dict[chain]*ddg_df['DDG'][index]
             ddg_df.name=pdb.split('_')[0]
             df_list.append(ddg_df)
+
 
     #create list of sets of each df's mutation column 
     mut_sets=[]

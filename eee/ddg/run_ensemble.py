@@ -10,7 +10,7 @@ import glob
 import sys
 import argparse
 import shutil
-import pickle
+import json
 
 
 def regularize_data(df, stats_dict,stdev_rosetta=13.228994023873321):
@@ -110,7 +110,8 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,all_models_necessary:bool,
             #ddg_df=regularize_data(ddg_df, foldx_dict)
             #^^MAY ADD THIS BACK LATER
             #multiply each DDG by the multiplier provided by the pickle (based on the number of identical chains)
-            mult_dict = pickle.load(pdb_id+'_ddg_mult.pkl','rb')
+            with open(pdb_id+'_ddg_mult.json', 'r') as openfile:
+                mult_dict = json.load(openfile)
             for index,row in ddg_df.iterrows():
                 chain=ddg_df['Mutation'][index][1]
                 if chain in mult_dict.keys():
@@ -133,7 +134,8 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,all_models_necessary:bool,
             #ddg_df=regularize_data(ddg_df, acdc_dict)
             #^^MAY ADD THIS BACK LATER
             #multiply each DDG by the multiplier provided by the pickle (based on the number of identical chains)
-            mult_dict = pickle.load(pdb_id+'_ddg_mult.pkl','rb')
+            with open(pdb_id+'_ddg_mult.json', 'r') as openfile:
+                mult_dict = json.load(openfile)
             for index,row in ddg_df.iterrows():
                 chain=ddg_df['Mutation'][index][1]
                 if chain in mult_dict.keys():

@@ -3,21 +3,7 @@ from eee.io.read_structure import read_structure
 import pandas as pd
 import json
 
-def make_mutation_file(pdb_file:str):
-    """
-    Makes a dataframe with all possible mutations from a pdb file. 
-
-    Parameters
-    ----------
-        
-    pdb_file : str
-        pdb file of protein of interest
-
-    Returns
-    -------
-    Dataframe with all possible mutations from a pdb file. 
-    """
-
+def chains_and_multipliers(pdb_file):
     #establish pdb_id
     pdb_id=pdb_file.split('.')[0]
     
@@ -39,11 +25,15 @@ def make_mutation_file(pdb_file:str):
         chain_df.loc[len(chain_df.index)]=[chain,test_string]
         
     #finding original chains 
-    original_chains=[]
     all_chains=[]
     for group, df in chain_df.groupby('seq'):
         temp_list=list(df['Chain ID'])
-        original_chains.append(temp_list[0])
+        all_chains.append(temp_list)
+
+    #finding original chains 
+    all_chains=[]
+    for group, df in chain_df.groupby('seq'):
+        temp_list=list(df['Chain ID'])
         all_chains.append(temp_list)
 
     #creating ddg multiplier json
@@ -51,29 +41,7 @@ def make_mutation_file(pdb_file:str):
     for item in all_chains:
         mult_dict[item[0]]=len(item)
     
-
     with open(pdb_id+"_ddg_mult.json", "w") as outfile:
         json.dump(mult_dict, outfile)
-        
-    prot_seq=redundant_prot_seq[(redundant_prot_seq['chain'].isin(original_chains))]
-
-    #create new mutation dictionary
-    mutation_dict={'chain':[],'wt_res':[],'res_pos':[],'mut_res':[]}
     
-    aa_list=["ALA","CYS","ASP","GLU","PHE","GLY","HIS","ILE","LYS","LEU","MET","ASN","PRO","GLN","ARG","SER","THR","VAL","TRP","TYR"]
-    
-    #populate mutation dictionary with info from original df
-    for index, row in prot_seq.iterrows():
-        for aa in aa_list:
-            if row[1]!=aa:
-                mutation_dict["chain"].append(row[0])
-                mutation_dict["wt_res"].append(row[1])
-                mutation_dict["res_pos"].append(row[2])
-                mutation_dict["mut_res"].append(aa)
-            else:
-                continue
-    
-    #create a dataframe from the mutation dictionary
-    mutation_df=pd.DataFrame.from_dict(mutation_dict)
-    
-    return mutation_df
+    return mult_dict

@@ -196,7 +196,7 @@ def _acdc_nn_format(pdb_file:str, prof_file:str, tsv_file:str,just_a_test=True):
     
     mut_file.to_csv(tsv_file, sep="\t",header=False, index=False)
     
-def generate_input(pdb_file:str, hhblits_path:str, uniref_path:str, remove_multiple_models:bool,just_a_test=True,):
+def generate_input(pdb_file:str, hhblits_path:str, uniref_path:str,just_a_test=True,):
     """
     Creates a prof file and an tab separated file in the format for ACDC_NN batch input. 
 
@@ -236,12 +236,10 @@ def generate_input(pdb_file:str, hhblits_path:str, uniref_path:str, remove_multi
                     psi_file=psi_file,
                     prof_file=prof_file, 
                     hhblits_path=hhblits_path, 
-                    uniref_path=uniref_path, 
-                    remove_multiple_models=remove_multiple_models) 
+                    uniref_path=uniref_path) 
 
 
     _acdc_nn_format(pdb_file=pdb_file, 
                     prof_file=prof_file, 
                     tsv_file=tsv_file, 
-                    just_a_test=just_a_test, 
-                    remove_multiple_models=remove_multiple_models)
+                    just_a_test=just_a_test)

@@ -57,8 +57,6 @@ def clean_structure(df,
     
     new_df = read_structure(os.path.join(tmp_dir,"tmp-output.pdb"),remove_multiple_models=remove_multiple_models)
 
-    print('this is new df after cleaning',new_df)
-
     # foldx will drop all hetatms. bring them back in
     hetatm_df = df.loc[df["class"] == "HETATM",:]
     new_df = pd.concat((new_df,hetatm_df))

@@ -50,7 +50,6 @@ def make_mutation_file(pdb_file:str):
     mult_dict={}
     for item in all_chains:
         mult_dict[item[0]]=len(item)
-    
 
     with open(pdb_id+"_ddg_mult.json", "w") as outfile:
         json.dump(mult_dict, outfile)

@@ -13,7 +13,7 @@ import subprocess
 
 
 
-def _make_psi_file(pdb_file:str, psi_file:str,hhblits_path:str,uniref_path:str,remove_multiple_models:bool):
+def _make_psi_file(pdb_file:str, psi_file:str,hhblits_path:str,uniref_path:str):
     """
     Creates a psi file.
 
@@ -41,8 +41,7 @@ def _make_psi_file(pdb_file:str, psi_file:str,hhblits_path:str,uniref_path:str,r
     """
     fasta_file=pdb_file.split('.')[0]+'.fasta' ##consider if later you want files to be 1abc.pdb_clean.fasta so you know they're from the clean version--something to consider
 
-    pdb_df=read_structure(pdb_file,
-                          remove_multiple_models=remove_multiple_models)
+    pdb_df=read_structure(pdb_file)
 
     
     write_fasta(pdb_df,fasta_file)
@@ -110,7 +109,7 @@ def _make_prof_file_from_psi(psi_file:str, prof_file:str):
         err = "Program failed.\n"
         raise RuntimeError(err)
 
-def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str,hhblits_path:str,uniref_path:str,remove_multiple_models:bool):
+def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str,hhblits_path:str,uniref_path:str):
     """
     Creates a prof file from a pdb file.
 
@@ -142,8 +141,7 @@ def _make_prof_file(pdb_file:str,psi_file:str,prof_file:str,hhblits_path:str,uni
     _make_psi_file(pdb_file=pdb_file, 
                    psi_file=psi_file, 
                    hhblits_path=hhblits_path, 
-                   uniref_path=uniref_path,
-                   remove_multiple_models=remove_multiple_models)
+                   uniref_path=uniref_path)
 
    
     _make_prof_file_from_psi(psi_file=psi_file, prof_file=prof_file)

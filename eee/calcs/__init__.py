@@ -10,7 +10,6 @@ from .wf_sim import WrightFisherSimulation
 from .dms import DeepMutationalScan
 from .accessible_paths import AccessiblePaths
 from .wf_tree_sim import WrightFisherTreeSimulation
-from .batch_running import batch_run_dms_epi
 
 def _get_available():
 

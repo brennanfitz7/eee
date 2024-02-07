@@ -38,8 +38,8 @@ def get_ensemble_df(folder:str,prot_name:str):
                 mult_dict = json.load(openfile)
         chain=item[-5]
         for index,row in new_df.iterrows():
-            my_mut=new_df.Mutation[index]
-            new_df.loc[index,'Mutation'] = my_mut[0]+chain+my_mut[1:]
+            #my_mut=new_df.Mutation[index]
+            #new_df.loc[index,'Mutation'] = my_mut[0]+chain+my_mut[1:]
             if chain in mult_dict.keys():
                 new_df.loc[index, "ddG (kcal/mol)"] = mult_dict[chain]*new_df['ddG (kcal/mol)'][index]
                 new_df.name=pdb_id

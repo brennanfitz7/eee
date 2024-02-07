@@ -11,4 +11,4 @@ from .num_genotypes import get_num_genotypes
 
 from . import epistasis
 
-#from eee.analysis.dms_epistasis import dms_epistasis
+#from .dms_epistasis import dms_epistasis

@@ -16,7 +16,7 @@ def batch_run_dms_epi(on_off_df,prot_name:str):
         conditions_df.at[1,'oht']=on
         conditions_df.to_csv('conditions.csv')
 
-        out_dir=prot_name+"_on_"+on+'_off_'+off
+        out_dir=prot_name+"_on_"+str(on)+'_off_'+str(off)
 
         cmd=['eee-run-calculation','simulation.json',out_dir]
 

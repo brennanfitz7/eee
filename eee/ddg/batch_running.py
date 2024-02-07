@@ -44,11 +44,11 @@ def batch_run_dms_epi(json_file,
                 err = f"\noutput_directory '{out_dir}' already exists\n\n"
                 raise FileExistsError(err)
 
-    print()
-    print(es.get_calc_description(kwargs))
-    print(f"\nWriting result to '{out_dir}' directory\n",flush=True)
+        print()
+        print(es.get_calc_description(kwargs))
+        print(f"\nWriting result to '{out_dir}' directory\n",flush=True)
             
-    es.run(output_directory=out_dir,**kwargs)
+        es.run(output_directory=out_dir,**kwargs)
 
         #cannot run dms_epistasis within eee because it meses with importing
         #epi_df=dms_epistasis(prot_name+"_on_"+on_off_df['on'][idx]+'_off_'+on_off_df['off'][idx])

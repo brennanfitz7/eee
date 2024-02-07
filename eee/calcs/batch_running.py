@@ -1,4 +1,4 @@
-from eee.analysis.dms_epistasis import dms_epistasis
+#from eee.analysis.dms_epistasis import dms_epistasis
 
 import pandas as pd
 import subprocess
@@ -34,6 +34,6 @@ def batch_run_dms_epi(on_off_df,prot_name:str):
             err = "Program failed.\n"
             raise RuntimeError(err)
 
-
-        epi_df=dms_epistasis(prot_name+"_on_"+on_off_df['on'][idx]+'_off_'+on_off_df['off'][idx])
-        epi_df.to_csv(prot_name+"_on_"+on_off_df['on'][idx]+'_off_'+on_off_df['off'][idx]+'_epi.csv')
+        #cannot run dms_epistasis within eee because it meses with importing
+        #epi_df=dms_epistasis(prot_name+"_on_"+on_off_df['on'][idx]+'_off_'+on_off_df['off'][idx])
+        #epi_df.to_csv(prot_name+"_on_"+on_off_df['on'][idx]+'_off_'+on_off_df['off'][idx]+'_epi.csv')

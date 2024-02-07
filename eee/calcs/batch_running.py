@@ -10,11 +10,15 @@ def batch_run_dms_epi(on_off_df,prot_name:str):
     
     conditions_df=pd.read_csv('conditions.csv')
     for idx,row in on_off_df.iterrows():
-        conditions_df.at[0, 'oht'] = on_off_df['off'][idx]
-        conditions_df.at[1,'oht']=on_off_df['on'][idx]
+        on=on_off_df['on'][idx]
+        off=on_off_df['off'][idx]
+        conditions_df.at[0, 'oht'] = off
+        conditions_df.at[1,'oht']=on
         conditions_df.to_csv('conditions.csv')
 
-        cmd=['eee-run-calculation','simulation.json',prot_name+"_on_"+on_off_df['on'][idx]+'_off_'+on_off_df['off'][idx]]
+        out_dir=prot_name+"_on_"+on+'_off_'+off
+
+        cmd=['eee-run-calculation','simulation.json',out_dir]
 
         verbose=True
 

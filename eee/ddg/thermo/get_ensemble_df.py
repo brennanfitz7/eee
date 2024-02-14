@@ -72,7 +72,7 @@ def get_ensemble_df(folder:str,prot_name:str):
     combined_df=pd.DataFrame(mut_list, columns=['mut'])
 
     for df in clean_df_list:
-        DDG_col = df['ddG (kcal/mol)']
+        DDG_col = df['ddG (kcal/mol)'].tolist()
         ##use name_dict to get the correct name for the pdb file
         name_of_df=name_dict.get(df.name)
         combined_df[name_of_df] = DDG_col

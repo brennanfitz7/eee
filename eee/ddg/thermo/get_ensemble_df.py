@@ -33,6 +33,10 @@ def get_ensemble_df(folder:str,prot_name:str):
     for item in ddg_list:
         pdb_id=item.split('/')[-1].split('_')[0]
         raw_df = pd.read_csv(item)
+        #drop any self to self mutations
+        for idx,row in raw_df.iterrows():
+            if raw_df.wtAA[idx]==raw_df.mutAA[idx]:
+                raw_df.drop([idx],inplace=True)
         new_df=raw_df.drop(axis=1,labels=['Unnamed: 0','pos','wtAA','mutAA'])
         with open(folder+'/'+pdb_id+'_ddg_mult.json', 'r') as openfile:
                 mult_dict = json.load(openfile)
@@ -76,7 +80,7 @@ def get_ensemble_df(folder:str,prot_name:str):
     #making site column
     site=[]
     for index,row in combined_df.iterrows():
-        site.append(row[0][2:-1])
+        site.append(row[0][1:-1])
     combined_df.insert(loc=0, column='site',value=site)
 
     #making unfolded column

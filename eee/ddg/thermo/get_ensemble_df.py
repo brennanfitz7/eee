@@ -28,11 +28,35 @@ def get_ensemble_df(folder:str,prot_name:str):
             
     #getting list of ddgs
     ddg_list=glob.glob(folder+'/*.csv')
-    
+
+    #making lists
+    single_chain_dfs=[]
+    name_list=[]
     df_list=[]
+    
+    #creating "raw_dfs" for each of the ddg_csvs and assigning them names
     for item in ddg_list:
         pdb_id=item.split('/')[-1].split('_')[0]
-        raw_df = pd.read_csv(item)
+        single_df = pd.read_csv(item)
+        single_chain_dfs.append(single_df)
+        single_df.Name=pdb_id
+        
+        #adding pdb_ids to the name_list
+        if single_df.Name not in name_list:
+            name_list.append(single_df.Name)
+            
+    #sorting dfs by the pdb_id (now known as tags) 
+    for tag in name_list:
+        same_pdb_list=[]
+        for df in single_chain_dfs:
+            my_tag=df.Name
+            if my_tag==tag:
+                same_pdb_list.append(df)
+        #concatenating all dfs from the same pdb then sorting them 
+        raw_df=pd.concat(same_pdb_list)
+        raw_df.sort_values(by=['pos'],inplace=True)
+        raw_df.Name=tag
+        
         #drop any self to self mutations
         for idx,row in raw_df.iterrows():
             if raw_df.wtAA[idx]==raw_df.mutAA[idx]:
@@ -46,7 +70,7 @@ def get_ensemble_df(folder:str,prot_name:str):
             #new_df.loc[index,'Mutation'] = my_mut[0]+chain+my_mut[1:]
             if chain in mult_dict.keys():
                 new_df.loc[index, "ddG (kcal/mol)"] = mult_dict[chain]*new_df['ddG (kcal/mol)'][index]
-                new_df.name=pdb_id
+                new_df.Name=pdb_id
         df_list.append(new_df)
         
     mut_sets=[]

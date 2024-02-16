@@ -47,7 +47,6 @@ def get_ensemble_df(folder:str,prot_name:str):
             
     #sorting dfs by the pdb_id (now known as tags) 
     for tag in name_list:
-        print(tag)
         same_pdb_list=[]
         for df in single_chain_dfs:
             my_tag=df.name

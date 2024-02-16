@@ -47,6 +47,7 @@ def get_ensemble_df(folder:str,prot_name:str):
             
     #sorting dfs by the pdb_id (now known as tags) 
     for tag in name_list:
+        print(tag)
         same_pdb_list=[]
         for df in single_chain_dfs:
             my_tag=df.name
@@ -71,7 +72,7 @@ def get_ensemble_df(folder:str,prot_name:str):
             #new_df.loc[index,'Mutation'] = my_mut[0]+chain+my_mut[1:]
             if chain in mult_dict.keys():
                 new_df.loc[index, "ddG (kcal/mol)"] = mult_dict[chain]*new_df['ddG (kcal/mol)'][index]
-                new_df.name=pdb_id
+                new_df.name=tag
         df_list.append(new_df)
         
     mut_sets=[]

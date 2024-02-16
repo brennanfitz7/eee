@@ -109,7 +109,8 @@ def get_ensemble_df(folder:str,prot_name:str):
     combined_df.insert(loc=0, column='site',value=site)
 
     #making unfolded column
-    combined_df.insert(loc=5, column='unfolded',value=0)
+    end=len(combined_df.columns)
+    combined_df.insert(loc=end, column='unfolded',value=0)
     
     combined_df.to_csv(folder+'/'+prot_name+'_thermo_ddgs.csv', index=False)
     

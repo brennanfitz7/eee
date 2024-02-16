@@ -55,6 +55,7 @@ def get_ensemble_df(folder:str,prot_name:str):
         #concatenating all dfs from the same pdb then sorting them 
         raw_df=pd.concat(same_pdb_list)
         raw_df.sort_values(by=['pos'],inplace=True)
+        raw_df.reset_index(inplace=True)
         raw_df.Name=tag
         
         #drop any self to self mutations

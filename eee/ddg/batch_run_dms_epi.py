@@ -37,7 +37,7 @@ def batch_run_dms_epi(json_file,
         on=on_off_df['on'][idx]
         off=on_off_df['off'][idx]
         conditions_df.loc[conditions_df.fitness_fcn=='on', ligand] = on
-        conditions_df.loc[conditions_df.fitness_fcn=='on', ligand] = on
+        conditions_df.loc[conditions_df.fitness_fcn=='off', ligand] = off
         conditions_df.to_csv('conditions.csv',index=False)
 
         out_dir=prot_name+"_on_"+str(on)+'_off_'+str(off)

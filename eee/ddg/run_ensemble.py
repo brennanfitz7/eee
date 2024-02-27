@@ -13,9 +13,9 @@ import shutil
 import json
 
 
-def regularize_data(df, stats_dict,stdev_rosetta=13.228994023873321):
+def regularize_data(df, stats_dict,stdev_thermo=0.9542617775963215):
     """
-    Regularize data from a different ∆∆G calculator to Rosetta's standard
+    Regularize data from a different ∆∆G calculator to ThermoMPNN's standard
 
     Parameters
     ----------
@@ -25,8 +25,8 @@ def regularize_data(df, stats_dict,stdev_rosetta=13.228994023873321):
     stats_dict : dict
         dictionary with mean and stdev for whichever calculator the data is from. Should contain keys "mean" and "stdev"
     
-    stdev_rosetta : float
-        the standard deviation for rosseta data--will be updated as more data is obtained
+    stdev_thermo : float
+        the standard deviation for ThermoMPNN data--will be updated as more data is obtained
         
     Returns
     -------
@@ -35,7 +35,7 @@ def regularize_data(df, stats_dict,stdev_rosetta=13.228994023873321):
     mean_other=stats_dict.get('mean')
     stdev_other=stats_dict.get('stdev')
     for column in df.columns[2:-1]:
-        df[column] = df[column].map(lambda item: ((((item-mean_other)/stdev_other)*stdev_rosetta)+((stdev_rosetta/stdev_other)*mean_other)))
+        df[column] = df[column].map(lambda item: ((((item-mean_other)/stdev_other)*stdev_thermo)+((stdev_thermo/stdev_other)*mean_other)))
 
     return df
 
@@ -76,6 +76,7 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,all_models_necessary:bool,
     #dicts for regularizing data
     foldx_dict={'mean': 4.043667500801383, 'stdev': 28.70340193260126}
     acdc_dict={'mean': 0.24449510098968205, 'stdev': 0.6223300393521769}
+    rosetta_dict={'mean': 7.958155414873286, 'stdev': 13.13766799464332}
     if calculator==acdc:
         acdc_info=pdb_df['ACDC'].tolist()
         hhblits_path=acdc_info[0]
@@ -106,8 +107,8 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,all_models_necessary:bool,
                 
             calculator.ddg_calc(muts_file=pdb_id+'_'+module+'_muts.txt', pdb_file=pdb_file)
             ddg_df=calculator.convert_to_df('PS_'+pdb_file[0:-4]+'_scanning_output.txt')
-            #This will regularize the data to rosetta's standard
-            #ddg_df=regularize_data(ddg_df, foldx_dict)
+            #This will regularize the data to thermoMPNN's standard
+            ddg_df=regularize_data(ddg_df, foldx_dict)
             #^^MAY ADD THIS BACK LATER
             #multiply each DDG by the multiplier provided by the pickle (based on the number of identical chains)
             with open(pdb_id+'_ddg_mult.json', 'r') as openfile:
@@ -130,8 +131,8 @@ def run_ensemble(pdb_csv:str,prot_name:str,module:str,all_models_necessary:bool,
             #run ddg_calc and convert_to_df
             calculator.ddg_calc(pdb_id+'_'+module+'_muts.tsv')
             ddg_df=calculator.convert_to_df(pdb_id+'_'+module+'_raw_ddgs.txt')
-            #This will regularize the data to rosetta's standard
-            #ddg_df=regularize_data(ddg_df, acdc_dict)
+            #This will regularize the data to ThermoMPNN's standard
+            ddg_df=regularize_data(ddg_df, acdc_dict)
             #^^MAY ADD THIS BACK LATER
             #multiply each DDG by the multiplier provided by the pickle (based on the number of identical chains)
             with open(pdb_id+'_ddg_mult.json', 'r') as openfile:

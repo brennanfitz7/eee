@@ -1,7 +1,6 @@
 import pandas as pd
 
 
-
 def convert_to_df(ddg_output:str):
 
     #1abc_CALCULATOR_raw_ddgs.txt
@@ -26,22 +25,18 @@ def convert_to_df(ddg_output:str):
     with open(ddg_output,'r') as ddgs:
         output_list = ddgs.read().splitlines()
     
-    ddg_list=[]
-    for item in output_list:
-        if item[3:len(item)].isdigit()==True:
-            #adds tod ddg_list and changes sign so that stabilizing=neg, destab=positive
-            ddg_list.append(-(float(item)))
-        else:
-            continue
-    
+    #making ddg list with every 4th item (will get the DDGs)
+    #also changing the sign sothat stabilizing=neg, destab=positive
+    ddg_list=[-(float(item)) for item in output_list[3::4]]
     
     input_df=pd.read_table(muts_file, delimiter='\t',names=['Mutation', 'Prof', 'PDB','Chain'])
+    
     
     mut_and_chain=[]
     for index,row in input_df.iterrows():
         mutation=input_df['Mutation'][index]
         chain=input_df['Chain'][index]
-        mut_and_chain.append(mutation[0]+chain+mutation[1:])
+        mut_and_chain.append(mutation[0]+mutation[1:])
         
     
     ddg_df = pd.DataFrame(
@@ -50,8 +45,4 @@ def convert_to_df(ddg_output:str):
     ddg_df.to_csv(output_df, index=False)
     
     return ddg_df
-
-
-
-
 

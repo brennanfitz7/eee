@@ -6,6 +6,7 @@ from . import core
 from . import structure
 from . import io
 from . import calcs
+from . import analysis
 
 def _check_for_notebook():
     """

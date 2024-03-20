@@ -13,7 +13,8 @@ from tqdm.auto import tqdm
 import os
 
 def dms_epistasis(dms_dir,
-                  allow_neutral=True):
+                  allow_neutral=True,
+                  fitness_precision=None):
     """
     Analyze epistasis and path accessibility from a deep mutational scan.
     
@@ -23,7 +24,8 @@ def dms_epistasis(dms_dir,
         directory holding a dms calculation (must have simulation.json)
     allow_neutral : bool, default=True
         treat mutations that have no effect on fitness as accessible
-    
+    fitness_precision : float, default=None
+        dictates the precision of the fitness values before being compared to determine accessibility
     Returns
     -------
     ep_df : pandas.DataFrame
@@ -102,6 +104,12 @@ def dms_epistasis(dms_dir,
             f10 = single_fitness[m10]
             f01 = single_fitness[m01]
             f11 = dms_df.loc[idx,"fitness"]
+
+            if fitness_precision is not None:
+                f00=np.round(f00,fitness_precision)
+                f10=np.round(f10,fitness_precision)
+                f01=np.round(f01,fitness_precision)
+                f11=np.round(f11,fitness_precision)
 
             mag, sign10, sign01, ep_class = eee.analysis.epistasis.get_epistasis(f00,
                                                                                  f10,

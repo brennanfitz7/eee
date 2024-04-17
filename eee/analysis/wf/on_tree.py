@@ -2,8 +2,8 @@
 import eee
 
 from eee.calcs import read_json
-from eee.analysis.wf.analysis import get_most_common
-from eee.analysis.wf.analysis import read_genotypes_file
+from eee.analysis.wf.gene_analysis import get_most_common
+from eee.analysis.wf.gene_analysis import read_genotypes_file
 from eee._private.check.standard import check_bool
 
 from eee.core.data import AA_TO_INT

@@ -2,8 +2,6 @@
 Scripts for analyzing the results of Wright-Fisher evolutionary simulations. 
 """
 
-import eee
-
 import numpy as np
 import pandas as pd
 from tqdm.auto import tqdm
@@ -32,7 +30,8 @@ def read_genotypes_file(genotypes_file,
     print(f"Reading genotypes file {genotypes_file}",flush=True)
 
     if only_genotypes is None:
-        genotypes = eee.io.read_dataframe(genotypes_file)
+        from eee.io import read_dataframe
+        genotypes = read_dataframe(genotypes_file)
         return genotypes
     
     only_genotypes = set(only_genotypes)

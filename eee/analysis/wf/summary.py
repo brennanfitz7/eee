@@ -7,7 +7,7 @@ Functions for summarizing the result of a Wright-Fisher simulation.
 # interface. 
 from eee.analysis.plots import plt
 
-from eee.calcs.read_json import read_json
+from eee.io.read_json import read_json
 from eee._private.interface import MockContextManager
 
 import pandas as pd

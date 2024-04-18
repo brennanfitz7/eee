@@ -1,7 +1,7 @@
 import pytest
 
-from eee.calcs.read_json import _validate_calc_kwargs
-from eee.calcs.read_json import read_json
+from eee.io.read_json import _validate_calc_kwargs
+from eee.io.read_json import read_json
 from eee.core.fitness.ff import ff_on
 from eee.core.fitness.ff import ff_off
 from eee.core.data import GAS_CONSTANT

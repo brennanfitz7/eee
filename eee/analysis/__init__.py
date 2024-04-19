@@ -2,7 +2,6 @@
 Functions for analyzing simulation outputs.
 """
 
-from .wf.gene_analysis import get_most_common
 from .wf.gene_analysis import get_genotype_frequencies
 
 from .ensemble_fitness import ensemble_fitness

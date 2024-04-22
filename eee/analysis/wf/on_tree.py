@@ -8,7 +8,7 @@ from eee._private.check.standard import check_bool
 from eee.core.data import AA_TO_INT
 from eee.core.data import INT_TO_AA
 
-from eee.utilities.get_most_common import get_most_common
+from eee._private.utility import get_most_common
 
 import numpy as np
 import pandas as pd

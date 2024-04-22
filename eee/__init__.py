@@ -7,7 +7,6 @@ from . import structure
 from . import io
 from . import calcs
 from . import analysis
-from . import utilities
 
 def _check_for_notebook():
     """

@@ -6,7 +6,7 @@ import glob
 def generate_input(list_of_pdbs:list, prot_name:str, all_models_necessary:bool):
     
     sync_structures(list_of_pdbs, 
-                    out_dir=prot_name, 
+                    out_dir=prot_name+'_synced', 
                     all_models_necessary=all_models_necessary)
     
     synced_pdbs=glob.glob(prot_name+'/*.pdb')

@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import glob
 
-def get_ensemble_df(folder:str,prot_name:str):
+def get_ensemble_df(folder:str,prot_name:str,need_name_dict:bool):
 
     """
      Compiles ensemble results from ThermoMPNN. 
@@ -16,15 +16,19 @@ def get_ensemble_df(folder:str,prot_name:str):
 
     prot_name : str
         name of the protein
+
+    need_name_dict : bool
+        specifies whether these proteins need a name dict or if they will just be categorized under their pdb file name
         
     Returns
     -------
     the ensemble df
     """
     
-    #getting name_dict from json
-    with open(folder+'/name_dict.json', 'r') as openfile:
-                name_dict = json.load(openfile)
+    if need_name_dict==True:
+        #getting name_dict from json
+        with open(folder+'/name_dict.json', 'r') as openfile:
+                    name_dict = json.load(openfile)
             
     #getting list of ddgs
     ddg_list=glob.glob(folder+'/*.csv')
@@ -98,8 +102,12 @@ def get_ensemble_df(folder:str,prot_name:str):
 
     for df in clean_df_list:
         DDG_col = df['ddG (kcal/mol)'].tolist()
-        ##use name_dict to get the correct name for the pdb file
-        name_of_df=name_dict.get(df.name)
+        if need_name_dict==True:
+            #use name_dict to get the correct name for the pdb file
+            name_of_df=name_dict.get(df.name)
+        if need_name_dict==False:
+             #use pdb file as name of column
+             name_of_df=df.name
         combined_df[name_of_df] = DDG_col
 
     #making site column

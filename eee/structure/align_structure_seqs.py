@@ -72,6 +72,7 @@ def _run_muscle(seq_list,
 
     return [output[k] for k in keys]
 
+
 def align_structure_seqs(dfs,
                          muscle_binary="muscle",
                          verbose=False,
@@ -110,7 +111,6 @@ def align_structure_seqs(dfs,
                          verbose=verbose,
                          keep_temporary=keep_temporary)
 
-
     # Convert output into column indexes and column contents. For example: 
     # MAST-
     # -ASTP
@@ -119,29 +119,35 @@ def align_structure_seqs(dfs,
     # + column_indexes: [[0,1,2,3],[1,2,3,4]]
     column_indexes = [[] for _ in range(len(output))]
     column_contents = [[] for _ in range(len(output[0]))]
+
     for i in range(len(output)):
         
         counter = 0            
         for j, c in enumerate(output[i]):
+            column_indexes[i].append(counter)
+            counter += 1
             if c != "-":
                 column_contents[j].append(i)
-                column_indexes[i].append(counter)
-                counter += 1
 
     # Check sequence identity. identical_aa is True if the amino acids are the 
     # same at that site (or a mix of Ser and Cys), False if they differ. Gaps
     # do not count as different. 
     ser_to_cys = {}
     identical_aa = np.ones(len(column_contents),dtype=float)
+    shared_column = np.zeros(len(column_contents),dtype=float)
+    
+    #Use column_indexes and column_contents to create a list indicating where residues are identical
+    #between all structures
     for i in range(len(column_contents)):
 
         struct_seen = column_contents[i]
+
         aa_seen = list(set([output[j][i] for j in struct_seen]))
 
-        # All same
-        if len(aa_seen) == 1:
+        if len(aa_seen) == 1 and len(column_contents[i])==len(column_indexes):
             continue
-
+            
+        
         # If mixture of Cys and Ser seen, mutate SER --> CYS
         if set(aa_seen) == set(["C","S"]):
             ser_to_cys[i] = []
@@ -150,6 +156,7 @@ def align_structure_seqs(dfs,
                     ser_to_cys[i].append(j)
         else:
             identical_aa[i] = False
+            
 
     # Get lists of all CA atoms and residues
     residues = []
@@ -161,52 +168,82 @@ def align_structure_seqs(dfs,
         this_df = df.loc[mask,:]
 
         residues.append(list(this_df["_resid_key"]))
-
+        
+        
     # Create an array indicating the fraction of structures sharing the site. 
     shared_column = np.zeros(len(column_contents),dtype=float)
     num_structures = len(dfs)
     for i in range(len(column_contents)):
         shared_column[i] = len(column_contents[i])/num_structures
-
-    # Go through the alignment for each structure
-    for i in range(len(column_indexes)):
         
+    # Go through the alignment for each structure
+    for i in range(len(output)):
+        
+        #establishing which df we are editing and then creating shared_fx and identical_aa column to be 0
         this_df = dfs[i]
         this_df["shared_fx"] = 0.0
         this_df["identical_aa"] = 0.0
         
-        for j in range(len(column_indexes[i])):
+        #establish your various counters:
+        #C will be the resid_number for residues shared between all structures
+        #N will be the resid_number for residues that are not share between all structures
+        #idx is what you will use to iterate over the residue list
+        C=1
+        N=-1
+        idx=0
+        
+        for j in range(len(output[i])):
+
+            #if there is a gap in the alignment, this will move down the lists based on the alignment
+            #but will not affect the residues or residue numbers
+            if output[i][j]=='-':
+                continue
             
-            idx = column_indexes[i][j]
+            else:
+                # Create the mask that will select all rows for this residue
+                this_resid = residues[i][idx]
+                this_resid_mask = this_df["_resid_key"] == this_resid
+                idx=idx+1
+                
+                # Record identical amino acids. 
+                this_df.loc[this_resid_mask,"identical_aa"] = identical_aa[j]  
 
-            # Record how many structures share the column
-            this_resid = residues[i][j]
-            this_resid_mask = this_df["_resid_key"] == this_resid
-
-            # Change residue numbering
-            this_df.loc[this_resid_mask,"resid_num"] = f"{idx + 1:d}"
-
-            # Record shared fraction
-            this_df.loc[this_resid_mask,"shared_fx"] = shared_column[idx]
-
-            # Record identical amino acids. 
-            this_df.loc[this_resid_mask,"identical_aa"] = identical_aa[idx]        
-
-            # Mutate ser to cys from sites with mix of ser and cys across the
-            # structures
-            if j in ser_to_cys:
-                if i in ser_to_cys[j]:
-                    if verbose:
-                        logger.log(f"Introducing S{j}C into structure {i}")
-                        
-                    this_df.loc[this_resid_mask,"resid"] = "CYS"
-                    atom_mask = np.logical_and(this_resid_mask,
-                                               this_df["atom"] == "OG")
-                    this_df.loc[atom_mask,"atom"] = "SG"
-
+                #change identical_aa to a list
+                list_identical_aa=list(identical_aa)
+                
+                #if a residue is shared between all structures, number it then add 1
+                if list_identical_aa[j]==1:
+                    this_df.loc[this_resid_mask,"resid_num"] = C
+                    C=C+1
+                
+                #if a residue is not shared between all structures, number it negatively then add
+                elif list_identical_aa[j]==0:
+                    this_df.loc[this_resid_mask,"resid_num"]= N
+                    N=N-1
                     
-    # Remove "_resid_key" convenience column
+                    
+                # Record shared fraction
+                this_df.loc[this_resid_mask,"shared_fx"] = shared_column[j]
+
+
+                # Mutate ser to cys from sites with mix of ser and cys across the
+                # structures
+                if j in ser_to_cys:
+                    if i in ser_to_cys[j]:
+                        if verbose:
+                            logger.log(f"Introducing S{j}C into structure {i}")
+
+                        this_df.loc[this_resid_mask,"resid"] = "CYS"
+                        atom_mask = np.logical_and(this_resid_mask,
+                                                   this_df["atom"] == "OG")
+                        this_df.loc[atom_mask,"atom"] = "SG"
+
+
+    #Remove "_resid_key" convenience column
     for i in range(len(dfs)):
         dfs[i] = dfs[i].drop(columns="_resid_key")
-        
+
     return dfs
+
+
+

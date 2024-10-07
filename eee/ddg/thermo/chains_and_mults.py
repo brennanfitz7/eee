@@ -7,7 +7,22 @@ import json
 
 from Bio import Align
 
-def chains_and_multipliers(pdb_file):
+def chains_and_multipliers(pdb_file, save_dict:bool):
+    """
+    Find unique chains and multipliers within a single pdb file
+        
+    Parameters
+        ----------
+        pdb_file : str
+            pdb for which you are finding chains and multipliers    
+        save_dict : bool
+            bool about whether to save the mult_dict as json file or not
+
+        Returns
+        -------
+        mult_dict : dictionary
+            a dictionary where the keys are unique chains within the pdb_file and the values are the number of copies of this chain in the pdb
+        """ 
     #establish pdb_id
     pdb_id=pdb_file.split('.')[0]
     
@@ -57,9 +72,10 @@ def chains_and_multipliers(pdb_file):
                     redundant.append(chain_df.Chain_ID[n])
                     similar_seqs.append(chain_df.Chain_ID[n])
             mult_dict[main_chain]=len(similar_seqs)
-    
-    #now write out the dict to the json
-    with open(pdb_id+"_ddg_mult.json", "w") as outfile:
-        json.dump(mult_dict, outfile)
+
+    if save_dict==True:        
+        #now write out the dict to the json
+        with open(pdb_id+"_ddg_mult.json", "w") as outfile:
+            json.dump(mult_dict, outfile)
     
     return mult_dict

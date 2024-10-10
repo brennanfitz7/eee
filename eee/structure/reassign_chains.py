@@ -162,6 +162,7 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
     alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     idx=0
 
+    dfs=[]
     #for any chain that is in all pdbs, rename chain so they are consistent with each other
     #start from A and move forward from there
     for c in ubiquitous_chains:
@@ -169,8 +170,10 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
         for f in ubiquitous_chains.get(c):
             if f[1]==chain:
                 continue
+                dfs.append(f[0])
             else:
-                chain_reindex(df=f[0],prev_chain=f[1],new_chain=chain)
+                df=chain_reindex(df=f[0],prev_chain=f[1],new_chain=chain)
+                dfs.append(df)
 
         idx=idx+1
         
@@ -180,3 +183,5 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
     f = open(ensemble+'_chains.txt', 'w')
     f.write(chains)
     f.close()
+
+    return dfs

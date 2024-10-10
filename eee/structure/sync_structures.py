@@ -128,7 +128,7 @@ def sync_structures(structure_files,
         
     #Align chains and make sure the same chains share the same chain IDs between structures
     logger.log("Changing chains to ensure chain IDs are the same between structures")
-    dfs = reassign_chains(dfs,ens=out_dir)
+    dfs = reassign_chains(dfs,ensemble=out_dir)
             
     # Figure out which residues are shared between what structures
     logger.log("Aligning sequences using muscle.")

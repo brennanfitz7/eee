@@ -169,7 +169,6 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
         chain=alphabet[idx]
         for f in ubiquitous_chains.get(c):
             if f[1]==chain:
-                continue
                 dfs.append(f[0])
             else:
                 df=chain_reindex(df=f[0],prev_chain=f[1],new_chain=chain)

@@ -82,7 +82,7 @@ def write_pdb(df,
             if len(atom) < 5:
                 atom = f" {atom:<4s}"
 
-            f.write(f" {atom}{row['resid']:3s} {row['chain']}{row['resid_num']:>4s}")
+            f.write(f" {atom}{row['resid']:3s} {row['chain']}{str(row['resid_num']):>4s}")
             f.write(f"    {row['x']:8.3f}{row['y']:8.3f}{row['z']:8.3f}")
 
             if bfactor_column is None:

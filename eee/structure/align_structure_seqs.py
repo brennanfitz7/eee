@@ -213,7 +213,7 @@ def align_structure_seqs(dfs,
                 
                 #if a residue is shared between all structures, number it then add 1
                 if list_identical_aa[j]==1:
-                    this_df.loc[this_resid_mask,"resid_num"] = str(C)
+                    this_df.loc[this_resid_mask,"resid_num"] = C
                     C=C+1
                 
                 #if a residue is not shared between all structures, number it negatively then add

@@ -5,3 +5,4 @@ from .sync_structures import sync_structures
 from .reassign_chains import get_chain_df
 from .reassign_chains import get_unique_chains
 from .reassign_chains import reassign_chains
+from .chains_and_mults import chains_and_multipliers

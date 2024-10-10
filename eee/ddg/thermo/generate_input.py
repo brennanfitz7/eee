@@ -1,5 +1,5 @@
 from eee.structure.sync_structures import sync_structures
-from eee.ddg.thermo.chains_and_mults import chains_and_multipliers
+from eee.structure.chains_and_mults import chains_and_multipliers
 
 import glob
 

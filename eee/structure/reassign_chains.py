@@ -8,7 +8,7 @@ from eee.io.read_structure import read_structure
 from eee.io.write_pdb import write_pdb
 from eee.core.data import AA_3TO1
 from eee._private.logger import log
-from eee.ddg.thermo.chains_and_mults import chains_and_multipliers
+from eee.structure.chains_and_mults import chains_and_multipliers
 
 def chain_reindex(df,prev_chain,new_chain,pdb=None,write_pdb=False):
     

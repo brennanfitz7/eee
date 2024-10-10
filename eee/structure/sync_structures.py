@@ -10,6 +10,7 @@ from eee.structure.clean_structure import clean_structure
 from eee.structure.align_structure_seqs import align_structure_seqs
 from eee.structure.align_structures import align_structures
 from eee.io.incorporate_models import incorporate_models
+from eee.structure.reassign_chains import reassign_chains
 
 import os
 import glob
@@ -124,6 +125,10 @@ def sync_structures(structure_files,
         dfs[i] = clean_structure(dfs[i],
                                 verbose=verbose,
                                 keep_temporary=keep_temporary) 
+        
+    #Align chains and make sure the same chains share the same chain IDs between structures
+    logger.log("Changing chains to ensure chain IDs are the same between structures")
+    reassign_chains(dfs,ens=out_dir)
             
     # Figure out which residues are shared between what structures
     logger.log("Aligning sequences using muscle.")

@@ -131,11 +131,11 @@ def sync_structures(structure_files,
     dfs = reassign_chains(dfs,ensemble=out_dir)
             
     # Figure out which residues are shared between what structures
-    logger.log("Aligning sequences using muscle.")
+    logger.log("Aligning sequences using muscle or whatever.")
     dfs = align_structure_seqs(dfs,verbose=verbose,keep_temporary=keep_temporary)
 
     # Align structures in 3D
-    logger.log("Aligning structures using lovoalign.")
+    logger.log("Aligning structures using lovoalign or whatever.")
     dfs = align_structures(dfs,verbose=verbose,keep_temporary=keep_temporary)
 
     # Create a unique output name for each structure file

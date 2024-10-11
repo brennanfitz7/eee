@@ -13,4 +13,4 @@ def generate_input(list_of_pdbs:list, prot_name:str, all_models_necessary:bool):
     synced_pdbs=glob.glob(prot_name+'/*.pdb')
 
     for pdb in synced_pdbs:
-        chains_and_multipliers(pdb)
+        chains_and_multipliers(pdb,save_dict=True)

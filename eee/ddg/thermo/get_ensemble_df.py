@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import glob
 
-def get_ensemble_df(folder:str,prot_name:str,need_name_dict:bool):
+def get_ensemble_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exists:bool):
 
     """
      Compiles ensemble results from ThermoMPNN. 
@@ -66,7 +66,10 @@ def get_ensemble_df(folder:str,prot_name:str,need_name_dict:bool):
         for idx,row in raw_df.iterrows():
             if raw_df.wtAA[idx]==raw_df.mutAA[idx]:
                 raw_df.drop([idx],inplace=True)
-        new_df=raw_df.drop(axis=1,labels=['Unnamed: 0','pos','wtAA','mutAA'])
+        if unnamed_col_exists==True:
+            new_df=raw_df.drop(axis=1,labels=['Unnamed: 0','pos','wtAA','mutAA'])
+        elif unnamed_col_exists==False:
+             new_df=raw_df.drop(axis=1,labels=['pos','wtAA','mutAA'])
         with open(folder+'/'+pdb_id+'_ddg_mult.json', 'r') as openfile:
                 mult_dict = json.load(openfile)
         chain=item[-5]

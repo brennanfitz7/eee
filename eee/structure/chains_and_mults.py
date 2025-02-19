@@ -24,7 +24,10 @@ def chains_and_multipliers(pdb_file, save_dict:bool):
             a dictionary where the keys are unique chains within the pdb_file and the values are the number of copies of this chain in the pdb
         """ 
     #establish pdb_id
-    pdb_id=pdb_file.split('.')[0]
+    #get rid of "clean" marker (this won't do anything to pdb files not marked as clean)
+    noclean=pdb_file.split('_clean')[0]
+    #now this removes the final "pdb" at the end
+    pdb_id=noclean[0:-4]
     
     #get dataframe from pdb, select for atoms, and drop duplicates
     raw_prot=read_structure(pdb_file)

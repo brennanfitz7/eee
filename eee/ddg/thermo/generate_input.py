@@ -5,6 +5,8 @@ import glob
 
 def generate_input(list_of_pdbs:list, prot_name:str, all_models_necessary:bool):
     
+    print('this is a test!!')
+
     prot_name_synced=prot_name+'_synced'
     sync_structures(list_of_pdbs, 
                     out_dir=prot_name_synced, 

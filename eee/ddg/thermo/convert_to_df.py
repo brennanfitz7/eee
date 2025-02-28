@@ -1,3 +1,6 @@
+import json
+import glob
+
 import numpy as np
 import pandas as pd
 
@@ -142,8 +145,7 @@ def align_thermo_output_seqs(dfs,
     return dfs
 
 
-import json
-import glob
+
 
 def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exists:bool):
     
@@ -307,7 +309,7 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
     #sort combined_df to get it all in order
     combined_df.sort_values(by=['site','mut'],inplace=True)
     
-    combined_df.to_csv(folder+'/'+prot_name+'thermo_ddgs.csv')
+    combined_df.to_csv(folder+'/'+prot_name+'_thermo_ddgs.csv',index=False)
 
     return combined_df
     

@@ -147,7 +147,7 @@ def align_thermo_output_seqs(dfs,
 
 
 
-def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exists:bool):
+def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exists:bool, use_ddg_mult:bool):
     
 
     """
@@ -232,14 +232,15 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
         for idx,row in aligned_df.iterrows():
             if aligned_df.position[idx] <= 0:
                 aligned_df.drop([idx],inplace=True) 
-                
-        #use ddg_mults to multiply ddg values
-        with open(folder+'/'+pdb_id+'_ddg_mult.json', 'r') as openfile:
-            mult_dict = json.load(openfile)
-        for idx,row in aligned_df.iterrows():
-            res_chain=aligned_df.chain[idx]
-            if aligned_df.chain[idx] in mult_dict.keys():
-                aligned_df.loc[idx, "ddG_pred"] = mult_dict[res_chain]*aligned_df['ddG_pred'][idx]
+        
+        if use_ddg_mult==True:
+            #use ddg_mults to multiply ddg values
+            with open(folder+'/'+pdb_id+'_ddg_mult.json', 'r') as openfile:
+                mult_dict = json.load(openfile)
+            for idx,row in aligned_df.iterrows():
+                res_chain=aligned_df.chain[idx]
+                if aligned_df.chain[idx] in mult_dict.keys():
+                    aligned_df.loc[idx, "ddG_pred"] = mult_dict[res_chain]*aligned_df['ddG_pred'][idx]
                 
         #create column with wildytpe, residue number, mutation
         mut_col=[]

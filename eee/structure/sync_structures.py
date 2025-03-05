@@ -152,10 +152,15 @@ def sync_structures(structure_files,
         f = f"{name_mapper[structure_files[i]]}_clean.pdb"
         f = os.path.join(out_dir,f)
         
-        write_pdb(dfs[i],
-                  f,
-                  bfactor_column="shared_fx",
-                  occ_column="identical_aa")
+        if align_seqs == True:
+            write_pdb(dfs[i],
+                    f,
+                    bfactor_column="shared_fx",
+                    occ_column="identical_aa")
+        if align_seqs == False:
+            write_pdb(dfs[i],
+                    f)
+
     
 
     return dfs

@@ -148,7 +148,7 @@ def align_thermo_output_seqs(dfs,
 
 
 def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exists:bool, use_ddg_mult:bool):
-    
+    #FIX DDG MULT BEFORE I USE IT AGAIN
 
     """
      Compiles ensemble results from ThermoMPNN. 
@@ -235,6 +235,7 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
         
         if use_ddg_mult==True:
             #use ddg_mults to multiply ddg values
+            #THIS CODE NEEDS TO BE INVESTIGATED AND FIXED BEFORE I USE IT AGAIN
             with open(folder+'/'+pdb_id+'_ddg_mult.json', 'r') as openfile:
                 mult_dict = json.load(openfile)
             for idx,row in aligned_df.iterrows():
@@ -303,7 +304,7 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
     
     site=[]
     for item in combined_df.mut:
-        site.append(item[1:-1])
+        site.append(float(item[1:-1]))
 
     combined_df.insert(loc=0, column='site', value=site)
     

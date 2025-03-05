@@ -51,6 +51,7 @@ def _create_unique_filenames(files):
 def sync_structures(structure_files,
                     out_dir,
                     all_models_necessary:bool,
+                    align_seqs: False,
                     overwrite=False,
                     verbose=False,
                     keep_temporary=False):
@@ -74,6 +75,8 @@ def sync_structures(structure_files,
     out_dir : str
         output directory for the cleaned up files in pdb format. This directory
         should either not exist or be empty. 
+    align_seqs : bool
+        align the sequences in all the structures. will add negative numbers to the residues, which can cause a problem with ThermoMPNN.
     overwrite : bool, default=False
         overwrite an existing output directory
     verbose : bool, default=False
@@ -131,8 +134,9 @@ def sync_structures(structure_files,
     dfs = reassign_chains(dfs,ensemble=out_dir)
             
     # Figure out which residues are shared between what structures
-    logger.log("Aligning sequences using muscle or whatever.")
-    dfs = align_structure_seqs(dfs,verbose=verbose,keep_temporary=keep_temporary)
+    if align_seqs == True:
+        logger.log("Aligning sequences using muscle or whatever.")
+        dfs = align_structure_seqs(dfs,verbose=verbose,keep_temporary=keep_temporary)
 
     # Align structures in 3D
     logger.log("Aligning structures using lovoalign or whatever.")

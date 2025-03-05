@@ -6,7 +6,7 @@ import os
 def write_fasta(df,fasta_file:str,overwrite=False):
 
     """
-    Write a pdb file given a pandas dataframe.
+    Write a fasta file given a pandas dataframe.
 
     Parameters
     ----------

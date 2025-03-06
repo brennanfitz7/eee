@@ -337,7 +337,7 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
 
             ddG_series = df.loc[df.mut==mut_site,'ddG_pred']
             
-            mut_ddG=float(ddG_series)
+            mut_ddG=ddG_series.iloc[0]
 
             combined_df.loc[idx,name] = mut_ddG
             

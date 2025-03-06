@@ -1,5 +1,7 @@
 import json
 import glob
+import statistics
+from difflib import SequenceMatcher
 
 import numpy as np
 import pandas as pd
@@ -7,20 +9,61 @@ import pandas as pd
 from eee.structure.align_structure_seqs import _run_muscle
 
 
-def align_thermo_output_seqs(dfs, 
+def align_thermo_output_seqs(original_dfs, 
                              muscle_binary="muscle",
                              verbose=False,
                              keep_temporary=False):
     #RUN THIS AFTER SEQ FILES ARE CONCATENATED SO DDG CSVS HAVE THE SAME FILE
     #RUN BEFORE REMOVAL OF SELF TO SELF MUTATIONS
     
-    seq_list=[]
 
-    for df in dfs:
+    pdb_list=[]
+    seq_list=[]
+    
+    for df in original_dfs:
+        #add to pdb_list
+        pdb_list.append(df.pdb[1].split('_')[0])
         #create a mask to only have one residue
         mask = np.array(df.mutation=='A')
         this_df = df.loc[mask,:]  
         this_df
+        seq_list.append(''.join(this_df["wildtype"]))
+
+    #make sequence df
+    seq_dict = {'pdb': pdb_list, 'seq': seq_list} 
+    seq_df = pd.DataFrame(seq_dict)  
+    
+    dfs=[]
+    
+    for i in range(0,len(seq_df)):
+        comps=[]
+        #now we do a pairwise alignment of this seq with every other seq
+        for n in range(0,len(seq_df)):
+            if i==n:
+                continue
+            else:
+                comp = SequenceMatcher(None, seq_df.seq[i], seq_df.seq[n]).ratio()
+                comps.append(comp)
+            
+        #get the mean comparison
+        mean_comp=statistics.mean(comps)
+        
+        if mean_comp <= 0.90:
+            print(seq_df.pdb[i]+' had a mean comparison score of '+str(mean_comp)+'. It is being discarded.')
+            
+        if mean_comp > 0.90:
+            df=original_dfs[i]
+            if seq_df.pdb[i] in df.pdb[1]:
+                dfs.append(df)
+            else:
+                print('The dataframes and sequences are not in the same order')
+                
+    seq_list=[]
+    
+    for df in dfs:
+        #create a mask to only have one residue
+        mask = np.array(df.mutation=='A')
+        this_df = df.loc[mask,:]  
         seq_list.append(this_df["wildtype"])
         
     output = _run_muscle(seq_list=seq_list,

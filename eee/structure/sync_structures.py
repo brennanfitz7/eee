@@ -51,7 +51,7 @@ def _create_unique_filenames(files):
 def sync_structures(structure_files,
                     out_dir,
                     all_models_necessary:bool,
-                    align_seqs: False,
+                    align_seqs= False,
                     overwrite=False,
                     verbose=False,
                     keep_temporary=False):

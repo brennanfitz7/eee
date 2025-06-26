@@ -87,6 +87,9 @@ def sync_structures(structure_files,
         if true, all models should be used in syncing
     """
     
+    #setting no_dfs as false to track where they were lost if I lost them
+    no_dfs = False
+
     # See if the output directory exists
     exists = False
     if os.path.exists(out_dir):
@@ -129,18 +132,34 @@ def sync_structures(structure_files,
                                 verbose=verbose,
                                 keep_temporary=keep_temporary) 
         
+    if len(dfs)==0:
+        no_dfs=True
+        logger.log("After cleaning up structures with FoldX, there are no protein dataframes.")
+        
     #Align chains and make sure the same chains share the same chain IDs between structures
-    logger.log("Changing chains to ensure chain IDs are the same between structures")
+    logger.log("Changing chains to ensure chain IDs are the same between structures.")
     dfs = reassign_chains(dfs,ensemble=out_dir)
-            
+
+    if len(dfs)==0 and no_dfs==False:
+        no_dfs=True
+        logger.log("After chain reassignment, there are no protein dataframes")
+
     # Figure out which residues are shared between what structures
     if align_seqs == True:
         logger.log("Aligning sequences using muscle or whatever.")
         dfs = align_structure_seqs(dfs,verbose=verbose,keep_temporary=keep_temporary)
 
+        if len(dfs)==0 and no_dfs==False:
+            no_dfs=True
+            logger.log("After aligning seqs, there are no protein dataframes.")
+
     # Align structures in 3D
-    logger.log("Aligning structures using lovoalign or whatever.")
+    logger.log("Aligning structures using lovoalign.")
     dfs = align_structures(dfs,verbose=verbose,keep_temporary=keep_temporary)
+
+    if len(dfs)==0 and no_dfs==False:
+        no_dfs=True
+        logger.log("After aligning structures with lovoalign, there are no protein dataframes.")
 
     # Create a unique output name for each structure file
     name_mapper = _create_unique_filenames(structure_files)

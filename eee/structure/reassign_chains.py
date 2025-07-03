@@ -43,8 +43,8 @@ def get_chain_df(df):
         chain=str(item)
         temp_list=[]
         for index,row in redundant_prot_seq.iterrows():
-            if chain==row[0]:
-                temp_list.append((AA_3TO1.get(row[1])))
+            if chain==row.iloc[0]:
+                temp_list.append((AA_3TO1.get(row.iloc[1])))
 
         test_string=''.join(temp_list)
         chain_df.loc[len(chain_df.index)]=[chain,test_string]
@@ -69,18 +69,16 @@ def get_unique_chains(df):
     redundant=[]
     unique_chains=[]
     for i in range(0,len(chain_df)):
+
         #this line is to make sure we don't run chains that have already been grouped with other chains
         if chain_df.Chain_ID[i] not in redundant:
             main_chain=chain_df.Chain_ID[i]
             #now we do a pairwise alignment of this chain with every other chain (that hasn't been grouped already)
             for n in range(i+1,len(chain_df)):
-                scores=[]
-                for alignment in aligner.align(chain_df.seq[i],chain_df.seq[n]):
-                    scores.append(alignment.score)
-                mean_score=np.mean(scores)
-                match=mean_score/min(len(chain_df.seq[i]),len(chain_df.seq[n]))
+                score=aligner.score(chain_df.seq[i],chain_df.seq[n])
+                match=score/min(len(chain_df.seq[i]),len(chain_df.seq[n]))
                 #if the match is sufficient we append the chain to the similar seqs list
-                if match >= 0.99:
+                if match >= 0.95:
                     redundant.append(chain_df.Chain_ID[n])
             unique_chains.append(main_chain)
 
@@ -105,20 +103,20 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
     #find unique chains and drop any chains that are redundant
     unique_chains1=get_unique_chains(df1)
     for idx, row in chain1.iterrows():
-        if row[0] not in unique_chains1:
+        if row.iloc[0] not in unique_chains1:
             chain1 = chain1.drop(index=idx)
             
-            
+    
     #make a dictionary for chains that track the files that have this chain 
     #the dictionary has the chain ID from the first file as its key and a list of tuples as its value
     #the tuples are the df then the chain that is aligned with all others in the list
     dfs_by_chain={}
     for idx, row in chain1.iterrows():
-        dfs_by_chain[row[0]]=[]
-        chain_ID1=row[0]
+        dfs_by_chain[row.iloc[0]]=[]
+        chain_ID1=row.iloc[0]
         dfs_by_chain[chain_ID1].append((df1,chain_ID1))
         
-        
+    
     #iterating over all other files
     for j in range(1,len(dfs)):
         
@@ -127,30 +125,32 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
         
         #get the df sorted by chains for this first df
         chain2=get_chain_df(df2)
+
         
         #find unique chains and drop any chains that are redundant
         unique_chains2=get_unique_chains(df2)
+        
         for idx, row in chain2.iterrows():
-            if row[0] not in unique_chains2:
+            if row.iloc[0] not in unique_chains2:
                 chain2 = chain2.drop(index=idx)
-
+                
+        
         #identify any chains that are 95% similar to each other
         for idx1,row1 in chain1.iterrows():
-            chain_ID1=row1[0]
+            chain_ID1=row1.iloc[0]
 
             for idx2,row2 in chain2.iterrows():
-                chain_ID2=row2[0]
+                chain_ID2=row2.iloc[0]
                 scores=[]
 
-                for alignment in aligner.align(chain1.seq[idx1],chain2.seq[idx2]):
-                    scores.append(alignment.score)
-                mean_score=np.mean(scores)
-                match=mean_score/min(len(chain1.seq[idx1]),len(chain2.seq[idx2]))
+                score=aligner.score(chain1.seq[idx1],chain2.seq[idx2])
+                match=score/min(len(chain1.seq[idx1]),len(chain2.seq[idx2]))
                 #if the match is sufficient we append a tuple with the name of the file and the chain of the file
                 #into the dfs_by_chain dict
                 if match >= 0.95:
                     dfs_by_chain[chain_ID1].append((df2,chain_ID2))
                     
+
     #creating a dictionary that only includes chains that are present in all files in the ensemble
     ubiquitous_chains={}
     for item in dfs_by_chain:

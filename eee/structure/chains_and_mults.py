@@ -40,8 +40,8 @@ def chains_and_multipliers(pdb_file, save_dict:bool):
         chain=str(item)
         temp_list=[]
         for index,row in redundant_prot_seq.iterrows():
-            if chain==row[0]:
-                temp_list.append(AA_3TO1.get(row[1]))
+            if chain==row.iloc[0]:
+                temp_list.append(AA_3TO1.get(row.iloc[1]))
 
         test_string=''.join(temp_list)
         chain_df.loc[len(chain_df.index)]=[chain,test_string]

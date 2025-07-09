@@ -66,12 +66,10 @@ def chains_and_multipliers(pdb_file, save_dict:bool):
             #now we do a pairwise alignment of this chain with every other chain (that hasn't been grouped already)
             for n in range(i+1,len(chain_df)):
                 scores=[]
-                for alignment in aligner.align(chain_df.seq[i],chain_df.seq[n]):
-                    scores.append(alignment.score)
-                mean_score=np.mean(scores)
-                match=mean_score/min(len(chain_df.seq[i]),len(chain_df.seq[n]))
+                score=aligner.score(chain_df.seq[i],chain_df.seq[n])
+                match=score/min(len(chain_df.seq[i]),len(chain_df.seq[n]))
                 #if the match is sufficient we append the chain to the similar seqs list
-                if match >= 0.99:
+                if match >= 0.95:
                     redundant.append(chain_df.Chain_ID[n])
                     similar_seqs.append(chain_df.Chain_ID[n])
             mult_dict[main_chain]=len(similar_seqs)

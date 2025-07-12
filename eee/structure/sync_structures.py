@@ -132,14 +132,14 @@ def sync_structures(structure_files,
                                 keep_temporary=keep_temporary) 
         
     if len(dfs)!=len(structure_files):
-        logger.log("After cleaning up structures with FoldX, there are "+len(dfs)+" protein dataframes.")
+        logger.log("After cleaning up structures with FoldX, there are "+str(len(dfs))+" protein dataframes.")
         
     #Align chains and make sure the same chains share the same chain IDs between structures
     logger.log("Changing chains to ensure chain IDs are the same between structures.")
     dfs = reassign_chains(dfs,ensemble=out_dir)
 
     if len(dfs)!=len(structure_files):
-        logger.log("After chain reassignment, there are "+len(dfs)+" protein dataframes")
+        logger.log("After chain reassignment, there are "+str(len(dfs))+" protein dataframes")
 
     # Figure out which residues are shared between what structures
     if align_seqs == True:
@@ -147,14 +147,14 @@ def sync_structures(structure_files,
         dfs = align_structure_seqs(dfs,verbose=verbose,keep_temporary=keep_temporary)
 
         if len(dfs)!=len(structure_files):
-            logger.log("After aligning seqs, there are "+len(dfs)+" protein dataframes.")
+            logger.log("After aligning seqs, there are "+str(len(dfs))+" protein dataframes.")
 
     # Align structures in 3D
     logger.log("Aligning structures using lovoalign.")
     dfs = align_structures(dfs,verbose=verbose,keep_temporary=keep_temporary)
 
     if len(dfs)!=len(structure_files):
-        logger.log("After aligning structures with lovoalign, there are "+len(dfs)+" protein dataframes.")
+        logger.log("After aligning structures with lovoalign, there are "+str(len(dfs))+" protein dataframes.")
 
     # Create a unique output name for each structure file
     name_mapper = _create_unique_filenames(structure_files)

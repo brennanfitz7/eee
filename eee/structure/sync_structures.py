@@ -87,7 +87,7 @@ def sync_structures(structure_files,
         if true, all models should be used in syncing
     """
     
-    logger.log('Starting with '+len(structure_files)+' structure files.')
+    logger.log('Starting with '+str(len(structure_files))+' structure files.')
 
     # See if the output directory exists
     exists = False

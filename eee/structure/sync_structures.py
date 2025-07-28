@@ -160,16 +160,20 @@ def sync_structures(structure_files,
     if len(dfs)!=len(structure_files):
         logger.log("After aligning structures with lovoalign, there are "+str(len(dfs))+" protein dataframes.")
 
-    # Create a unique output name for each structure file
-    name_mapper = _create_unique_filenames(structure_files)
+
+    #create a list of files then create a unique output name for each structure file
+    filenames=[]
+    for i in range(len(dfs)):
+        pdb_name=dfs[i].name[0]
+        filenames.append(pdb_name)
+
+    name_mapper = _create_unique_filenames(filenames)   
 
     # Write out file names. 
     logger.log(f"Writing output to '{out_dir}'.")
     for i in range(len(dfs)):
-        
-        filename=dfs[i].name[0]
 
-        f = f"{name_mapper[filename]}_clean.pdb"
+        f = f"{name_mapper[dfs[i]]}_clean.pdb"
         f = os.path.join(out_dir,f)
         
         if align_seqs == True:

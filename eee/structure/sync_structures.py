@@ -111,18 +111,22 @@ def sync_structures(structure_files,
     except FileExistsError:
         pass
 
-    # Load the specified structure files
+    # Load the specified structure files, incorporate models if needed, and add name of file into pdb
     dfs = []
     if all_models_necessary==True:
         for f in structure_files:
             read_df=read_structure(f,remove_multiple_models=False)
+            read_df['name']=f
             dfs.append(incorporate_models(read_df))
     if all_models_necessary==False:
         for f in structure_files:
-            dfs.append(read_structure(f))
+            read_df=read_structure(f)
+            read_df['name']=f
+            dfs.append(read_df)
     
     # Clean up structures --> build missing atoms or delete residues with
     # missing backbone atoms. 
+    #this shouldn't have issues with name column
     logger.log("Cleaning up structures with FoldX.")
     
 
@@ -143,7 +147,7 @@ def sync_structures(structure_files,
 
     # Figure out which residues are shared between what structures
     if align_seqs == True:
-        logger.log("Aligning sequences using muscle or whatever.")
+        logger.log("Aligning sequences using muscle.")
         dfs = align_structure_seqs(dfs,verbose=verbose,keep_temporary=keep_temporary)
 
         if len(dfs)!=len(structure_files):
@@ -161,9 +165,11 @@ def sync_structures(structure_files,
 
     # Write out file names. 
     logger.log(f"Writing output to '{out_dir}'.")
-    for i in range(len(structure_files)):
+    for i in range(len(dfs)):
+        
+        filename=dfs[i].name[0]
 
-        f = f"{name_mapper[structure_files[i]]}_clean.pdb"
+        f = f"{name_mapper[filename]}_clean.pdb"
         f = os.path.join(out_dir,f)
         
         if align_seqs == True:
@@ -175,7 +181,6 @@ def sync_structures(structure_files,
             write_pdb(dfs[i],
                     f)
 
-    
 
     return dfs
     

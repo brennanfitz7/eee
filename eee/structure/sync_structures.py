@@ -116,12 +116,12 @@ def sync_structures(structure_files,
     if all_models_necessary==True:
         for f in structure_files:
             read_df=read_structure(f,remove_multiple_models=False)
-            read_df['name']=f
+            read_df['name']=str(f)
             dfs.append(incorporate_models(read_df))
     if all_models_necessary==False:
         for f in structure_files:
             read_df=read_structure(f)
-            read_df['name']=f
+            read_df['name']=str(f)
             dfs.append(read_df)
     
     # Clean up structures --> build missing atoms or delete residues with

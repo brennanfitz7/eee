@@ -164,7 +164,8 @@ def sync_structures(structure_files,
     #create a list of files then create a unique output name for each structure file
     filenames=[]
     for i in range(len(dfs)):
-        pdb_name=dfs[i].name[0]
+        df=dfs[i]
+        pdb_name=df.name[0]
         filenames.append(pdb_name)
 
     name_mapper = _create_unique_filenames(filenames)   

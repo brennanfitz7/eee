@@ -173,7 +173,7 @@ def sync_structures(structure_files,
     logger.log(f"Writing output to '{out_dir}'.")
     for i in range(len(dfs)):
 
-        f = f"{name_mapper[dfs[i]]}_clean.pdb"
+        f = f"{name_mapper[filenames[i]]}_clean.pdb"
         f = os.path.join(out_dir,f)
         
         if align_seqs == True:

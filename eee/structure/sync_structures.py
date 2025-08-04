@@ -113,16 +113,23 @@ def sync_structures(structure_files,
 
     # Load the specified structure files, incorporate models if needed, and add name of file into pdb
     dfs = []
+
     if all_models_necessary==True:
         for f in structure_files:
-            read_df=read_structure(f,remove_multiple_models=False)
-            read_df['name']=str(f)
-            dfs.append(incorporate_models(read_df))
-    if all_models_necessary==False:
-        for f in structure_files:
-            read_df=read_structure(f)
-            read_df['name']=str(f)
-            dfs.append(read_df)
+            try:
+                read_df=read_structure(f,remove_multiple_models=False)
+                read_df['name']=str(f)
+                dfs.append(incorporate_models(read_df))
+            except:
+                logger.log('PDB '+str(f)+' failed when reading structure and incorporating models.')
+        if all_models_necessary==False:
+            for f in structure_files:
+                try:
+                    read_df=read_structure(f)
+                    read_df['name']=str(f)
+                    dfs.append(read_df)
+                except:
+                    logger.log('PDB '+str(f)+' failed when reading structure.')
     
     # Clean up structures --> build missing atoms or delete residues with
     # missing backbone atoms. 

@@ -133,7 +133,8 @@ def sync_structures(structure_files,
     for i in range(len(dfs)):
         dfs[i] = clean_structure(dfs[i],
                                 verbose=verbose,
-                                keep_temporary=keep_temporary) 
+                                keep_temporary=keep_temporary,
+                                name_in_df=True) 
         
     if len(dfs)!=len(structure_files):
         logger.log("After cleaning up structures with FoldX, there are "+str(len(dfs))+" protein dataframes.")

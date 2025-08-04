@@ -16,7 +16,8 @@ def clean_structure(df,
                     foldx_binary="foldx",
                     verbose=False,
                     keep_temporary=False,
-                    remove_multiple_models=True):
+                    remove_multiple_models=True,
+                   name_in_df=True):
     """
     Run a structure through foldx to build missing atoms in sidechains. This 
     will delete residues with incomplete backbones.
@@ -33,6 +34,8 @@ def clean_structure(df,
         do not delete temporary files
     remove_multiple_models : bool
         bool that determines whether multiple models are kept in the pdb file after read_structure
+    name_in_file : bool, default=True
+        the name of the pdb is in the df under the column "name"
 
     Returns
     -------
@@ -42,7 +45,12 @@ def clean_structure(df,
 
     tmp_dir = create_new_dir()    
     write_pdb(df,os.path.join(tmp_dir,"input.pdb"))
-
+    
+    #pull out the name from the file to be put back in later and drop the column
+    if name_in_df==True:
+        name=df.name[0]
+        df=df.drop('name', axis=1)
+        
     cmd = [foldx_binary,
             "-c","PDBFile",
             "--fixSideChains","1",
@@ -61,6 +69,10 @@ def clean_structure(df,
     hetatm_df = df.loc[df["class"] == "HETATM",:]
     new_df = pd.concat((new_df,hetatm_df))
     new_df.index = np.arange(len(new_df.index),dtype=int)
+    
+    #add the name column back to the df
+    if name_in_df==True:
+        new_df['name']=name
     
     if not keep_temporary:
         rmtree(tmp_dir)

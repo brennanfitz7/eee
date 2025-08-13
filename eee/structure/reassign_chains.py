@@ -1,14 +1,8 @@
-import json
-import glob
+
 from Bio import Align
 import pandas as pd
-import numpy as np
 
-from eee.io.read_structure import read_structure
-from eee.io.write_pdb import write_pdb
 from eee.core.data import AA_3TO1
-from eee._private.logger import log
-from eee.structure.chains_and_mults import chains_and_multipliers
 
 def chain_reindex(df,prev_chain,new_chain,pdb=None,write_pdb=False):
     
@@ -86,6 +80,7 @@ def get_unique_chains(df):
     return unique_chains
 
 def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
+
     
     #setting up pairwise aligner
     aligner = Align.PairwiseAligner()
@@ -151,11 +146,25 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
                     dfs_by_chain[chain_ID1].append((df2,chain_ID2))
                     
 
+    #creating truly ubiquitous chain argument and setting to false
+    truly_ubiquitous_chain=False
     #creating a dictionary that only includes chains that are present in all files in the ensemble
     ubiquitous_chains={}
+    number_dfs_by_chain=[]
     for item in dfs_by_chain:
+        number_dfs_by_chain.append(len(dfs_by_chain.get(item)))
         if len(dfs_by_chain.get(item)) == len(dfs):
             ubiquitous_chains[item]=dfs_by_chain.get(item)
+            truly_ubiquitous_chain=True
+                
+            
+    #if there is no chain that is in every structure, I will find the chain(s) present in the most structures and keep those
+    if truly_ubiquitous_chain==False:
+        most_structs=max(number_dfs_by_chain)
+        for item in dfs_by_chain:
+            if len(dfs_by_chain.get(item)) == most_structs:
+                ubiquitous_chains[item]==dfs_by_chain.get(item)
+                
 
 
     #create alphabet string and set idx for that string to 0

@@ -167,7 +167,7 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
                 ubiquitous_chains[item]=dfs_by_chain.get(item)
 
         if len(ubiquitous_chains) >= 2:
-            logger.log('There are more than 2 chains in every structure we are looking at.')
+            logger.log('There is no truly ubiquitous chain, and we are looking at more than 2 chains.')
                 
 
 

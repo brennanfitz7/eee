@@ -3,6 +3,7 @@ from Bio import Align
 import pandas as pd
 
 from eee.core.data import AA_3TO1
+from eee._private import logger
 
 def chain_reindex(df,prev_chain,new_chain,pdb=None,write_pdb=False):
     
@@ -164,6 +165,9 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
         for item in dfs_by_chain:
             if len(dfs_by_chain.get(item)) == most_structs:
                 ubiquitous_chains[item]=dfs_by_chain.get(item)
+
+        if len(ubiquitous_chains) >= 2:
+            logger.log('There are more than 2 chains in every structure we are looking at.')
                 
 
 

@@ -148,7 +148,6 @@ def sync_structures(structure_files,
 
     for i in range(len(dfs)):
         name=dfs[i].name[0]
-        logger.log('after cleaning up structures with FoldX, structure name:'+name)  
 
     #Align chains and make sure the same chains share the same chain IDs between structures
     logger.log("Changing chains to ensure chain IDs are the same between structures.")

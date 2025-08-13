@@ -163,7 +163,7 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
         most_structs=max(number_dfs_by_chain)
         for item in dfs_by_chain:
             if len(dfs_by_chain.get(item)) == most_structs:
-                ubiquitous_chains[item]==dfs_by_chain.get(item)
+                ubiquitous_chains[item]=dfs_by_chain.get(item)
                 
 
 

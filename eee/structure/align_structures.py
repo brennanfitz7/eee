@@ -1,6 +1,7 @@
 
 from eee.io.write_pdb import write_pdb
 from eee.io.read_structure import read_structure
+from eee._private import logger
 
 from eee._private.interface import create_new_dir
 from eee._private.interface import launch
@@ -50,22 +51,25 @@ def align_structures(dfs,
 
         files.append(f"tmp-align_{i}.pdb")
         write_pdb(no_het_df,os.path.join(tmp_dir,files[-1]))
-        
+         
     # Go through all but first file
     for i, f in enumerate(files[1:]):
         
-        # Align file to first file using lovoalign
-        out_file = f"tmp-out_{i+1}.pdb"
-        cmd = [lovoalign_binary,"-p1",f,"-p2",files[0],"-o",out_file]
-        launch(cmd=cmd,run_directory=tmp_dir)
-                
-        # Move coordinates from aligned structure into dfs
-        new_df = read_structure(os.path.join(tmp_dir,out_file))
-        mask = dfs[i+1]["class"] == "ATOM"
+        try:
+            # Align file to first file using lovoalign
+            out_file = f"tmp-out_{i+1}.pdb"
+            cmd = [lovoalign_binary,"-p1",f,"-p2",files[0],"-o",out_file]
+            launch(cmd=cmd,run_directory=tmp_dir)
+                    
+            # Move coordinates from aligned structure into dfs
+            new_df = read_structure(os.path.join(tmp_dir,out_file))
+            mask = dfs[i+1]["class"] == "ATOM"
 
-        dfs[i+1].loc[mask,"x"] = np.array(new_df["x"])
-        dfs[i+1].loc[mask,"y"] = np.array(new_df["y"])
-        dfs[i+1].loc[mask,"z"] = np.array(new_df["z"])
+            dfs[i+1].loc[mask,"x"] = np.array(new_df["x"])
+            dfs[i+1].loc[mask,"y"] = np.array(new_df["y"])
+            dfs[i+1].loc[mask,"z"] = np.array(new_df["z"])
+        except:
+            logger.log('A file failed at lovoalign alignment.')
         
     # Remove all temporary files
     if not keep_temporary:

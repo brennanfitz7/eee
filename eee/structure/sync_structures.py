@@ -130,6 +130,17 @@ def sync_structures(structure_files,
                     dfs.append(read_df)
                 except:
                     logger.log('PDB '+str(f)+' failed when reading structure.')
+
+        #create a list of files then create a unique output name for each structure file
+    filenames=[]
+    for i in range(len(dfs)):
+        df=dfs[i]
+        pdb_name=df.name[0]
+        filenames.append(pdb_name)
+
+    logger.log('Saving filenames')
+    with open("post_adding_names.txt", "w") as output:
+        output.write(str(filenames))
     
     # Clean up structures --> build missing atoms or delete residues with
     # missing backbone atoms. 
@@ -146,12 +157,31 @@ def sync_structures(structure_files,
     if len(dfs)!=len(structure_files):
         logger.log("After cleaning up structures with FoldX, there are "+str(len(dfs))+" protein dataframes.")
 
+        #create a list of files then create a unique output name for each structure file
+    filenames=[]
     for i in range(len(dfs)):
-        name=dfs[i].name[0]
+        df=dfs[i]
+        pdb_name=df.name[0]
+        filenames.append(pdb_name)
+
+    logger.log('Saving filenames')
+    with open("post_cleaning.txt", "w") as output:
+        output.write(str(filenames))
 
     #Align chains and make sure the same chains share the same chain IDs between structures
     logger.log("Changing chains to ensure chain IDs are the same between structures.")
     dfs = reassign_chains(dfs,ensemble=out_dir)
+
+        #create a list of files then create a unique output name for each structure file
+    filenames=[]
+    for i in range(len(dfs)):
+        df=dfs[i]
+        pdb_name=df.name[0]
+        filenames.append(pdb_name)
+
+    logger.log('Saving filenames')
+    with open("post_reassign_chains.txt", "w") as output:
+        output.write(str(filenames))
 
     if len(dfs)!=len(structure_files):
         logger.log("After chain reassignment, there are "+str(len(dfs))+" protein dataframes")
@@ -173,13 +203,17 @@ def sync_structures(structure_files,
     if len(dfs)!=len(structure_files):
         logger.log("After aligning structures with lovoalign, there are "+str(len(dfs))+" protein dataframes.")
 
-
+        
     #create a list of files then create a unique output name for each structure file
     filenames=[]
     for i in range(len(dfs)):
         df=dfs[i]
         pdb_name=df.name[0]
         filenames.append(pdb_name)
+
+    logger.log('Saving filenames')
+    with open("post_lovoalign.txt", "w") as output:
+        output.write(str(filenames))
 
     name_mapper = _create_unique_filenames(filenames)   
 

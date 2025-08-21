@@ -8,6 +8,8 @@ def get_ensemble_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
     """
      Compiles ensemble results from ThermoMPNN. 
 
+     IMPORTANT : THIS IS FOR RESULTS FROM THERMO FILES RUN ON COLAB, NOT THROUGH TALAPAS
+
     Parameters
     ----------
         

@@ -121,7 +121,6 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
         
         #get the df sorted by chains for this first df
         chain2=get_chain_df(df2)
-
         
         #find unique chains and drop any chains that are redundant
         unique_chains2=get_unique_chains(df2)
@@ -166,32 +165,32 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
             if len(dfs_by_chain.get(item)) == most_structs:
                 ubiquitous_chains[item]=dfs_by_chain.get(item)
 
-        if len(ubiquitous_chains) >= 2:
-            logger.log('There is no truly ubiquitous chain, and we are looking at more than 2 chains.')
-                
-
 
     #create alphabet string and set idx for that string to 0
     alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     idx=0
 
     dfs=[]
+    chains_for_thermo=[]
     #for any chain that is in all pdbs, rename chain so they are consistent with each other
     #start from A and move forward from there
     for c in ubiquitous_chains:
         chain=alphabet[idx]
+        chains_for_thermo.append(chain)
         for f in ubiquitous_chains.get(c):
-            if f[1]==chain:
-                dfs.append(f[0])
-            else:
-                df=chain_reindex(df=f[0],prev_chain=f[1],new_chain=chain)
-                dfs.append(df)
-
+            if f[1] != chain:
+                #the chain reindexing will impact the dfs that are in ubiquitous chains
+                #so I don't need to add it to a new list yet
+                chain_reindex(df=f[0],prev_chain=f[1],new_chain=chain)
         idx=idx+1
         
+    #now add all the structures in the first chain of ubiquitous chains into a list
+    for i in ubiquitous_chains[list(ubiquitous_chains.keys())[0]]:
+        dfs.append(i[0])
+        
+        
     #create a text file with each chain on its own line
-    ubiq_list=list(ubiquitous_chains.keys())
-    chains='\n'.join(ubiq_list)
+    chains='\n'.join(chains_for_thermo)
     f = open(ensemble+'_chains.txt', 'w')
     f.write(chains)
     f.close()

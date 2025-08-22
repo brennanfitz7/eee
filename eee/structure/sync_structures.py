@@ -112,14 +112,14 @@ def sync_structures(structure_files,
         pass
 
     # Load the specified structure files, incorporate models if needed, and add name of file into pdb
-    dfs = []
+    raw_dfs = []
 
     if all_models_necessary==True:
         for f in structure_files:
             try:
                 read_df=read_structure(f,remove_multiple_models=False)
                 read_df['name']=str(f)
-                dfs.append(incorporate_models(read_df))
+                raw_dfs.append(incorporate_models(read_df))
             except:
                 logger.log('PDB '+str(f)+' failed when reading structure and incorporating models.')
         if all_models_necessary==False:
@@ -127,65 +127,41 @@ def sync_structures(structure_files,
                 try:
                     read_df=read_structure(f)
                     read_df['name']=str(f)
-                    dfs.append(read_df)
+                    raw_dfs.append(read_df)
                 except:
                     logger.log('PDB '+str(f)+' failed when reading structure.')
 
-        #create a list of files then create a unique output name for each structure file
-    filenames=[]
-    for i in range(len(dfs)):
-        df=dfs[i]
-        pdb_name=df.name[0]
-        filenames.append(pdb_name)
 
-    logger.log('Saving filenames')
-    with open("post_adding_names.txt", "w") as output:
-        output.write(str(filenames))
     
     # Clean up structures --> build missing atoms or delete residues with
     # missing backbone atoms. 
     #this shouldn't have issues with name column
     logger.log("Cleaning up structures with FoldX.")
     
+    dfs=[]
 
-    for i in range(len(dfs)):
-        dfs[i] = clean_structure(dfs[i],
+    for i in range(len(raw_dfs)):
+
+        try:
+            dfs.append(clean_structure(raw_dfs[i],
                                 verbose=verbose,
                                 keep_temporary=keep_temporary,
-                                name_in_df=True) 
-        
+                                name_in_df=True))
+        except:
+            failed_name=raw_dfs[i].name[0]
+            logger.log('PDB '+failed_name+' failed foldx cleaning.')
+
+            
     if len(dfs)!=len(structure_files):
         logger.log("After cleaning up structures with FoldX, there are "+str(len(dfs))+" protein dataframes.")
-
-        #create a list of files then create a unique output name for each structure file
-    filenames=[]
-    for i in range(len(dfs)):
-        df=dfs[i]
-        pdb_name=df.name[0]
-        filenames.append(pdb_name)
-
-    logger.log('Saving filenames')
-    with open("post_cleaning.txt", "w") as output:
-        output.write(str(filenames))
 
     #Align chains and make sure the same chains share the same chain IDs between structures
     logger.log("Changing chains to ensure chain IDs are the same between structures.")
     dfs = reassign_chains(dfs,ensemble=out_dir)
 
-        #create a list of files then create a unique output name for each structure file
-    filenames=[]
-    for i in range(len(dfs)):
-        df=dfs[i]
-        pdb_name=df.name[0]
-        filenames.append(pdb_name)
-
-    logger.log('Saving filenames')
-    with open("post_reassign_chains.txt", "w") as output:
-        output.write(str(filenames))
 
     if len(dfs)!=len(structure_files):
         logger.log("After chain reassignment, there are "+str(len(dfs))+" protein dataframes")
-
 
     # Figure out which residues are shared between what structures
     if align_seqs == True:
@@ -211,9 +187,6 @@ def sync_structures(structure_files,
         pdb_name=df.name[0]
         filenames.append(pdb_name)
 
-    logger.log('Saving filenames')
-    with open("post_lovoalign.txt", "w") as output:
-        output.write(str(filenames))
 
     name_mapper = _create_unique_filenames(filenames)   
 

@@ -1,4 +1,3 @@
-
 from Bio import Align
 import pandas as pd
 
@@ -131,9 +130,11 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
                 
         
         #identify any chains that are 95% similar to each other
+        #establish a count for these chains and raise an error if there is more than one chain in one structure matching with another
+        #Given df1 with chain A and df2, only one chain in df2 should match with df1's chain A
         for idx1,row1 in chain1.iterrows():
             chain_ID1=row1.iloc[0]
-
+            count=0
             for idx2,row2 in chain2.iterrows():
                 chain_ID2=row2.iloc[0]
                 scores=[]
@@ -142,8 +143,13 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
                 match=score/min(len(chain1.seq[idx1]),len(chain2.seq[idx2]))
                 #if the match is sufficient we append a tuple with the name of the file and the chain of the file
                 #into the dfs_by_chain dict
-                if match >= 0.95:
+                if match >= 0.95 and count<1:
                     dfs_by_chain[chain_ID1].append((df2,chain_ID2))
+                    count+=1
+                elif match >= 0.95 and count >= 1:
+                    df_name=df2.name[0]
+                    logger.log(df_name+' has chains that are not quite 95 percent similar to each other but 95 percent similar to other chains in the ensemble.')
+
                     
 
     #creating truly ubiquitous chain argument and setting to false
@@ -164,7 +170,6 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
         for item in dfs_by_chain:
             if len(dfs_by_chain.get(item)) == most_structs:
                 ubiquitous_chains[item]=dfs_by_chain.get(item)
-
 
     #create alphabet string and set idx for that string to 0
     alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'

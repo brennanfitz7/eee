@@ -284,7 +284,7 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
             for idx,row in aligned_df.iterrows():
                 res_chain=aligned_df.chain[idx]
                 if aligned_df.chain[idx] in mult_dict.keys():
-                    aligned_df.loc[idx, "ddG_pred"] = mult_dict[res_chain]*aligned_df['ddG_pred'][idx]
+                    aligned_df.loc[idx, "ddG_pred"] = mult_dict[res_chain]*aligned_df[idx,'ddG_pred']
                 
         #create column with wildytpe, residue number, mutation
         mut_col=[]
@@ -299,7 +299,6 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
             new_df=aligned_df.drop(axis=1,labels=['Unnamed: 0','Model','Dataset','pdb','shared_fx','identical_aa','index','mutation','wildtype','chain'])
         elif unnamed_col_exists==False:
              new_df=aligned_df.drop(axis=1,labels=['Model','Dataset','pdb','shared_fx','identical_aa','index','mutation','wildtype','chain'])
-
 
                
         #name the df

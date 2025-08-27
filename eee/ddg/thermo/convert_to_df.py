@@ -1,7 +1,7 @@
 import json
 import glob
 import statistics
-from difflib import SequenceMatcher
+from Bio import Align
 
 import numpy as np
 import pandas as pd
@@ -16,6 +16,12 @@ def align_thermo_output_seqs(original_dfs,
     #RUN THIS AFTER SEQ FILES ARE CONCATENATED SO DDG CSVS HAVE THE SAME FILE
     #RUN BEFORE REMOVAL OF SELF TO SELF MUTATIONS
     
+    #setting up pairwise aligner
+    aligner = Align.PairwiseAligner()
+    aligner.open_gap_score = -0.5
+    aligner.extend_gap_score = -0.1
+    aligner.target_end_gap_score = 0.0
+    aligner.query_end_gap_score = 0.0
 
     pdb_list=[]
     seq_list=[]
@@ -36,22 +42,23 @@ def align_thermo_output_seqs(original_dfs,
     dfs=[]
     
     for i in range(0,len(seq_df)):
-        comps=[]
+        matches=[]
         #now we do a pairwise alignment of this seq with every other seq
         for n in range(0,len(seq_df)):
             if i==n:
                 continue
             else:
-                comp = SequenceMatcher(None, seq_df.seq[i], seq_df.seq[n]).ratio()
-                comps.append(comp)
+                score=aligner.score(seq_df.seq[i],seq_df.seq[n])
+                match=score/min(len(seq_df.seq[i]),len(seq_df.seq[n]))
+                matches.append(match)
             
-        #get the mean comparison
-        mean_comp=statistics.mean(comps)
+        #get the mean match
+        mean_match=statistics.mean(matches)
         
-        if mean_comp <= 0.90:
-            print(seq_df.pdb[i]+' had a mean comparison score of '+str(mean_comp)+'. It is being discarded.')
+        if mean_match <= 0.90:
+            print(seq_df.pdb[i]+' had a mean match score of '+str(mean_match)+'. It is being discarded.')
             
-        if mean_comp > 0.90:
+        if mean_match > 0.90:
             df=original_dfs[i]
             if seq_df.pdb[i] in df.pdb[1]:
                 dfs.append(df)

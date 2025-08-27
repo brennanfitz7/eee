@@ -6,3 +6,4 @@ from .batch_run_dms_epi import batch_run_dms_epi
 from . import acdc
 from . import foldx
 from . import thermo
+from . import analyze_ddgs

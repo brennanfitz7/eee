@@ -147,7 +147,7 @@ def align_structure_seqs(original_dfs,
             
         if mean_match > 0.90:
             df=original_dfs[i]
-            if seq_df.pdb[i] in df.pdb[1]:
+            if seq_df.pdb[i] in df.name[1]:
                 dfs.append(df)
             else:
                 print('The dataframes and sequences are not in the same order')

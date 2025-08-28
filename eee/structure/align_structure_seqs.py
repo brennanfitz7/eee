@@ -1,4 +1,3 @@
-
 from eee.core.data import AA_3TO1
 
 from eee._private.interface import create_new_dir
@@ -8,8 +7,11 @@ from eee._private.interface import WrappedFunctionException
 from eee._private import logger
 
 import numpy as np
+import pandas as pd
+from Bio import Align
 
 import os
+import statistics
 
 def _run_muscle(seq_list,
                 muscle_binary="muscle",
@@ -73,7 +75,7 @@ def _run_muscle(seq_list,
     return [output[k] for k in keys]
 
 
-def align_structure_seqs(dfs,
+def align_structure_seqs(original_dfs,
                          muscle_binary="muscle",
                          verbose=False,
                          keep_temporary=False):
@@ -84,8 +86,9 @@ def align_structure_seqs(dfs,
     
     Parameters
     ----------
-    dfs : list
-        list of pandas dataframes containing structures
+    original_dfs : list
+        list of pandas dataframes containing structures of pdbs that have been through sync_structures
+        (with pdb name as a column in the df)
     muscle_binary : str, default="muscle"
         path to muscle binary
     verbose : bool, default=True
@@ -99,12 +102,64 @@ def align_structure_seqs(dfs,
         list of pandas dataframes with structures updated to have the shared_fx,
         alignment_site, and identical_aa columns. 
     """
+    
+    #setting up pairwise aligner
+    aligner = Align.PairwiseAligner()
+    aligner.open_gap_score = -0.5
+    aligner.extend_gap_score = -0.1
+    aligner.target_end_gap_score = 0.0
+    aligner.query_end_gap_score = 0.0
 
-    seq_list = []
-    for df in dfs:
+    pdb_list=[]
+    original_seq_list=[]
+    
+    for df in original_dfs:
+        #add to pdb_list
+        pdb_list.append(df.name[1])
+        #create a mask to only have one residue
         mask = np.logical_and(df.atom == "CA",df["class"] == "ATOM")
-        this_df = df.loc[mask,:]        
-        seq_list.append([AA_3TO1[aa] for aa in this_df["resid"]])
+        this_df = df.loc[mask,:]  
+        original_seq_list.append(''.join([AA_3TO1[aa] for aa in this_df["resid"]]))
+
+
+    #make sequence df
+    seq_dict = {'pdb': pdb_list, 'seq': original_seq_list} 
+    seq_df = pd.DataFrame(seq_dict)  
+    
+    dfs=[]
+    
+    for i in range(0,len(seq_df)):
+        matches=[]
+        #now we do a pairwise alignment of this seq with every other seq
+        for n in range(0,len(seq_df)):
+            if i==n:
+                continue
+            else:
+                score=aligner.score(seq_df.seq[i],seq_df.seq[n])
+                match=score/min(len(seq_df.seq[i]),len(seq_df.seq[n]))
+                matches.append(match)
+            
+        #get the mean match
+        mean_match=statistics.mean(matches)
+        
+        if mean_match <= 0.90:
+            print(seq_df.pdb[i]+' had a mean match score of '+str(mean_match)+'. It is being discarded.')
+            
+        if mean_match > 0.90:
+            df=original_dfs[i]
+            if seq_df.pdb[i] in df.pdb[1]:
+                dfs.append(df)
+            else:
+                print('The dataframes and sequences are not in the same order')
+                
+    seq_list=[]
+    
+    for df in dfs:
+        #create a mask to only have one residue
+        mask = np.logical_and(df.atom == "CA",df["class"] == "ATOM")
+        this_df = df.loc[mask,:]  
+        seq_list.append(''.join([AA_3TO1[aa] for aa in this_df["resid"]]))
+
 
     output = _run_muscle(seq_list=seq_list,
                          muscle_binary=muscle_binary,
@@ -244,6 +299,3 @@ def align_structure_seqs(dfs,
         dfs[i] = dfs[i].drop(columns="_resid_key")
 
     return dfs
-
-
-

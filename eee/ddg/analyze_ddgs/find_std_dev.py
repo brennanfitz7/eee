@@ -36,7 +36,7 @@ def get_ddg_std_dev(ens_ddg_file:str,save_file=True):
     out_file=ens_ddg_file.split('.')[0]+'_std_dev.csv'
     
     if save_file == True:
-        df.to_csv(out_file)
+        df.to_csv(out_file,index=False)
         
     return df
 

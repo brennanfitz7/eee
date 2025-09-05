@@ -46,9 +46,12 @@ def RMSF_for_ens(ens_dir):
     #read the pdb structures and add a name column
     logger.log('Reading in pdbs.')
     for item in pdb_list:
-        read_df=read_structure(item,remove_multiple_models=False)
-        read_df['name']=item
-        dfs.append(read_df)
+        try:
+            read_df=read_structure(item,remove_multiple_models=False)
+            read_df['name']=item
+            dfs.append(read_df)
+        except:
+            logger.log('PDB '+str(item)+' failed when reading structure and incorporating models.')
 
     #align the structure sequences
     logger.log('Aligning structure sequences.')

@@ -45,7 +45,7 @@ def _read_structure_pdb(pdb_file):
                     out["atom"].append(line[12:16].strip())
                     out["resid"].append(line[17:20].strip())
                     out["resid_num"].append(line[22:28].strip())
-
+                    
                     alternate = line[16]
                     if alternate == " ":
                         alternate = "."

@@ -32,7 +32,6 @@ def align_thermo_output_seqs(original_dfs,
         #create a mask to only have one residue
         mask = np.array(df.mutation=='A')
         this_df = df.loc[mask,:]  
-        this_df
         seq_list.append(''.join(this_df["wildtype"]))
 
     #make sequence df

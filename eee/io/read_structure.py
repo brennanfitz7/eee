@@ -8,6 +8,33 @@ from eee.core.data import AA_3TO1
 import pandas as pd
 import numpy as np
 
+def renumber_if_insertions(df):
+    
+    #establish if there are any insertions in the change
+    for chain in df['chain'].unique():
+        insertion_present=False
+        for item in df.loc[df['chain']==chain].resid_num:
+            if str(item).isdigit()!=True:
+                insertion_present=True
+
+        #renumber residues starting from 1 
+        if insertion_present == True:
+            prev_resid_num=0
+            c=0
+            for idx,row in df.loc[df['chain']=='D'].iterrows():
+                my_resid_num=df.loc[idx,'resid_num']
+
+                #if the resid_num on this line is different from the old line, this is a new residue
+                if my_resid_num != prev_resid_num:
+                    c+=1
+
+                #renumber residue to "c"
+                df.loc[idx,'resid_num']=str(c)
+
+                prev_resid_num=my_resid_num
+                
+    return df
+
 def _read_structure_pdb(pdb_file):
     """
     Load the coordinates from a pdb file into a pandas data frame. Should 
@@ -124,7 +151,8 @@ def read_structure(rcsb_file,
                    remove_non_protein_polymer=True,
                    remove_multiple_models=True,
                    remove_alternate_conf=True,
-                   remove_hydrogens=True):
+                   remove_hydrogens=True,
+                   renumber_insertions=True):
     """
     Load an rcsb file (pdb or cif) into a pandas data frame.
     
@@ -142,6 +170,9 @@ def read_structure(rcsb_file,
         remove alternate conformations, taking only "A" if present
     remove_hydrogens : bool, default=True
         remove hydrogen atoms
+    remumber_insertions : bool, default=True
+        if insertion codes are present, renumber residues to remove them
+    
     
     Returns
     -------
@@ -184,6 +215,10 @@ def read_structure(rcsb_file,
     # Remove hydrogens
     if remove_hydrogens:
         df = df.loc[df["elem"] != "H",:]
+
+    # Renumber insertions
+    if renumber_insertions:
+        df = renumber_if_insertions(df)
 
     # Clean up dataframe indexes
     df.index = np.arange(len(df.index),dtype=int)

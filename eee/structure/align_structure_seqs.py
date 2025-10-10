@@ -76,6 +76,7 @@ def _run_muscle(seq_list,
 
 
 def align_structure_seqs(original_dfs,
+                         limited_chains=None,
                          muscle_binary="muscle",
                          verbose=False,
                          keep_temporary=False):
@@ -89,6 +90,8 @@ def align_structure_seqs(original_dfs,
     original_dfs : list
         list of pandas dataframes containing structures of pdbs that have been through sync_structures
         (with pdb name as a column in the df)
+    limited_chains : list, default=None
+        whether or not to only align certain chains. if this arg is used, output will only contain chains listed here
     muscle_binary : str, default="muscle"
         path to muscle binary
     verbose : bool, default=True
@@ -116,6 +119,15 @@ def align_structure_seqs(original_dfs,
     for df in original_dfs:
         #add to pdb_list
         pdb_list.append(df.name[1])
+        #if limited_chains, only keep desired chains
+        if limited_chains:
+            single_chain_dfs=[]
+            for mychain in list(set(df.chain)):
+                if mychain in limited_chains:
+                    single_chain_dfs.append(df.loc[df.chain]==mychain)
+                
+            df=pd.concat(single_chain_dfs).reset_index(drop=True)
+
         #create a mask to only have one residue
         mask = np.logical_and(df.atom == "CA",df["class"] == "ATOM")
         this_df = df.loc[mask,:]  

@@ -1,6 +1,7 @@
 from eee.io.read_structure import read_structure
 from eee._private import logger
 from eee.structure.align_structure_seqs import align_structure_seqs
+from eee.structure.align_structures import align_structures
 
 import pandas as pd
 import numpy as np
@@ -32,14 +33,23 @@ def get_RMSF(x_values,y_values,z_values):
     return RMSF
         
 
-def RMSF_for_ens(ens_dir):
+def RMSF_for_ens(ens_dir,chains_file):
     
     """
-    ens_dir: this ensemble directory should contain pdbs that have been through sync_structures, so that they are 
-    already aligned
+    ens_dir : str
+        this ensemble directory should contain pdbs that have been through sync_structures
+    
+    chains_file : str
+        file containing the chains that are in all pdbs in the ensemble
     """
     
     pdb_list=glob.glob(ens_dir+'/*pdb')
+    
+    #read synced_chains file
+    chains=[]
+    with open(chains_file, 'r') as file:
+        for line in file:
+            chains.append(line.strip())
     
     dfs=[]
     
@@ -55,8 +65,30 @@ def RMSF_for_ens(ens_dir):
 
     #align the structure sequences
     logger.log('Aligning structure sequences.')
-    aligned_dfs=align_structure_seqs(original_dfs=dfs)
+    aligned_dfs=align_structure_seqs(original_dfs=dfs,limited_chains=chains)
     
+    #align the dfs by chain
+    #if there are multiple chains in synced_chains, find the longest one
+    if len(chains)>1:
+        chain_lengths={}
+        for chain in chains:
+            length=[]
+            for df in aligned_dfs:
+                length.append(len(df.loc[df['chain']==chain]))
+                
+            chain_lengths[np.mean(length)]=chain
+        
+        mychain=chain_lengths.get(max(chain_lengths.keys()))
+    
+    else:
+        mychain=chains[0]
+        
+    
+    #align structures with lovoalign
+    logger.log('Aligning structures by chain with lovoalign.')
+    aligned_dfs = align_structures(aligned_dfs,chain=mychain)
+    
+            
     prepped_dfs=[]
     resid_sets=[]
     

@@ -148,7 +148,7 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
                     count+=1
                 elif match >= 0.95 and count >= 1:
                     df_name=df2.name[0]
-                    logger.log(df_name+' has chains that are not quite 95 percent similar to each other but 95 percent similar to other chains in the ensemble.')
+                    logger.log(df_name+' has chains that are <95 percent similar to each other but 95 percent similar to other chains in the ensemble.')
 
                     
 

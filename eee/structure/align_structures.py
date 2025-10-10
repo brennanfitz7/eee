@@ -12,6 +12,7 @@ import numpy as np
 import os
 
 def align_structures(dfs,
+                     chain=None,
                      lovoalign_binary="lovoalign",
                      verbose=False,
                      keep_temporary=False):
@@ -23,6 +24,8 @@ def align_structures(dfs,
     ----------
     dfs : list
         list of pandas dataframes containing structures
+    chain : str, default=None
+        chain by which dataframes are aligned. this chain must be the same for all dataframes
     lovoalign_binary : default = "lovoalign"
         lovoalign binary
     verbose : bool, default = True
@@ -56,11 +59,18 @@ def align_structures(dfs,
     for i, f in enumerate(files[1:]):
         
         try:
-            # Align file to first file using lovoalign
-            out_file = f"tmp-out_{i+1}.pdb"
-            cmd = [lovoalign_binary,"-p1",f,"-p2",files[0],"-o",out_file]
-            launch(cmd=cmd,run_directory=tmp_dir)
-                    
+            if chain:
+                # Align file to first file using lovoalign
+                out_file = f"tmp-out_{i+1}.pdb"
+                cmd = [lovoalign_binary,"-p1",f,"-c1",chain,"-p2",files[0],"-c2",chain,"-o",out_file]
+                launch(cmd=cmd,run_directory=tmp_dir)
+
+            else:
+                # Align file to first file using lovoalign
+                out_file = f"tmp-out_{i+1}.pdb"
+                cmd = [lovoalign_binary,"-p1",f,"-p2",files[0],"-o",out_file]
+                launch(cmd=cmd,run_directory=tmp_dir)
+                        
             # Move coordinates from aligned structure into dfs
             new_df = read_structure(os.path.join(tmp_dir,out_file))
             mask = dfs[i+1]["class"] == "ATOM"
@@ -68,6 +78,7 @@ def align_structures(dfs,
             dfs[i+1].loc[mask,"x"] = np.array(new_df["x"])
             dfs[i+1].loc[mask,"y"] = np.array(new_df["y"])
             dfs[i+1].loc[mask,"z"] = np.array(new_df["z"])
+
         except:
             logger.log('A file failed at lovoalign alignment.')
         

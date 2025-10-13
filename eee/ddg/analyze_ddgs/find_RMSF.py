@@ -33,7 +33,7 @@ def get_RMSF(x_values,y_values,z_values):
     return RMSF
         
 
-def RMSF_for_ens(ens_dir,chains_file):
+def get_RMSF_ens(ens_dir, chains_file):
     
     """
     ens_dir : str

@@ -122,9 +122,9 @@ def align_structure_seqs(original_dfs,
         #if limited_chains, only keep desired chains
         if limited_chains:
             single_chain_dfs=[]
-            for mychain in list(set(df.chain)):
+            for mychain in list(set(df.chain.tolist())):
                 if mychain in limited_chains:
-                    single_chain_dfs.append(df.loc[df.chain]==mychain)
+                    single_chain_dfs.append(df.loc[df['chain']==mychain])
                 
             df=pd.concat(single_chain_dfs).reset_index(drop=True)
 

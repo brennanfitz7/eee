@@ -121,12 +121,12 @@ def get_dist_btw_struct_resids(pdb_list, chains_file, ens_dir):
             z_vals.append(float(df.loc[df['_resid_key']==resid_key,'z']))
 
 
-        dist.append(get_dist_btw_struct_resids(x_vals, y_vals, z_vals))
+        dist.append(get_position_dist(x_vals, y_vals, z_vals))
         
     #add new RMSF column to my df
     dist_df.insert(3, 'position_dist', dist)
     
-    #save df as a csv
+    #save df a csv
     struct1=pdb_list[0].split('/')[-1].split('.pdb')[0]
     struct2=pdb_list[1].split('/')[-1].split('.pdb')[0]
 

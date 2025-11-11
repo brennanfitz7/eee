@@ -21,7 +21,7 @@ def get_position_dist(x_values,y_values,z_values):
 
     return dist
 
-def get_dist_btw_struct_resids(pdb_list, chains_file, ens_dir):
+def get_dist_btw_struct_resids(pdb_list, chains_file, ens_dir,save_csv=False):
     
     """
     pdb_list : list_of_str
@@ -33,7 +33,8 @@ def get_dist_btw_struct_resids(pdb_list, chains_file, ens_dir):
     ens_dir : str
         directory for the ensemble--will determine name and where the file ends up
 
-
+    save_csv : bool (default=False)
+        if true, dist_df gets saved as a csv
     """
     
     #read synced_chains file
@@ -130,8 +131,9 @@ def get_dist_btw_struct_resids(pdb_list, chains_file, ens_dir):
     struct1=pdb_list[0].split('/')[-1].split('.pdb')[0]
     struct2=pdb_list[1].split('/')[-1].split('.pdb')[0]
 
-    dir_name=ens_dir.split('/')[-1]
-    ens_alone=dir_name.split('_synced')[0]
-    dist_df.to_csv(ens_dir+'/'+ens_alone+'_'+struct1+'_'+struct2+'_position_diff.csv',index=False)
+    if save_csv==True:
+        dir_name=ens_dir.split('/')[-1]
+        ens_alone=dir_name.split('_synced')[0]
+        dist_df.to_csv(ens_dir+'/'+ens_alone+'_'+struct1+'_'+struct2+'_position_diff.csv',index=False)
     
     return dist_df

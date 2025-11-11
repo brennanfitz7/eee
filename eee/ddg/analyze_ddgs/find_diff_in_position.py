@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 
 
-def get_position_dist(x_values,y_values,z_values):
+def get_position_dist_site(x_values,y_values,z_values):
 
     #check that all value lists only contain two values
     if len(x_values) == len(y_values) == len(z_values) == 2:
@@ -21,7 +21,7 @@ def get_position_dist(x_values,y_values,z_values):
 
     return dist
 
-def get_dist_btw_struct_resids(pdb_list, chains_file, ens_dir,save_csv=False):
+def get_position_dist_all(pdb_list, chains_file, ens_dir,save_csv=False):
     
     """
     pdb_list : list_of_str
@@ -35,6 +35,11 @@ def get_dist_btw_struct_resids(pdb_list, chains_file, ens_dir,save_csv=False):
 
     save_csv : bool (default=False)
         if true, dist_df gets saved as a csv
+
+
+    Returns:
+
+        dataframe with distances between sites
     """
     
     #read synced_chains file
@@ -122,7 +127,7 @@ def get_dist_btw_struct_resids(pdb_list, chains_file, ens_dir,save_csv=False):
             z_vals.append(float(df.loc[df['_resid_key']==resid_key,'z']))
 
 
-        dist.append(get_position_dist(x_vals, y_vals, z_vals))
+        dist.append(get_position_dist_site(x_vals, y_vals, z_vals))
         
     #add new RMSF column to my df
     dist_df.insert(3, 'position_dist', dist)

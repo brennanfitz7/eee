@@ -21,10 +21,10 @@ def get_position_dist_site(x_values,y_values,z_values):
 
     return dist
 
-def get_position_dist_all(pdb_list, chains_file, ens_dir,save_csv=False):
+def get_position_dist_all(struct_list, chains_file, ens_dir,aligned_and_read=False, save_csv=False):
     
     """
-    pdb_list : list_of_str
+    pdb_list : list_of_str (or list of dfs if aligned_and_read==True)
         list of two pdbs that will be compared
     
     chains_file : str
@@ -32,6 +32,9 @@ def get_position_dist_all(pdb_list, chains_file, ens_dir,save_csv=False):
 
     ens_dir : str
         directory for the ensemble--will determine name and where the file ends up
+
+    aligned_and_read : bool (default=False)
+        if True, assumed pdbs have been read, aligned by sequence, and have a name column
 
     save_csv : bool (default=False)
         if true, dist_df gets saved as a csv
@@ -48,18 +51,22 @@ def get_position_dist_all(pdb_list, chains_file, ens_dir,save_csv=False):
         for line in file:
             chains.append(line.strip())
     
-    dfs=[]
-    
-    #read the pdb structures and add a name column
-    logger.log('Reading in pdbs.')
-    for item in pdb_list:
-        read_df=read_structure(item,remove_multiple_models=False)
-        read_df['name']=item
-        dfs.append(read_df)
+    if aligned_and_read==True:
+        aligned_dfs=struct_list
 
-    #align the structure sequences
-    logger.log('Aligning structure sequences.')
-    aligned_dfs=align_structure_seqs(original_dfs=dfs,limited_chains=chains)
+    if aligned_and_read==False:
+        dfs=[]
+        
+        #read the pdb structures and add a name column
+        logger.log('Reading in pdbs.')
+        for item in struct_list:
+            read_df=read_structure(item,remove_multiple_models=False)
+            read_df['name']=item
+            dfs.append(read_df)
+
+        #align the structure sequences
+        logger.log('Aligning structure sequences.')
+        aligned_dfs=align_structure_seqs(original_dfs=dfs,limited_chains=chains)
     
     #align the dfs by chain
     #if there are multiple chains in synced_chains, find the longest one
@@ -110,7 +117,7 @@ def get_position_dist_all(pdb_list, chains_file, ens_dir,save_csv=False):
     dist_df = only_shared[0][['chain','resid','resid_num','_resid_key']].copy()
     
     #go through RMSF df, collect values for each site from each dataframe, and get the RMSF value
-    logger.log('Finding RMSF values for each site.')
+    logger.log('Finding difference in position between structures at each site.')
     dist=[]
     for idx, row in dist_df.iterrows():
 
@@ -132,9 +139,9 @@ def get_position_dist_all(pdb_list, chains_file, ens_dir,save_csv=False):
     #add new RMSF column to my df
     dist_df.insert(3, 'position_dist', dist)
     
-    #save df a csv
-    struct1=pdb_list[0].split('/')[-1].split('.pdb')[0]
-    struct2=pdb_list[1].split('/')[-1].split('.pdb')[0]
+    #save df as a csv
+    struct1=only_shared[0]['name'][0].split('/')[-1].split('.pdb')[0]
+    struct2=only_shared[1]['name'][0].split('/')[-1].split('.pdb')[0]
 
     if save_csv==True:
         dir_name=ens_dir.split('/')[-1]

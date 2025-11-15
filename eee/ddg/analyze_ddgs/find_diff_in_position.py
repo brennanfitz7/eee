@@ -56,7 +56,6 @@ def get_position_dist_all(struct_list, chains_file, ens_dir,aligned_and_read=Fal
 
     if aligned_and_read==False:
         dfs=[]
-        
         #read the pdb structures and add a name column
         logger.log('Reading in pdbs.')
         for item in struct_list:

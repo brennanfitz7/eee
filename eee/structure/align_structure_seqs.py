@@ -79,7 +79,8 @@ def align_structure_seqs(original_dfs,
                          limited_chains=None,
                          muscle_binary="muscle",
                          verbose=False,
-                         keep_temporary=False):
+                         keep_temporary=False,
+                         remove_unshared_sites=True):
     """
     Use muscle to align sequences from rcsb files, then do some clean up. 
     Renumber residues so they match between structures. If a site has a mixture
@@ -98,6 +99,8 @@ def align_structure_seqs(original_dfs,
         whether or not to print out muscle output
     keep_temporary : bool, default=False
         do not delete temporary files
+    remove_unshared_sites :  bool, default=True
+        if true, will remove unshared sites (resid # is negative)
         
     Returns
     -------
@@ -306,8 +309,13 @@ def align_structure_seqs(original_dfs,
                         this_df.loc[atom_mask,"atom"] = "SG"
 
 
-    #Remove "_resid_key" convenience column
+    #Remove "_resid_key" convenience column and unshared sites if keep_unshared_sites==False
     for i in range(len(dfs)):
         dfs[i] = dfs[i].drop(columns="_resid_key")
+
+        if remove_unshared_sites==True:
+            dfs[i]['resid_num']=dfs[i]['resid_num'].astype(float)
+            dfs[i]=dfs[i].loc[dfs[i]['resid_num']>=0]
+    
 
     return dfs

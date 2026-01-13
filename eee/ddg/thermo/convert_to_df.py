@@ -5,8 +5,97 @@ from Bio import Align
 
 import numpy as np
 import pandas as pd
+from matplotlib import pyplot as plt
 
 from eee.structure.align_structure_seqs import _run_muscle
+from eee._private import logger
+
+
+def filter_seq_length(seq_df):
+
+    """
+     Filters out the sequences in the ensemble that are not the same size as the majority of the sequences. 
+
+    Parameters
+    ----------
+        
+    seq_df : pandas DataFrame
+        a dataframe with columns "pdb" and "seq" containing all the pdbs in the ensemble.
+        
+    Returns
+    -------
+    seq_df only with sequences of the selected length
+    """
+    
+    #create a column in the df with lengths of sequences
+    len_seqs=[len(i) for i in seq_df.seq]
+    
+    seq_df['seq_length']=len_seqs
+    
+    #remove any sequences under 50 residues long
+    seq_df=seq_df.loc[seq_df.seq_length>=50]
+    
+    seq_df=seq_df.reset_index(drop=True)
+    
+    #if all sequences are within 50 residues of each other, keep everything
+    if max(seq_df.seq_length)-min(seq_df.seq_length)<50 :
+        
+        logger.log('All sequences are withing 50 residues length of each other.')
+        
+    else:
+        
+        logger.log('Filtering sequences by length.')
+        
+        #use the histogram function (binned by 5) to find the frequency of seq lengths
+        hist_output=plt.hist(seq_df.seq_length, bins=range(min(seq_df.seq_length),max(seq_df.seq_length),5))
+        
+        bin_start=hist_output[1][0:-1]
+        
+        hist_df=pd.DataFrame({'counts':list(hist_output[0]),'bin_start':bin_start})
+        
+        #find the highest peak
+        max_idx = hist_df.loc[hist_df['counts'] == max(hist_df.counts)].index[0]
+        
+        to_collect=[]
+        
+        #if the max_idx is not in the middle of the graph, set the stop and start to be within index
+        #if max_idx is in the middle, look at the five peaks on either side
+        if max_idx-5<0:
+            
+            start=0
+            
+        else:
+            start=max_idx-5
+            
+        if max_idx+5 > (hist_df.index.stop -1):
+            
+            stop = hist_df.index.stop -1
+            
+        else:
+            stop=max_idx+5
+        
+        #find peaks within this range that are at least 20% as large as the max peak
+        for i in range(start,stop):
+
+            if hist_df.counts[i] >= ((max(hist_df.counts))*0.2):
+
+                to_collect.append(hist_df.loc[hist_df['counts']==hist_df.counts[i]].index[0])
+        
+        start_len=float(hist_df.loc[to_collect[0],'bin_start'])
+        
+        end_len=float(hist_df.loc[to_collect[-1],'bin_start']+5)
+        
+        #apply a mask to only select for sequences within the desired range
+        mask=np.logical_and(seq_df.seq_length>=start_len,seq_df.seq_length<=end_len)
+        
+        seq_df=seq_df.loc[mask,:]
+        
+        seq_df=seq_df.reset_index(drop=True)
+        
+    seq_df=seq_df.drop('seq_length',axis=1)
+        
+    return seq_df
+
 
 
 def align_thermo_output_seqs(original_dfs, 
@@ -36,7 +125,10 @@ def align_thermo_output_seqs(original_dfs,
 
     #make sequence df
     seq_dict = {'pdb': pdb_list, 'seq': seq_list} 
-    seq_df = pd.DataFrame(seq_dict)  
+    seq_df = pd.DataFrame(seq_dict) 
+
+    #filter by seq_length to make sure all sequences are approx the same size
+    seq_df=filter_seq_length(seq_df)
     
     dfs=[]
     

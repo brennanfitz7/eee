@@ -67,9 +67,9 @@ def filter_seq_length(seq_df):
         else:
             start=max_idx-5
             
-        if max_idx+5 > (hist_df.index.stop -1):
+        if max_idx+5 > (hist_df.index.stop):
             
-            stop = hist_df.index.stop -1
+            stop = hist_df.index.stop
             
         else:
             stop=max_idx+5
@@ -79,7 +79,7 @@ def filter_seq_length(seq_df):
 
             if hist_df.counts[i] >= ((max(hist_df.counts))*0.2):
 
-                to_collect.append(hist_df.loc[hist_df['counts']==hist_df.counts[i]].index[0])
+                to_collect.append(i)
         
         start_len=float(hist_df.loc[to_collect[0],'bin_start'])
         

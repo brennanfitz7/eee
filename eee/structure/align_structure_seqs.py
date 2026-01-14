@@ -111,8 +111,8 @@ def align_structure_seqs(original_dfs,
     
     #setting up pairwise aligner
     aligner = Align.PairwiseAligner()
-    aligner.open_gap_score = -0.5
-    aligner.extend_gap_score = -0.1
+    aligner.open_gap_score = 0
+    aligner.extend_gap_score = 0
     aligner.target_end_gap_score = 0.0
     aligner.query_end_gap_score = 0.0
 

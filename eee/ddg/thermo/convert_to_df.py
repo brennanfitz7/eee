@@ -107,8 +107,8 @@ def align_thermo_output_seqs(original_dfs,
     
     #setting up pairwise aligner
     aligner = Align.PairwiseAligner()
-    aligner.open_gap_score = -0.5
-    aligner.extend_gap_score = -0.1
+    aligner.open_gap_score = 0.0
+    aligner.extend_gap_score = 0.0
     aligner.target_end_gap_score = 0.0
     aligner.query_end_gap_score = 0.0
 
@@ -417,27 +417,34 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
     
     muts=list(shared_muts)
     
-    combined_df = pd.DataFrame(muts, columns=['mut'])
+    combined_dict = {mut:muts}
 
     for df in df_list:
         name=df.name
-        
-        #creating placeholder column full of ones with the correct name
-        placeholder = np.ones(len(muts),dtype=float)
-        combined_df[name]=placeholder
-        
-        #now replace these ones with the ddG_pred values
-        
-        for idx,row in combined_df.iterrows():
             
+        #creating placeholder list with all values 999
+        placeholder = [999]*len(muts)
+            
+        #now replace the 999 values with the ddG_pred values
+        for idx,row in combined_df.iterrows():
+                
             mut_site = combined_df.mut[idx]
 
             ddG_series = df.loc[df.mut==mut_site,'ddG_pred']
-            
+                
             mut_ddG=ddG_series.iloc[0]
-
-            combined_df.loc[idx,name] = mut_ddG
             
+            placeholder[idx] = mut_ddG
+
+        #add a check to make sure that all of the values had been replaced
+        if 999 in placeholder:
+            err=name+' did not have all the sites supposedly shared by all pdbs.'
+            raise RuntimeError(err)
+        
+        #now add this updated list to the combined_dict with the name as the key
+        combined_dict[name] = placeholder
+    
+    combined_df=pd.DataFrame(combined_dict)    
                  
     #adding site and unfolded columns to combined_df
     combined_df['unfolded']=np.zeros(len(combined_df),dtype=float)

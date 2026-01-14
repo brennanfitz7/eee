@@ -150,11 +150,17 @@ def align_thermo_output_seqs(original_dfs,
             logger.log(seq_df.pdb[i]+' had a mean match score of '+str(mean_match)+'. It is being discarded.')
             
         if mean_match > 0.90:
-            df=original_dfs[i]
-            if seq_df.pdb[i] in df.pdb[1]:
-                dfs.append(df)
-            else:
-                logger.log('The dataframes and sequences are not in the same order')
+            c=0
+            for df in original_dfs:
+                if seq_df.pdb[i] in df.pdb[1]:
+                    dfs.append(df)
+                    c=+1
+            if c>1:
+                err='There are multiple dfs from the same pdb'
+                raise RuntimeError(err)
+            elif c==0:
+                err='There is no df in original_dfs for '+seq_df.pdb[i]+'.'
+                raise RuntimeError(err)
                 
     seq_list=[]
     

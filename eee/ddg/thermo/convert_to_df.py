@@ -40,11 +40,11 @@ def filter_seq_length(seq_df):
     #if all sequences are within 50 residues of each other, keep everything
     if max(seq_df.seq_length)-min(seq_df.seq_length)<50 :
         
-        logger.log('All sequences are withing 50 residues length of each other.')
+        print('All sequences are within 50 residues length of each other.')
         
     else:
         
-        logger.log('Filtering sequences by length.')
+        print('Filtering sequences by length.')
         
         #use the histogram function (binned by 5) to find the frequency of seq lengths
         hist_output=plt.hist(seq_df.seq_length, bins=range(min(seq_df.seq_length),max(seq_df.seq_length),5))

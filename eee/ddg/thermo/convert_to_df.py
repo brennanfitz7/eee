@@ -417,7 +417,7 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
     
     muts=list(shared_muts)
     
-    combined_dict = {mut:muts}
+    combined_dict = {'mut':muts}
 
     for df in df_list:
         name=df.name

@@ -434,7 +434,7 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
                 
             mut_ddG=ddG_series.iloc[0]
             
-            placeholder[idx] = mut_ddG
+            placeholder[i] = mut_ddG
 
         #add a check to make sure that all of the values had been replaced
         if 999 in placeholder:

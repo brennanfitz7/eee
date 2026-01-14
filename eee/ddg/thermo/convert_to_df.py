@@ -40,11 +40,11 @@ def filter_seq_length(seq_df):
     #if all sequences are within 50 residues of each other, keep everything
     if max(seq_df.seq_length)-min(seq_df.seq_length)<50 :
         
-        print('All sequences are within 50 residues length of each other.')
+        logger.log('All sequences are within 50 residues length of each other.')
         
     else:
         
-        print('Filtering sequences by length.')
+        logger.log('Filtering sequences by length.')
         
         #use the histogram function (binned by 5) to find the frequency of seq lengths
         hist_output=plt.hist(seq_df.seq_length, bins=range(min(seq_df.seq_length),max(seq_df.seq_length),5))
@@ -147,14 +147,14 @@ def align_thermo_output_seqs(original_dfs,
         mean_match=statistics.mean(matches)
         
         if mean_match <= 0.90:
-            print(seq_df.pdb[i]+' had a mean match score of '+str(mean_match)+'. It is being discarded.')
+            logger.log(seq_df.pdb[i]+' had a mean match score of '+str(mean_match)+'. It is being discarded.')
             
         if mean_match > 0.90:
             df=original_dfs[i]
             if seq_df.pdb[i] in df.pdb[1]:
                 dfs.append(df)
             else:
-                print('The dataframes and sequences are not in the same order')
+                logger.log('The dataframes and sequences are not in the same order')
                 
     seq_list=[]
     
@@ -310,8 +310,7 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
     -------
     the ensemble df
     """
-    logger.log('if updated version is running, this will print from logger')
-    print('if updated version is running, this will print from print')
+
     if need_name_dict==True:
         #getting name_dict from json
         with open(folder+'/name_dict.json', 'r') as openfile:
@@ -427,7 +426,7 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
         placeholder = [999]*len(muts)
             
         #now replace the 999 values with the ddG_pred values
-        for i in range(0,muts):
+        for i in range(0,len(muts)):
                 
             mut_site = muts[i]
 

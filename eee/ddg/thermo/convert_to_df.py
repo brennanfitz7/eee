@@ -310,7 +310,8 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
     -------
     the ensemble df
     """
-    
+    logger.log('if updated version is running, this will print from logger')
+    print('if updated version is running, this will print from print')
     if need_name_dict==True:
         #getting name_dict from json
         with open(folder+'/name_dict.json', 'r') as openfile:

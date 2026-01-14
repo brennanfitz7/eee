@@ -427,9 +427,9 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
         placeholder = [999]*len(muts)
             
         #now replace the 999 values with the ddG_pred values
-        for idx,row in combined_df.iterrows():
+        for i in range(0,muts):
                 
-            mut_site = combined_df.mut[idx]
+            mut_site = muts[i]
 
             ddG_series = df.loc[df.mut==mut_site,'ddG_pred']
                 

@@ -294,7 +294,7 @@ def align_thermo_output_seqs(original_dfs,
 
 
 
-def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exists:bool, use_ddg_mult:bool):
+def get_combined_df(folder:str,prot_name:str,chains_file:str,need_name_dict:bool,unnamed_col_exists:bool, use_ddg_mult:bool):
     #FIX DDG MULT BEFORE I USE IT AGAIN
 
     """
@@ -308,6 +308,9 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
 
     prot_name : str
         name of the protein
+
+    chains_file : str
+        the synced_chains file containing all the shared chains across an ensemble
 
     need_name_dict : bool
         specifies whether these proteins need a name dict or if they will just be categorized under their pdb file name
@@ -323,7 +326,7 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
                     name_dict = json.load(openfile)
             
     #getting list of ddgs
-    ddg_list=glob.glob(folder+'/*.csv')
+    ddg_list=glob.glob(folder+'/*thermo_ddg_*.csv')
 
     #making lists
     single_chain_dfs=[]
@@ -343,6 +346,14 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
             
     #make list of dfs for input into align_thermo_output_seqs
     raw_df_list=[]
+
+    #find the number of synced chains for this ensemble
+    chains=[]
+    with open(chains_file, 'r') as file:
+        for line in file:
+            chains.append(line.strip())
+                
+    number_chains=len(chains)
             
     #sorting dfs by the pdb_id (now known as tags) 
     for tag in name_list:
@@ -351,12 +362,15 @@ def get_combined_df(folder:str,prot_name:str,need_name_dict:bool,unnamed_col_exi
             my_tag=df.name
             if my_tag==tag:
                 same_pdb_list.append(df)
-        #concatenating all dfs from the same pdb then sorting them 
-        raw_df=pd.concat(same_pdb_list)
-        raw_df.sort_values(by=['chain','position'],inplace=True)
-        raw_df.reset_index(inplace=True)
-        raw_df.name=tag
-        raw_df_list.append(raw_df)
+        #if there is the correct number of ddg files concatenating all dfs from the same pdb then sorting them 
+        if len(same_pdb_list)==number_chains:
+            raw_df=pd.concat(same_pdb_list)
+            raw_df.sort_values(by=['chain','position'],inplace=True)
+            raw_df.reset_index(inplace=True)
+            raw_df.name=tag
+            raw_df_list.append(raw_df)
+        else:
+            logger.log(tag+' does not have all the expected ddgs. It will not be used.')
         
     
     #run align thermo output seqs to get the numbering right

@@ -134,7 +134,7 @@ def get_least_similar_pdbs (ens_dir,
         
         for n in range(i+1,len(pdbs)):
             
-            RMSD_val=get_RMSD_lovoalign(pdbs[i],pdbs[n],out_dir=out_dir,chain=chains[0],keep_temporary=keep_temporary)
+            RMSD_val=get_RMSD_lovoalign(pdbs[i],pdbs[n],chain=chains[0],keep_temporary=keep_temporary)
             RMSD_dict[float(RMSD_val)]=[pdbs[i],pdbs[n]]
 
     

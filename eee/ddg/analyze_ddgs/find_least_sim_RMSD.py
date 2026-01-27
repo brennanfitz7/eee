@@ -1,10 +1,51 @@
 from eee._private import logger
 
+import pandas as pd
+import numpy as np
+
 import subprocess
 import shutil
 import glob
 import os 
 
+
+def find_longest_chain(chains_file):
+    
+    chains=[]
+    
+    with open(chains_file, 'r') as file:
+        for line in file:
+            chains.append(line.strip())
+            
+    if len(chains)>1:
+        
+        ens_dir=chains_file.split('_chains.txt')[0]
+        
+        chain_length_dict={}
+        
+        for chain in chains:
+            
+            length_chain=[]
+        
+            for ddg_file in glob.glob(ens_dir+'/*thermo_ddg_'+chain+'.csv'):
+                
+                df=pd.read_csv(ddg_file)
+                
+                length_chain.append(len(df))
+            
+            mean_length=np.mean(length_chain)
+            
+            chain_length_dict[mean_length]=chain
+            
+        
+        longest_chain=chain_length_dict[max(chain_length_dict)]
+        
+    else:
+        longest_chain=chains[0]
+        
+    
+    return longest_chain
+        
 
 def get_RMSD_lovoalign(pdb1,
                        pdb2,
@@ -122,10 +163,8 @@ def get_least_similar_pdbs (ens_dir,
     
     pdbs=glob.glob(ens_dir+'/*pdb')
     
-    chains=[]
-    with open(chains_file, 'r') as file:
-        for line in file:
-            chains.append(line.strip())
+
+    my_chain=find_longest_chain(chains_file=chains_file)
     
     RMSD_dict={}
     
@@ -134,7 +173,7 @@ def get_least_similar_pdbs (ens_dir,
         
         for n in range(i+1,len(pdbs)):
             
-            RMSD_val=get_RMSD_lovoalign(pdbs[i],pdbs[n],chain=chains[0],keep_temporary=keep_temporary)
+            RMSD_val=get_RMSD_lovoalign(pdbs[i],pdbs[n],chain=my_chain,keep_temporary=keep_temporary)
             RMSD_dict[float(RMSD_val)]=[pdbs[i],pdbs[n]]
 
     
@@ -156,9 +195,9 @@ def get_least_similar_pdbs (ens_dir,
             
             tag_path=item.split('.pdb')[0]
             
-            thermo_filepath=tag_path+'_thermo_ddg_'+chains[0]+'.csv'
+            thermo_filepath=tag_path+'_thermo_ddg_'+my_chain+'.csv'
             
-            thermo_file=tag+'_thermo_ddg_'+chains[0]+'.csv'
+            thermo_file=tag+'_thermo_ddg_'+my_chain+'.csv'
             
             shutil.copyfile(thermo_filepath,out_dir+'/'+thermo_file)
         

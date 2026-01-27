@@ -5,3 +5,4 @@ from .find_diff_in_position import get_position_dist_site
 from .find_diff_in_position import get_position_dist_all
 from .find_least_sim_RMSD import get_least_similar_pdbs
 from .find_least_sim_RMSD import get_RMSD_lovoalign
+from .find_least_sim_RMSD import find_longest_chain

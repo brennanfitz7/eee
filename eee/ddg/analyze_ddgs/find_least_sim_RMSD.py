@@ -191,15 +191,14 @@ def get_least_similar_pdbs (ens_dir,
         
         if copy_thermo_files == True:
             
-            tag=just_file_name.split('.pdb')[0]
-            
             tag_path=item.split('.pdb')[0]
+
+            for ddg_file in glob.glob(tag_path+'_thermo_ddg_*.csv'):
+
+                thermo_file=ddg_file.split('/')[-1]
+
+                shutil.copyfile(ddg_file,out_dir+'/'+thermo_file)
             
-            thermo_filepath=tag_path+'_thermo_ddg_'+my_chain+'.csv'
-            
-            thermo_file=tag+'_thermo_ddg_'+my_chain+'.csv'
-            
-            shutil.copyfile(thermo_filepath,out_dir+'/'+thermo_file)
         
     
     logger.log(max_RMSD_pair[0]+' and '+max_RMSD_pair[1]+' are the least similar pair of pdbs. They have been moved to new directory.')

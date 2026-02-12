@@ -79,7 +79,7 @@ def get_unique_chains(df):
 
     return unique_chains
 
-def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
+def reassign_chains(dfs:list, ensemble:str,write_pdb=False, save_text_file=True):
 
     
     #setting up pairwise aligner
@@ -193,11 +193,11 @@ def reassign_chains(dfs:list, ensemble:str,write_pdb=False):
     for i in ubiquitous_chains[list(ubiquitous_chains.keys())[0]]:
         dfs.append(i[0])
         
-        
-    #create a text file with each chain on its own line
-    chains='\n'.join(chains_for_thermo)
-    f = open(ensemble+'_chains.txt', 'w')
-    f.write(chains)
-    f.close()
+    if save_text_file==True:
+        #create a text file with each chain on its own line
+        chains='\n'.join(chains_for_thermo)
+        f = open(ensemble+'_chains.txt', 'w')
+        f.write(chains)
+        f.close()
 
     return dfs

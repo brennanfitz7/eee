@@ -119,21 +119,27 @@ def align_structure_seqs(original_dfs,
     pdb_list=[]
     original_seq_list=[]
     
-    for df in original_dfs:
+    limited_chains_df=[]
+    
+    for og_df in original_dfs:
         #add to pdb_list
-        pdb_list.append(df.name[1])
+        pdb_list.append(og_df.name[1])
         #if limited_chains, only keep desired chains
         if limited_chains:
             single_chain_dfs=[]
-            for mychain in list(set(df.chain.tolist())):
+            for mychain in list(set(og_df.chain.tolist())):
                 if mychain in limited_chains:
-                    single_chain_dfs.append(df.loc[df['chain']==mychain])
-                
+                    single_chain_dfs.append(og_df.loc[og_df['chain']==mychain])
+            
             df=pd.concat(single_chain_dfs).reset_index(drop=True)
+            limited_chains_df.append(df)
+        
+        else:
+            df=og_df 
 
         #create a mask to only have one residue
         mask = np.logical_and(df.atom == "CA",df["class"] == "ATOM")
-        this_df = df.loc[mask,:]  
+        this_df = df.loc[mask,:]
         original_seq_list.append(''.join([AA_3TO1[aa] for aa in this_df["resid"]]))
 
 
@@ -161,7 +167,10 @@ def align_structure_seqs(original_dfs,
             print(seq_df.pdb[i]+' had a mean match score of '+str(mean_match)+'. It is being discarded.')
             
         if mean_match > 0.90:
-            df=original_dfs[i]
+            if limited_chains:
+                df=limited_chains_df[i]
+            else:
+                df=original_dfs[i]
             if seq_df.pdb[i] in df.name[1]:
                 dfs.append(df)
             else:
@@ -312,6 +321,10 @@ def align_structure_seqs(original_dfs,
     #Remove "_resid_key" convenience column and unshared sites if keep_unshared_sites==False
     for i in range(len(dfs)):
         dfs[i] = dfs[i].drop(columns="_resid_key")
+    
+    #sort by chain
+    for df in dfs:
+        df.sort_values(by=['chain','resid_num'],inplace=True)
 
         if remove_unshared_sites==True:
             dfs[i]['resid_num']=dfs[i]['resid_num'].astype(float)

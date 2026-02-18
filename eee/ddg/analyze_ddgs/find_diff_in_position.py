@@ -21,10 +21,10 @@ def get_position_dist_site(x_values,y_values,z_values):
 
     return dist
 
-def get_position_dist_all(struct_list, chains_file, ens_dir,aligned_and_read=False, save_csv=False):
+def get_position_dist_all(struct_list, chains_file, ens_dir, save_csv=False):
     
     """
-    pdb_list : list_of_str (or list of dfs if aligned_and_read==True)
+    struc_list : list_of_str 
         list of two pdbs that will be compared
     
     chains_file : str
@@ -50,30 +50,23 @@ def get_position_dist_all(struct_list, chains_file, ens_dir,aligned_and_read=Fal
     with open(chains_file, 'r') as file:
         for line in file:
             chains.append(line.strip())
-    
-    if aligned_and_read==True:
-        aligned_dfs=struct_list
 
-    if aligned_and_read==False:
-        dfs=[]
-        #read the pdb structures and add a name column
-        logger.log('Reading in pdbs.')
-        for item in struct_list:
-            read_df=read_structure(item,remove_multiple_models=False)
-            read_df['name']=item
-            dfs.append(read_df)
 
-        #align the structure sequences
-        logger.log('Aligning structure sequences.')
-        aligned_dfs=align_structure_seqs(original_dfs=dfs,limited_chains=chains)
-    
+    dfs=[]
+    #read the pdb structures and add a name column
+    logger.log('Reading in pdbs.')
+    for item in struct_list:
+        read_df=read_structure(item,remove_multiple_models=False)
+        read_df['name']=item
+        dfs.append(read_df)
+
     #align the dfs by chain
     #if there are multiple chains in synced_chains, find the longest one
     if len(chains)>1:
         chain_lengths={}
         for chain in chains:
             length=[]
-            for df in aligned_dfs:
+            for df in dfs:
                 length.append(len(df.loc[df['chain']==chain]))
                 
             chain_lengths[np.mean(length)]=chain
@@ -83,17 +76,20 @@ def get_position_dist_all(struct_list, chains_file, ens_dir,aligned_and_read=Fal
     else:
         mychain=chains[0]
         
-    
     #align structures with lovoalign
     logger.log('Aligning structures by chain with lovoalign.')
-    aligned_dfs = align_structures(aligned_dfs,chain=mychain)
+    dfs = align_structures(dfs,chain=mychain)
+    
+    #align the structure sequences
+    logger.log('Aligning structure sequences.')
+    dfs=align_structure_seqs(original_dfs=dfs,limited_chains=chains)
     
             
     prepped_dfs=[]
     resid_sets=[]
     
     #prep the dfs by creating a resid key column and keeping only alpha carbons and regular atoms
-    for df in aligned_dfs:
+    for df in dfs:
 
         df["_resid_key"] = list(zip(df["chain"],df["resid"],df["resid_num"]))
 
@@ -103,7 +99,7 @@ def get_position_dist_all(struct_list, chains_file, ens_dir,aligned_and_read=Fal
         resid_sets.append(set(this_df._resid_key))
         
         prepped_dfs.append(this_df)
-
+        
     #create a list of all shared residues
     shared_resids=list(resid_sets[0].intersection(*resid_sets[1:]))
 
@@ -137,10 +133,10 @@ def get_position_dist_all(struct_list, chains_file, ens_dir,aligned_and_read=Fal
         
     #add new RMSF column to my df
     dist_df.insert(3, 'position_dist', dist)
-    
+
     #save df as a csv
-    struct1=only_shared[0]['name'][0].split('/')[-1].split('.pdb')[0]
-    struct2=only_shared[1]['name'][0].split('/')[-1].split('.pdb')[0]
+    struct1=only_shared[0]['name'].to_list()[0].split('/')[-1].split('.pdb')[0]
+    struct2=only_shared[1]['name'].to_list()[0].split('/')[-1].split('.pdb')[0]
 
     if save_csv==True:
         dir_name=ens_dir.split('/')[-1]

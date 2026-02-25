@@ -332,12 +332,12 @@ def align_structure_seqs(original_dfs,
         df.sort_values(by=['chain','resid_num'],inplace=True)
 
         if remove_unshared_sites==True:
-            df.loc[:,'resid_num']=df['resid_num'].astype(float)
+            df.loc[:,'resid_num']=df['resid_num'].astype(int)
             df=df.loc[df['resid_num']>=0]
             wanted_sites_dfs.append(df)
             
         elif remove_unshared_sites==False:
-            df.loc[:,'resid_num']=df['resid_num'].astype(float)
+            df.loc[:,'resid_num']=df['resid_num'].astype(int)
             end_resid_num=max(df.resid_num.to_list())
 
             same_struct=[df]
@@ -346,7 +346,7 @@ def align_structure_seqs(original_dfs,
 
                 if df.name.to_list()[0] == other_chains_df.name.to_list()[0]:
                         
-                    other_chains_df.loc[:,'resid_num']=other_chains_df['resid_num'].astype(float)
+                    other_chains_df.loc[:,'resid_num']=other_chains_df['resid_num'].astype(int)
                     other_chains_df.loc[:,'resid_num']= other_chains_df['resid_num']+ end_resid_num
                     
                     end_resid_num=max(other_chains_df.resid_num.to_list())

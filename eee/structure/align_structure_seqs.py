@@ -80,7 +80,7 @@ def align_structure_seqs(original_dfs,
                          muscle_binary="muscle",
                          verbose=False,
                          keep_temporary=False,
-                         remove_unshared_sites=True):
+                         remove_unshared_sites=False):
     """
     Use muscle to align sequences from rcsb files, then do some clean up. 
     Renumber residues so they match between structures. If a site has a mixture
@@ -99,7 +99,7 @@ def align_structure_seqs(original_dfs,
         whether or not to print out muscle output
     keep_temporary : bool, default=False
         do not delete temporary files
-    remove_unshared_sites :  bool, default=True
+    remove_unshared_sites :  bool, default=False
         if true, will remove unshared sites (resid # is negative)
         
     Returns
@@ -120,6 +120,7 @@ def align_structure_seqs(original_dfs,
     original_seq_list=[]
     
     limited_chains_df=[]
+    unwanted_chain_dfs=[]
     
     for og_df in original_dfs:
         #add to pdb_list
@@ -130,18 +131,20 @@ def align_structure_seqs(original_dfs,
             for mychain in list(set(og_df.chain.tolist())):
                 if mychain in limited_chains:
                     single_chain_dfs.append(og_df.loc[og_df['chain']==mychain])
+                else:
+                    unwanted_chain_dfs.append(og_df.loc[og_df['chain']==mychain].reset_index(drop=True))
             
             df=pd.concat(single_chain_dfs).reset_index(drop=True)
             limited_chains_df.append(df)
-        
+            
         else:
             df=og_df 
+            
 
         #create a mask to only have one residue
         mask = np.logical_and(df.atom == "CA",df["class"] == "ATOM")
         this_df = df.loc[mask,:]
         original_seq_list.append(''.join([AA_3TO1[aa] for aa in this_df["resid"]]))
-
 
     #make sequence df
     seq_dict = {'pdb': pdb_list, 'seq': original_seq_list} 
@@ -321,14 +324,36 @@ def align_structure_seqs(original_dfs,
     #Remove "_resid_key" convenience column and unshared sites if keep_unshared_sites==False
     for i in range(len(dfs)):
         dfs[i] = dfs[i].drop(columns="_resid_key")
+        
     
     #sort by chain
+    wanted_sites_dfs=[]
     for df in dfs:
         df.sort_values(by=['chain','resid_num'],inplace=True)
 
         if remove_unshared_sites==True:
-            dfs[i]['resid_num']=dfs[i]['resid_num'].astype(float)
-            dfs[i]=dfs[i].loc[dfs[i]['resid_num']>=0]
+            df.loc[:,'resid_num']=df['resid_num'].astype(float)
+            df=df.loc[df['resid_num']>=0]
+            wanted_sites_dfs.append(df)
+            
+        elif remove_unshared_sites==False:
+            df.loc[:,'resid_num']=df['resid_num'].astype(float)
+            end_resid_num=max(df.resid_num.to_list())
+
+            same_struct=[df]
+                
+            for other_chains_df in unwanted_chain_dfs:
+
+                if df.name.to_list()[0] == other_chains_df.name.to_list()[0]:
+                        
+                    other_chains_df.loc[:,'resid_num']=other_chains_df['resid_num'].astype(float)
+                    other_chains_df.loc[:,'resid_num']= other_chains_df['resid_num']+ end_resid_num
+                    
+                    end_resid_num=max(other_chains_df.resid_num.to_list())
+                    
+                    same_struct.append(other_chains_df)
+                    
+            wanted_sites_dfs.append(pd.concat(same_struct).reset_index(drop=True))
     
 
-    return dfs
+    return wanted_sites_dfs

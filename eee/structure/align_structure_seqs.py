@@ -128,7 +128,8 @@ def align_structure_seqs(original_dfs,
         #if limited_chains, only keep desired chains
         if limited_chains:
             single_chain_dfs=[]
-            for mychain in list(set(og_df.chain.tolist())):
+            ordered_chains=list(set(og_df.chain.tolist())).sort()
+            for mychain in ordered_chains:
                 if mychain in limited_chains:
                     single_chain_dfs.append(og_df.loc[og_df['chain']==mychain])
                 else:
